@@ -1,0 +1,27 @@
+{
+  "name": "mnwa",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mlengse/mnwa.git"
+  },
+  "author": "mlengse",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mlengse/mnwa/issues"
+  },
+  "homepage": "https://github.com/mlengse/mnwa#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ora": "^4.0.3",
+    "puppeteer-core": "^2.0.0",
+    "qrcode": "^1.4.4",
+    "qrcode-terminal": "^0.12.0",
+    "rxjs": "^6.5.3"
+  }
+}
