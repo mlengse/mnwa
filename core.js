@@ -33,7 +33,7 @@ module.exports = class Core {
       request.continue();
     });
   
-    await this.page.goto('https://web.whatsapp.com')
+    await this.page.goto('https://web.whatsapp.com', this.config.waitOpt)
   
     spinner.succeed();
 
