@@ -8,46 +8,37 @@ const wa = new Core(config)
   try{
     const client = await wa.init()
 
+
     const handleMessage = async message => {
-    	console.log('-------------')
+			console.log('-------------')
+			
+			let msg = {
+				time: time(message.t),
+				grup: message.isGroupMsg ? message.chat.name : undefined,
+				pengirim: message.sender.name || message.sender.pushname || message.sender.shortName || message.sender.formattedName || message.sender.id.user,
+				jenis: message.broadcast ? 'status' : 'chat',
+				isi: message.type === 'chat' ? message.body : `${message.type} | ${message.mimetype}`,
+				quote: message.quotedMsg ? message.quotedMsg.type === 'chat' ? message.quotedMsg.body : `${message.quotedMsg.type} | ${message.quotedMsg.mimetype}` : undefined,
+				// str: JSON.stringify(message)
+			}
 
-    	console.log('time:', time(message.t))
-    	if(message.isGroupMsg) {
-	    	console.log('grup:', message.chat.name)
-    	}
+			console.log(JSON.parse(JSON.stringify(msg)))
 
-  		console.log( 'pengirim: ', message.sender.name || message.sender.pushname || message.sender.shortName || message.sender.formattedName || message.sender.id.user )
-  		// console.log( 'pengirim: ', JSON.stringify(message.sender) )
-
-  		if(message.type === 'chat'){
-  			console.log('isi:', message.body)
-  		} else {
-  			console.log('isi:', message.type, message.mimetype)
-  		}
     }
 
-    let [unreads, _] = await Promise.all([
-    	client.getAllChats(true),
-    	client.onMessage( handleMessage )
-    ])
+		client.onMessage( handleMessage )
+
+		let unreads = await client.getAllChats(true)
 
     for(let unread of unreads){
-    	// if(unread.isGroup){
-	    // 	console.log('grup: ', unread.contact.name || unread.contact.formattedName || unread.id.user)
-    	// }
-    	let messages = []
+
+			let messages = []
 
     	while(!messages || !messages.length || messages.length < unread.unreadCount) {
     		messages = await wa.page.evaluate( id => {
 	    		return WAPI.getAllMessagesInChat(id)
 	    	}, unread.id)
     	}
-
-    	// console.log( messages.length, unread.unreadCount)
-    	
-    	// messages = messages.filter( e => e.isNewMsg )
-
-    	// console.log( messages.length, unread.unreadCount)
 
     	while( messages.length > unread.unreadCount){
     		messages.shift()
