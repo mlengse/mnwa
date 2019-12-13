@@ -8,6 +8,7 @@ module.exports = class Logic {
   }
 
   processUnstructured(messageBody) {
+    let formattedText
     messageBody = messageBody.toLowerCase()
     let rawArr = messageBody.match(/\b\w+/g)
   
