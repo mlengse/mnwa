@@ -108,3 +108,5 @@ package-lock.json
 tmp
 
 *.png
+
+db.json

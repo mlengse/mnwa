@@ -51,10 +51,13 @@ const pols = [ {
 
 const polArr = []
 
-pols.map(({ alias }) => {
+let unit = {}
+
+pols.map(({ alias, id, nama }) => {
   if(alias && Array.isArray(alias) ){
     alias.map( e => polArr.push(e))
   }
+	unit[id] = nama
 })
 
 module.exports = Object.assign({}, 
@@ -65,6 +68,7 @@ module.exports = Object.assign({},
     NIK_REGEX: /^(3)([0-9]){0,16}$/,
     days: ['sekarang', 'hari ini', 'hariini', 'besok', 'besuk', 'lusa'],
     polArr,
+    unit,
     keywords: ['tes', 'cek', 'cari', 'daftar'],
     waitOpt: {
       waitUntil: 'networkidle2'

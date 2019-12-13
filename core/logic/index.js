@@ -1,6 +1,8 @@
-module.exports = class Logic {
+const Message = require('./message')
+
+module.exports = class Logic extends Message {
   constructor(config){
-    this.config = config
+    super(config)
   }
 
   time(s) {
@@ -126,56 +128,6 @@ module.exports = class Logic {
   
     return formattedText
   
-  }
-
-  async handleMessage(message) {
-    // console.log('-------------')
-    
-    let msg = {
-      time: this.time(message.t),
-      grup: message.isGroupMsg ? message.chat.name : undefined,
-      pengirim: message.sender.name || message.sender.pushname || message.sender.shortName || message.sender.formattedName || message.sender.id.user,
-      jenis: message.broadcast ? 'status' : 'chat',
-      isi: message.type === 'chat' ? message.body : `${message.type} | ${message.mimetype}`,
-      quote: message.quotedMsg ? message.quotedMsg.type === 'chat' ? message.quotedMsg.body : `${message.quotedMsg.type} | ${message.quotedMsg.mimetype}` : undefined,
-      // str: JSON.stringify(message)
-    }
-
-    let reply = {
-      reply: false,
-      to: undefined,
-      msg: undefined
-    }
-
-    // console.log(JSON.parse(JSON.stringify(msg)))
-
-
-    if(message.type === 'chat' && !message.isGroupMsg && !message.isMMS && !message.isMedia && message.chatId !== 'status@broadcast') {
-
-      let messageBody = message.body
-      let containsPandawa = messageBody && messageBody.toLowerCase().includes('pandawa')
-
-      if(containsPandawa){
-        reply = {
-          reply: true,
-          to: message.chat.id,
-          msg: 'Harap mengganti kata pandawa dengan nama pasien.'
-        }
-      } else {
-        reply = {
-          reply: false,
-          to: message.chat.id,
-          msg: 'processing message',
-          text: this.processTag(messageBody)
-      }
-        // await generateReply(client, {
-        //   user: message.from,
-        //   content: text
-        // })
-      }
-    }
-
-    return JSON.parse(JSON.stringify(Object.assign({}, msg, reply)))
   }
 
 }

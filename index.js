@@ -8,8 +8,8 @@ const wa = new Core(config)
     const client = await wa.init()
 
 		client.onMessage( async message => {
-      let reply = await wa.handleMessage(message)
-      console.log(reply)
+      await wa.handleMessage(message)
+      // console.log(reply)
     })
 
 		let unreads = await client.getAllChats(true)
@@ -19,8 +19,8 @@ const wa = new Core(config)
 			let messages = await wa.getUnreadMessagesInChat(unread)
 
     	for(let message of messages){
-        let reply = await wa.handleMessage(message)
-        console.log(reply)
+        await wa.handleMessage(message)
+        // console.log(reply)
       }
     	
     }
