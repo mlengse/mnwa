@@ -1,10 +1,10 @@
 const getconn = require('./_mysqlconn')
-const { pool } = getconn()
+const { pool } = getconn
 const {
 	RM_REGEX,
 	BPJS_REGEX,
 	NIK_REGEX
-} = require('../config')
+} = require('../../config')
 
 const pad = (n, width, z) => {
   z = z || '0';
@@ -75,7 +75,7 @@ const findQuery = Arr => {
 	return query;
 }
 
-module.exports = async (chatArr) => await new Promise ( resolve =>{
+const cari = async (chatArr) => await new Promise ( resolve =>{
 	let chArr = []
 	for(let eachChatArr of chatArr){
 		if(eachChatArr.trim() !=='') {
@@ -122,3 +122,89 @@ module.exports = async (chatArr) => await new Promise ( resolve =>{
 	}
 
 })
+
+
+const cariFunc = async (chatArr, result ) => {
+	if(typeof result === 'undefined'){
+		result = ''
+	}
+	let newParams = [...chatArr].map(e=> e.trim())
+
+	let resultArr = await cari(chatArr)
+
+	if(resultArr.length > 20){
+		result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
+		result += `Mohon parameter pencarian dipersempit.\n`
+		resultArr.length = 0
+	}
+
+
+	while(newParams.length && !resultArr.length) {
+		let naParams = [...newParams]
+		naParams = naParams.join('#')
+		while(naParams.includes(' ')  && !resultArr.length) {
+			naParams = naParams.split(' ')
+			naParams.pop()
+			naParams = naParams.join(' ')
+			resultArr = await cari([...naParams.split('#')])
+			if(resultArr.length) {
+				result += `mencoba\n#cari#${naParams}\n`
+				result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
+			}
+		}
+
+		let nbParams = [...newParams]
+
+		for ( let [id, noParams] of newParams.entries()) { 
+			if(!noParams.match(RM_REGEX)) {
+				while(noParams.length > 6 && !resultArr.length) {
+					noParams = noParams.slice(0, -1)
+					nbParams[id] = noParams
+					resultArr = await cari([...nbParams])
+					if(resultArr.length) {
+						result += `mencoba #cari#${nbParams.join('#')}\n`
+						result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
+					}
+				}
+			}
+		}
+		
+		let aParams = [...newParams]
+
+		aParams.shift()
+		while(aParams.length && !resultArr.length ) {
+			for ( let [id, noParams] of aParams.entries()) {
+				let cParams = [...aParams] 
+				if(!noParams.match(RM_REGEX)) {
+					while(noParams.length > 6 && !resultArr.length) {
+						noParams = noParams.slice(0, -1)
+						cParams[id] = noParams
+						//console.log(cParams)
+						resultArr = await cari([...cParams])
+						if(resultArr.length) {
+							result += `mencoba #cari#${cParams.join('#')}\n`
+							result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
+						}
+					}
+				}
+			}
+
+			aParams.shift()
+		}
+		
+		newParams.pop()
+	}
+
+	return {
+		result,
+		resultArr
+	}
+
+}
+
+module.exports = {
+ cariFunc,
+ cari,
+ findQuery,
+ pad
+}

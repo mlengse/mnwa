@@ -1,5 +1,7 @@
 const getconn = require('./_mysqlconn')
-const { pool } = getconn()
+
+const { pool } = getconn
+
 module.exports = async (tgl) =>{
   const query = `SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`
   let res = await new Promise( resolve => {

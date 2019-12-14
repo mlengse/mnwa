@@ -6,7 +6,8 @@ module.exports = class Logic extends Message {
   }
 
   time(s) {
-    return new Date(s * 1e3).toISOString()
+    return this.moment(s * 1e3).format('LLLL')
+    // return new Date(s * 1e3).toISOString()
   }
 
   processUnstructured(messageBody) {
@@ -107,7 +108,7 @@ module.exports = class Logic extends Message {
         firstWord = firstWord.split(' ').join('')
       }
       
-      let isKeyword = this.keywords.filter(e => firstWord === e)
+      let isKeyword = this.config.keywords.filter(e => firstWord === e)
       
       if(!isKeyword.length){
     

@@ -1,6 +1,8 @@
 const moment = require('moment')
 const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
+const pptr = require('puppeteer-core')
+const ora = require('ora');
 
 const adapter = new FileSync('./db.json')
 
@@ -9,9 +11,14 @@ module.exports = class Libur {
     this.config = config
     this.moment = moment
     this.moment.locale('id')
-    this.db = low(adapter)
+    this.db = low(adapter)    
+    this.spinner = ora({
+      stream: process.stdout
+    });
+
     // Set some defaults (required if your JSON file is empty)
     this.db.defaults({ liburnas: [] }).write()
+    this.pptr = pptr
   }
 
   addLiburnas(obj){

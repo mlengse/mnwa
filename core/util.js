@@ -1,6 +1,4 @@
 const path = require('path')
-const pptr = require('puppeteer-core')
-const ora = require('ora');
 const qrcode = require('qrcode-terminal')
 const { from, merge } = require('rxjs')
 const { take } = require('rxjs/operators')
@@ -10,9 +8,6 @@ const { Whatsapp } = require('./api/whatsapp')
 module.exports = class Util extends Logic {
   constructor(config){
     super(config)
-    this.spinner = ora({
-      stream: process.stdout
-    });
     this.qrcode = qrcode
     this.from = from
     this.merge = merge
@@ -94,9 +89,15 @@ module.exports = class Util extends Logic {
   }
 
   async init(){
+    this.spinner.start('config things')
+    await Promise.all([
+      this.getVillages(),
+      this.getUnits()
+    ])
+    this.spinner.succeed()
     this.spinner.start('Initializing whatsapp');
 
-    this.browser = await pptr.launch(this.config.pptrOpt);
+    this.browser = await this.pptr.launch(this.config.pptrOpt);
     this.pages = await this.browser.pages()
     this.page = this.pages[0]
 

@@ -1,12 +1,5 @@
 const data_kunj = require('./_data_kunj')
 
-// const { pols } = require('../config')
-
-// let unit = {}
-// pols.map( ({ id, nama }) => {
-// 	unit[id] = nama
-// })
-
 module.exports = async(tgl, unit) => {
 		
 	let terdaft = ''

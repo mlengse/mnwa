@@ -1,64 +1,30 @@
 const {
   CHROME_PATH,
   USER_DATA_PATH,
-  RM_REGEX
+  RM_REGEX,
 } = process.env
 
+const keywords = ['tes', 'cek', 'cari', 'daftar']
+
+const days = ['sekarang', 'hari ini', 'hariini', 'besok', 'besuk', 'lusa']
+
 const pols = [ {
-  id: '01',
   alias: ['umum', 'lansia', 'rujukan'], 
-  nama: 'BP. Umum',
-  bpjs_id: '001'
 }, {
-  id: '02',
   alias: ['gigi'],
-  nama: 'BP. Gigi',
-  bpjs_id: '002'
 },{
-  id: '03',
   alias: ['kia', 'bumil', 'mtbs'],
-  nama: 'KIA',
-  bpjs_id: '003'
-},{
-  id: '04',
-  nama: 'Laborat',
-  bpjs_id: '004'
 }, {
-  id: '05',
   alias: ['gizi'],
-  nama: 'Gizi'
 }, {
-  id: '06',
   alias: ['kesling'],
-  nama: 'Kesling'
 }, {
-  id: '08',
   alias: ['tb'],
-  nama: 'Poli TB'
 }, {
-  id: '09',
   alias: ['kb'],
-  nama: 'KB',
-  bpjs_id: '008'
 }, {
-  id: '10',
-  nama: 'Pelayanan Sore'
-}, {
-  id: '11',
   alias: ['imunisasi'],
-  nama: 'Imunisasi'
 }]
-
-const polArr = []
-
-let unit = {}
-
-pols.map(({ alias, id, nama }) => {
-  if(alias && Array.isArray(alias) ){
-    alias.map( e => polArr.push(e))
-  }
-	unit[id] = nama
-})
 
 module.exports = Object.assign({}, 
   process.env, 
@@ -66,16 +32,15 @@ module.exports = Object.assign({},
     RM_REGEX: new RegExp(RM_REGEX),
     BPJS_REGEX: /^(0)([0-9]){0,12}$/,
     NIK_REGEX: /^(3)([0-9]){0,16}$/,
-    days: ['sekarang', 'hari ini', 'hariini', 'besok', 'besuk', 'lusa'],
-    polArr,
-    unit,
-    keywords: ['tes', 'cek', 'cari', 'daftar'],
+    days,
+    pols,
+    keywords,
     waitOpt: {
       waitUntil: 'networkidle2'
     },
     pptrOpt: {
-      headless: true,
-      // headless: false,
+      // headless: true,
+      headless: false,
       executablePath: CHROME_PATH, 
       userDataDir: USER_DATA_PATH,
       // args: ['--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs' ]

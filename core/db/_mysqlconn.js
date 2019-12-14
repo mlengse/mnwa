@@ -6,7 +6,7 @@ const {
 	MYSQL_USER,
 	MYSQL_PWD,
 	MYSQL_DB
-} = process.env
+} = require('../../config')
 
 const pool = mysql.createPool({
 	connectionLimit: 10,
@@ -58,8 +58,8 @@ const connect = async (query) => {
 
 }
 
-module.exports = () => ({
+module.exports = {
 	pool,
 	getConnection,
 	connect
-})
+}
