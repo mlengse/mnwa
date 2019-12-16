@@ -1,5 +1,3 @@
-require('dotenv').config()
-
 const Core = require('./core')
 const config = require('./config')
 const wa = new Core(config)
@@ -9,7 +7,8 @@ const wa = new Core(config)
     const client = await wa.init()
 
 		client.onMessage( async message => {
-      await wa.handleMessage(message)
+      let msg = await wa.handleMessage(message)
+      console.log(msg)
     })
 
 		let unreads = await client.getAllChats(true)
@@ -19,7 +18,8 @@ const wa = new Core(config)
 			let messages = await wa.getUnreadMessagesInChat(unread)
 
     	for(let message of messages){
-        await wa.handleMessage(message)
+        let msg = await wa.handleMessage(message)
+        console.log(msg)
       }
     	
     }
