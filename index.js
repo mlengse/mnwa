@@ -1,6 +1,16 @@
 const Core = require('./core')
 const config = require('./config')
+const { schedule } = require('node-cron')
 const wa = new Core(config)
+
+schedule('30 12 1 * *', async() => {
+  try {
+    await wa.scrapeLiburnas()
+  }catch(e){
+    console.error(e)
+  }
+})
+
 ;(async()=>{
   try{
 
@@ -23,6 +33,7 @@ const wa = new Core(config)
       }
     	
     }
+
 
   }catch(e){
     console.error(e)
