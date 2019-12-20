@@ -20,6 +20,14 @@ module.exports = class Core {
 
   constructor(config){
     this.config = config
+    this.config.jadwal = {}
+    this.config.pols.filter(({hari})=> hari).map( ({ alias, hari }) => {
+      if(alias.length){
+        for( let a of alias){
+          this.config.jadwal[a] = hari
+        }
+      }
+    })
   }
 
   time(s) {
@@ -817,8 +825,8 @@ module.exports = class Core {
           let ada = this.config.polArr.filter(e => e == poli)
           if(ada.length){
 
-            if(poli === 'imunisasi' && tgl.weekday() !== 1 ) {
-              return `poli imunisasi hanya buka hari Selasa.\n`
+            if(this.config.jadwal[poli] && this.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
+              return `poli ${poli} hanya buka hari ${tgl.format('dddd')}`
             }
 
             if(poli === 'rujukan') {

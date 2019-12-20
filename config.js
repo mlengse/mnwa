@@ -16,6 +16,7 @@ const pols = [ {
   alias: ['gigi'],
 },{
   alias: ['kia', 'bumil', 'mtbs'],
+  hari: [5]
 }, {
   alias: ['gizi'],
 }, {
@@ -26,6 +27,7 @@ const pols = [ {
   alias: ['kb'],
 }, {
   alias: ['imunisasi'],
+  hari: [1]
 }]
 
 const waitOpt = {
