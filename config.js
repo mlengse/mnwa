@@ -1,3 +1,5 @@
+require('dotenv').config()
+
 const {
   CHROME_PATH,
   USER_DATA_PATH,
@@ -14,6 +16,7 @@ const pols = [ {
   alias: ['gigi'],
 },{
   alias: ['kia', 'bumil', 'mtbs'],
+  hari: [5]
 }, {
   alias: ['gizi'],
 }, {
@@ -24,7 +27,54 @@ const pols = [ {
   alias: ['kb'],
 }, {
   alias: ['imunisasi'],
+  hari: [1]
 }]
+
+const waitOpt = {
+  waitUntil: 'networkidle2'
+}
+
+const pptrOpt = {
+  // headless: true,
+  headless: false,
+  executablePath: CHROME_PATH, 
+  userDataDir: USER_DATA_PATH,
+  // args: ['--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs' ]
+  args: [
+    // `--app=${whatsappUrl}`,
+    '--log-level=3', // fatal only
+    //'--start-maximized',
+    '--no-default-browser-check',
+    '--disable-site-isolation-trials',
+    '--no-experiments',
+    '--ignore-gpu-blacklist',
+    '--ignore-certificate-errors',
+    '--ignore-certificate-errors-spki-list',
+    '--disable-gpu',
+    '--disable-extensions',
+    '--disable-default-apps',
+    '--enable-features=NetworkService',
+    '--disable-setuid-sandbox',
+    '--no-sandbox',
+    // Extras
+    '--disable-webgl',
+    '--disable-threaded-animation',
+    '--disable-threaded-scrolling',
+    '--disable-in-process-stack-traces',
+    '--disable-histogram-customizer',
+    '--disable-gl-extensions',
+    '--disable-composited-antialiasing',
+    '--disable-canvas-aa',
+    '--disable-3d-apis',
+    '--disable-accelerated-2d-canvas',
+    '--disable-accelerated-jpeg-decoding',
+    '--disable-accelerated-mjpeg-decode',
+    '--disable-app-list-dismiss-on-blur',
+    '--disable-accelerated-video-decode'
+  ]
+}
+
+
 
 module.exports = Object.assign({}, 
   process.env, 
@@ -35,46 +85,6 @@ module.exports = Object.assign({},
     days,
     pols,
     keywords,
-    waitOpt: {
-      waitUntil: 'networkidle2'
-    },
-    pptrOpt: {
-      // headless: true,
-      headless: false,
-      executablePath: CHROME_PATH, 
-      userDataDir: USER_DATA_PATH,
-      // args: ['--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs' ]
-      args: [
-        // `--app=${whatsappUrl}`,
-        '--log-level=3', // fatal only
-        //'--start-maximized',
-        '--no-default-browser-check',
-        '--disable-site-isolation-trials',
-        '--no-experiments',
-        '--ignore-gpu-blacklist',
-        '--ignore-certificate-errors',
-        '--ignore-certificate-errors-spki-list',
-        '--disable-gpu',
-        '--disable-extensions',
-        '--disable-default-apps',
-        '--enable-features=NetworkService',
-        '--disable-setuid-sandbox',
-        '--no-sandbox',
-        // Extras
-        '--disable-webgl',
-        '--disable-threaded-animation',
-        '--disable-threaded-scrolling',
-        '--disable-in-process-stack-traces',
-        '--disable-histogram-customizer',
-        '--disable-gl-extensions',
-        '--disable-composited-antialiasing',
-        '--disable-canvas-aa',
-        '--disable-3d-apis',
-        '--disable-accelerated-2d-canvas',
-        '--disable-accelerated-jpeg-decoding',
-        '--disable-accelerated-mjpeg-decode',
-        '--disable-app-list-dismiss-on-blur',
-        '--disable-accelerated-video-decode'
-      ]
-    },
+    waitOpt,
+    pptrOpt
   })

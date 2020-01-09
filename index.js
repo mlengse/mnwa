@@ -1,15 +1,24 @@
-require('dotenv').config()
-
 const Core = require('./core')
 const config = require('./config')
+const { schedule } = require('node-cron')
 const wa = new Core(config)
+
+schedule('30 12 1 * *', async() => {
+  try {
+    await wa.scrapeLiburnas()
+  }catch(e){
+    console.error(e)
+  }
+})
+
 ;(async()=>{
   try{
 
     const client = await wa.init()
 
 		client.onMessage( async message => {
-      await wa.handleMessage(message)
+      let msg = await wa.handleMessage(message)
+      console.log(msg)
     })
 
 		let unreads = await client.getAllChats(true)
@@ -19,10 +28,12 @@ const wa = new Core(config)
 			let messages = await wa.getUnreadMessagesInChat(unread)
 
     	for(let message of messages){
-        await wa.handleMessage(message)
+        let msg = await wa.handleMessage(message)
+        console.log(msg)
       }
     	
     }
+
 
   }catch(e){
     console.error(e)
