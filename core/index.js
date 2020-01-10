@@ -369,6 +369,7 @@ module.exports = class Core {
       }
       this.config.unit[id] = unit
     })
+    this.config.polArr = [...new Set(this.config.polArr)]
 
     // console.log(this.config.pols)
     // console.log(this.config.unit)
@@ -768,7 +769,8 @@ module.exports = class Core {
     }
     
     if(result.includes('atas nama')) {
-      result = `${result}, ${hari}, ${dddd}, ${tgl} di poli tujuan ${poli.toUpperCase()}. \nSilahkan konfirmasi dengan loket pd hari kunjungan untuk mendapatkan nomor antrian poli tujuan.\n`
+      let plnama = this.config.pols.filter( e => JSON.stringify(e).toLowerCase().includes(poli.toLowerCase())).map(({ unit }) => unit )[0]
+      result = `${result}, ${hari}, ${dddd}, ${tgl} di poli tujuan ${plnama} untuk pemeriksaan ${poli.toUpperCase()}. \nSilahkan konfirmasi dengan loket pd hari kunjungan untuk mendapatkan nomor antrian poli tujuan.\n`
     }
 
     return Object.assign({}, res, {
@@ -826,7 +828,8 @@ module.exports = class Core {
           if(ada.length){
 
             if(this.config.jadwal[poli] && this.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
-              return `poli ${poli} hanya buka hari ${tgl.format('dddd')}`
+              return `poli ${poli} hanya buka hari ${this.config.jadwal[poli].map(e => moment( e, 'e').format('dddd').join(', '))}`
+
             }
 
             if(poli === 'rujukan') {
