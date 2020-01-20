@@ -4,7 +4,7 @@ const { from, merge } = require('rxjs')
 const { take } = require('rxjs/operators')
 const moment = require('moment')
 const FileSync = require('lowdb/adapters/FileSync')
-const pptr = require('puppeteer-core')
+const pptr = require('puppeteer')
 const db = require('lowdb')(new FileSync('./db.json'))
 const spinner = require('ora')({
   stream: process.stdout
@@ -369,6 +369,7 @@ module.exports = class Core {
       }
       this.config.unit[id] = unit
     })
+
     this.config.polArr = [...new Set(this.config.polArr)]
 
     // console.log(this.config.pols)
@@ -747,6 +748,8 @@ module.exports = class Core {
   }
 
   async daftar(hari, dddd, tgl, poli, rm){
+
+    spinner.start(`daftar ${hari}, ${dddd}, ${tgl}, ${poli}, ${rm}`)
     rm.nama = rm.nama.trim()
     let result = ''
   
@@ -782,39 +785,41 @@ module.exports = class Core {
   async daftarApi({ chatArr, result}) {
     spinner.start('daftar')
     let hari = chatArr.shift()
-    hari = hari.toLowerCase().replace(' ', '')
+    hari = hari.toLowerCase().split(' ').join('')
+    // console.log(hari)
     let tgl
     let dddd
     switch(hari){
-      case 'sekarang':
-      case 'hariini':
-        tgl = moment().add(0, 'd')
-        let jam = tgl.format('H')
-        if(jam >= 8) {
-          // console.log(`${new Date()} request masuk jam: ${jam}`)
-          result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
-          return result
-        }
-        break
       case 'besok':
       case 'besuk':
         tgl = moment().add(1, 'd')
+        let jam = tgl.format('H')
+        if(jam >= 21) {
+          // console.log(`${new Date()} request masuk jam: ${jam}`)
+          result = 'Pendaftaran via whatsapp untuk besok ditutup pukul 21.00\n'
+          return result
+        }
         break
       case 'lusa':
         tgl = moment().add(2, 'd')
         break
       default:
-        return 'Hari periksa tidak sesuai referensi sistem.\nGunakan #sekarang, #hariini, #besok, #besuk atau #lusa.'
+        return 'Hari periksa tidak sesuai referensi sistem.\nGunakan #besok, #besuk atau #lusa.'
     }
+
     if(!result){
       let tgll = tgl.format('YYYY-MM-DD')
       dddd = tgl.format('dddd')
+
+      // console.log(tgll, dddd)
 
       if (tgl.weekday() == 6) {
         result = `Pelayanan rawat jalan ${tgl.format('dddd, D-M-YYYY')} tutup.\n`
         return result
       } else {
         let isMasuk = await this.libur(tgll)
+
+        // console.log(isMasuk)
 
         if(!isMasuk) {
           return `Pelayanan rawat jalan ${tgl.format('dddd, D-M-YYYY')} tutup.\n`
@@ -888,6 +893,7 @@ module.exports = class Core {
   }
 
   async scrapeLiburnas(tahun) {
+    spinner.start(`scrape libur nasional tahun ${tahun}`)
     if(!tahun){
       tahun = moment().format('YYYY')
     }
@@ -949,6 +955,8 @@ module.exports = class Core {
     for (let l of liburArr) {
       this.addLiburnas(l)
     }
+
+    spinner.succeed(`${liburArr.length} hari libur nasional`)
 
     return liburArr
 
