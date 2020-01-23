@@ -35,7 +35,7 @@ const waitOpt = {
 const pptrOpt = {
   // headless: true,
   headless: false,
-  // userDataDir: USER_DATA_PATH,
+  userDataDir: USER_DATA_PATH,
   executablePath: "/usr/bin/chromium-browser",
   // args: ['--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs' ]
   args: [
