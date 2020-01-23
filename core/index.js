@@ -193,6 +193,9 @@ module.exports = class Core {
         all = Object.assign({}, result)
         result = all.msg
       }
+      if(process.env.FORM_LINK) {
+        result += `\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+      }
       spinner.start(`send wa`)
       await this.client.sendText( msg.to, result)
       spinner.succeed()
