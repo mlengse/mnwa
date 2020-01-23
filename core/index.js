@@ -293,13 +293,13 @@ module.exports = class Core {
     this.pages = await this.browser.pages()
     this.page = this.pages[0]
 
-    await this.page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
+    // await this.page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36');
 
-    await this.page.setRequestInterception(true);
+    // await this.page.setRequestInterception(true);
     
-    this.page.on('request', (request) => {
-      request.continue();
-    });
+    // this.page.on('request', (request) => {
+    //   request.continue();
+    // });
   
     await this.page.goto('https://web.whatsapp.com', this.config.waitOpt)
   
