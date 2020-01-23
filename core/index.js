@@ -4,7 +4,7 @@ const { from, merge } = require('rxjs')
 const { take } = require('rxjs/operators')
 const moment = require('moment')
 const FileSync = require('lowdb/adapters/FileSync')
-const pptr = require('puppeteer')
+const pptr = require('puppeteer-core')
 const db = require('lowdb')(new FileSync('./db.json'))
 const spinner = require('ora')({
   stream: process.stdout
@@ -247,9 +247,9 @@ module.exports = class Core {
     spinner.start('Loading QR');
     // await this.page.waitFor(5000)
     // await this.page.screenshot({path: 'buddy-screenshot.png'});
-    await this.page.waitForSelector("img[alt='Scan me!']", { timeout: 0 });
+    await this.page.waitForSelector("canvas[aria-label='Scan me!']", { timeout: 0 });
     const qrImage = await this.page.evaluate(
-      `document.querySelector("img[alt='Scan me!']").parentElement.getAttribute("data-ref")`
+      `document.querySelector("canvas[aria-label='Scan me!']").parentElement.getAttribute("data-ref")`
     );
     spinner.succeed();
     qrcode.generate(qrImage, {
