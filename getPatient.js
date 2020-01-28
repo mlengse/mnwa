@@ -1,13 +1,11 @@
 const moment = require('moment')
 moment.locale('id')
 
-const getconn = require('./_mysqlconn')
+const { connect } = require('./core/db/_mysqlconn')
 
 const { 
   BPJS_REGEX,
 } = require('./config')
-
-const { connect } = getconn()
 
 module.exports = async event => {
   let after, res, re, all

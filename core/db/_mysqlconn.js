@@ -1,5 +1,5 @@
 const mysql = require('mysql')
-//require('dotenv').config()
+require('dotenv').config()
 
 const {
 	MYSQL_HOST,
@@ -10,7 +10,7 @@ const {
 
 let connection = false
 
-const getConnection = async () => {
+const getConnection = () => {
 	connection = mysql.createConnection({
 		// connectionLimit: 10,
 		host: MYSQL_HOST,
@@ -47,7 +47,7 @@ const getConnection = async () => {
 
 const connect = async (query) => {
 	if(!connection){
-		this.getConnection()
+		getConnection()
 	}
 	return await new Promise( resolve => {
 		// pool.getConnection( (err, connection) => {
@@ -64,8 +64,8 @@ const connect = async (query) => {
 
 }
 
-module.exports = () => ({
-	pool,
+module.exports = {
+	// pool,
 	getConnection,
 	connect
-})
+}
