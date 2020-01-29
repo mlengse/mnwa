@@ -1,5 +1,6 @@
-const getconn = require('./_mysqlconn')
-const { pool } = getconn
+const { connect } = require('./_mysqlconn')
+// const getconn = require('./_mysqlconn')
+// const { pool } = getconn
 const {
 	RM_REGEX,
 	BPJS_REGEX,
@@ -37,6 +38,7 @@ const findQuery = Arr => {
 		} //else if(params.match(/^(08)([0-9]){1,12}$/)) {
 			//query +=  ' WHERE (`no_hp` LIKE "' + params + '%")';
 		//} 
+		console.log(params)
 	
 	}
 
@@ -75,7 +77,8 @@ const findQuery = Arr => {
 	return query;
 }
 
-const cari = async (chatArr) => await new Promise ( resolve =>{
+const cari = async (chatArr) => {
+// const cari = async (chatArr) => await new Promise ( resolve =>{
 	let chArr = []
 	for(let eachChatArr of chatArr){
 		if(eachChatArr.trim() !=='') {
@@ -85,43 +88,50 @@ const cari = async (chatArr) => await new Promise ( resolve =>{
 
 	let query = findQuery(chatArr)
 
-	//console.log(query)
+	console.log(query)
 
 	if(query !== 'SELECT `id`, `nama`, `tgl_lahir`, `sex_id`, `alamat`,  `orchard_id`, `village_id`, `nik`, `no_kartu`, `no_hp` FROM `patients`') {
-		pool.getConnection( (err, connection) => {
-			err ? console.error(`${new Date()} error: ${err.stack}`) : '' //console.log(`connected id: ${connection.threadId}`);
-			connection.query(query, (err, results, fields) => {
-				let res = []
-				err ? console.error(`${new Date()} error querying`) : ''
+		let res = await connect(query)
+		if( Array.isArray(res) && res.length ){
+			return res
+		}
+		return []
+		// resolve(res)
+		// pool.getConnection( (err, connection) => {
+		// 	err ? console.error(`${new Date()} error: ${err.stack}`) : '' //console.log(`connected id: ${connection.threadId}`);
+		// 	connection.query(query, (err, results, fields) => {
+		// 		let res = []
+		// 		err ? console.error(`${new Date()} error querying`) : ''
 
-				for(let result of results) {
-					for(let prop in result){
-						if(result[prop] == '' || result[prop] == undefined) {
-							delete result[prop]
-						}
-					}
+		// 		for(let result of results) {
+		// 			for(let prop in result){
+		// 				if(result[prop] == '' || result[prop] == undefined) {
+		// 					delete result[prop]
+		// 				}
+		// 			}
 
-					//console.log(result)
+		// 			//console.log(result)
 
-					if (res.length <= 100) {
-						//if (result.id.match(RM_REGEX)) {
-						res.push(JSON.parse(JSON.stringify(result)))
-						//}
-					} else {
-						break
-					}
-				}
+		// 			if (res.length <= 100) {
+		// 				//if (result.id.match(RM_REGEX)) {
+		// 				res.push(JSON.parse(JSON.stringify(result)))
+		// 				//}
+		// 			} else {
+		// 				break
+		// 			}
+		// 		}
 
-				connection.release()
-				resolve(res)					
-			})
-		})
+		// 		connection.release()
+		// 		resolve(res)					
+		// 	})
+		// })
 	
 	} else {
-		resolve([])
+		return []
+		// resolve([])
 	}
 
-})
+}//)
 
 
 const cariFunc = async (chatArr, result ) => {

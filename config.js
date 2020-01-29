@@ -53,8 +53,8 @@ const pptrOpt = {
   //   '--disable-default-apps',
   //   '--enable-features=NetworkService',
     // '--disable-dev-shm-usage',
-    '--disable-setuid-sandbox',
-    '--no-sandbox',
+    // '--disable-setuid-sandbox',
+    // '--no-sandbox',
   //   // Extras
   //   '--disable-webgl',
   //   '--disable-threaded-animation',
