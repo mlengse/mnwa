@@ -261,20 +261,27 @@ module.exports = class Core {
 
   async getUnreadMessagesInChat(unread){
     spinner.start(`get unread messages in chat`);
+    // console.log(unread)
 
     let messages = []
+    messages = await this.page.evaluate( id => {
+      return WAPI.getAllMessagesInChat(id)
+    }, unread.id)
+    // console.log(messages)
 
-    while(!messages || !messages.length || messages.length < unread.unreadCount) {
-      messages = await this.page.evaluate( id => {
-        return WAPI.getAllMessagesInChat(id)
-      }, unread.id)
-    }
+    // while(!messages || !messages.length || messages.length < unread.unreadCount) {
+    //   messages = await this.page.evaluate( id => {
+    //     return WAPI.getAllMessagesInChat(id)
+    //   }, unread.id)
+    //   console.log(messages.length, unread.unreadCount)
+    // }
 
-    while( messages.length > unread.unreadCount){
-      messages.shift()
-    }
+    // while( messages.length > unread.unreadCount){
+    //   messages.shift()
+    //   console.log(messages.length, unread.unreadCount)
+    // }
 
-    spinner.succeed()
+    // spinner.succeed(messages.length, unread.unreadCount)
 
     return messages
 

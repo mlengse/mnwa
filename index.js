@@ -82,11 +82,11 @@ schedule('30 12 1 * *', async() => {
 
 		let unreads = await client.getAllChats(true)
 
-    for(let unread of unreads){
+    for(let unread of unreads) if(!unread.isGroup) {
 
 			let messages = await wa.getUnreadMessagesInChat(unread)
 
-    	for(let message of messages){
+    	for(let message of messages) {
         let msg = await wa.handleMessage(message)
         console.log(msg)
       }
