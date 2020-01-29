@@ -47,7 +47,7 @@ const getConnection = () => {
 
 const connect = async (query) => {
 	if(!connection){
-		getConnection()
+		connection = getConnection()
 	}
 	return await new Promise( resolve => {
 		// pool.getConnection( (err, connection) => {

@@ -11,7 +11,7 @@ moment.locale('id')
 let subscriber = null
 if(process.env.REDIS_HOST){
   subscriber = redis.createClient({
-    // host: process.env.REDIS_HOST
+    host: process.env.REDIS_HOST
   })
 }
 
@@ -33,19 +33,6 @@ schedule('30 12 1 * *', async() => {
       console.log(msg)
     })
 
-		let unreads = await client.getAllChats(true)
-
-    for(let unread of unreads){
-
-			let messages = await wa.getUnreadMessagesInChat(unread)
-
-    	for(let message of messages){
-        let msg = await wa.handleMessage(message)
-        console.log(msg)
-      }
-    	
-    }
-
     if( subscriber ){
       subscriber.on('message', async (channel, message) => {
         if(channel === 'simpus') {
@@ -58,6 +45,7 @@ schedule('30 12 1 * *', async() => {
               if(tglDaftar === moment().format('DD-MM-YYYY')){//} && jam >= 8 ) {
         
                 try{
+                  // console.log(event)
                   let patient = await getPatient(event)
         
                   if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
@@ -91,6 +79,20 @@ schedule('30 12 1 * *', async() => {
     
       subscriber.subscribe('simpus');
     }
+
+		let unreads = await client.getAllChats(true)
+
+    for(let unread of unreads){
+
+			let messages = await wa.getUnreadMessagesInChat(unread)
+
+    	for(let message of messages){
+        let msg = await wa.handleMessage(message)
+        console.log(msg)
+      }
+    	
+    }
+
 
 
   }catch(e){
