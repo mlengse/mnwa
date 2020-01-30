@@ -396,8 +396,10 @@ module.exports = class Core {
       case 'sekarang':
       case 'hari ini':
       case 'hariini':
-        tgl = moment().add(0, 'd')
-        break
+        if(this.config.DAFTAR_HARI_INI) {
+          tgl = moment().add(0, 'd')
+          break
+        }
       case 'besok':
       case 'besuk':
         tgl = moment().add(1, 'd')
@@ -406,7 +408,7 @@ module.exports = class Core {
         tgl = moment().add(2, 'd')
         break
       default:
-        result = 'Hari periksa tidak sesuai referensi sistem.\nGunakan #sekarang, #hariini, #besok, #besuk atau #lusa.'
+        result = `Hari periksa tidak sesuai referensi sistem.\nGunakan ${process.env.DAFTAR_HARI_INI ? '#sekarang, #hariini, ': ''}#besok, #besuk atau #lusa.`
         return result + '\n'
     }
     if(!result){
@@ -797,14 +799,14 @@ module.exports = class Core {
     let hari = chatArr.shift()
     hari = hari.toLowerCase().split(' ').join('')
     // console.log(hari)
-    let tgl
+    let tgl = moment()
     let dddd
     switch(hari){
       case 'sekarang':
       case 'hari ini':
       case 'hariini':
         if(this.config.DAFTAR_HARI_INI) {
-          tgl = moment().add(0, 'd')
+          // tgl = moment().add(0, 'd')
           let jam = tgl.format('H')
           if(jam >= 8) {
             // console.log(`${new Date()} request masuk jam: ${jam}`)
@@ -815,16 +817,18 @@ module.exports = class Core {
         }
       case 'besok':
       case 'besuk':
-        tgl = moment().add(1, 'd')
-        let jam = tgl.format('H')
-        if(jam >= 21) {
-          // console.log(`${new Date()} request masuk jam: ${jam}`)
-          result = 'Pendaftaran via whatsapp untuk besok ditutup pukul 21.00\n'
-          return result
+        tgl = tgl.add(1, 'd')
+        if(!this.config.DAFTAR_HARI_INI){
+          let jam = tgl.format('H')
+          if(jam >= 21) {
+            // console.log(`${new Date()} request masuk jam: ${jam}`)
+            result = 'Pendaftaran via whatsapp untuk besok ditutup pukul 21.00\n'
+            return result
+          }
         }
         break
       case 'lusa':
-        tgl = moment().add(2, 'd')
+        tgl = tgl.add(2, 'd')
         break
       default:
         return `Hari periksa tidak sesuai referensi sistem.\nGunakan ${this.config.DAFTAR_HARI_INI ? '#sekarang, #hariini,': ''} #besok, #besuk atau #lusa.`
@@ -834,7 +838,7 @@ module.exports = class Core {
       let tgll = tgl.format('YYYY-MM-DD')
       dddd = tgl.format('dddd')
 
-      // console.log(tgll, dddd)
+      console.log(tgll, dddd)
 
       if (tgl.weekday() == 6) {
         result = `Pelayanan rawat jalan ${tgl.format('dddd, D-M-YYYY')} tutup.\n`
@@ -898,6 +902,8 @@ module.exports = class Core {
             }
 
             let tgld = tgl.format('DD-MM-YYYY')
+
+            console.log(dddd, tgld, poli)
 
             return await this.daftar(hari, dddd, tgld, poli, rm[0])
 

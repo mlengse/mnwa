@@ -1,6 +1,8 @@
 const moment = require('moment')
 moment.locale('id')
 
+console.log(moment().add(0, 'd').format('ddd, DD-MM-YYYY'))
+
 const config = require('./config')
 
 let sekarang = moment().format('dddd')
