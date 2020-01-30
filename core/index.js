@@ -398,8 +398,8 @@ module.exports = class Core {
       case 'hariini':
         if(this.config.DAFTAR_HARI_INI) {
           tgl = moment().add(0, 'd')
-          break
         }
+        break
       case 'besok':
       case 'besuk':
         tgl = moment().add(1, 'd')
@@ -813,8 +813,8 @@ module.exports = class Core {
             result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
             return result
           }
-          break
         }
+        break
       case 'besok':
       case 'besuk':
         tgl = tgl.add(1, 'd')
