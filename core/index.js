@@ -92,15 +92,15 @@ module.exports = class Core {
   processTag(messageBody) {
     let contentArr = []
     let formattedText
-    if(messageBody && messageBody.charAt(0) == '#' ? true : false) {
+    while (messageBody.includes('##')) {
+      messageBody = messageBody.split('##').join('#')
+    }
+    if(messageBody && messageBody.charAt(0) == '#') {
       if (messageBody.includes('alamat')) {
         messageBody = messageBody.split('alamat').join('#')
       }
       if (messageBody.includes('.')) {
         messageBody = messageBody.split('.').join('')
-      }
-      while (messageBody.includes('##')) {
-        messageBody = messageBody.split('##').join('#')
       }
       contentArr = messageBody.split('#')
       contentArr = contentArr.map(e => e.trim())
@@ -192,6 +192,9 @@ module.exports = class Core {
       if(typeof result !== 'string') {
         all = Object.assign({}, result)
         result = all.msg
+      }
+      if(result.includes('pendaftaran gagal') && all.dataDaftar && all.dataDaftar.ketAktif && all.dataDaftar.ketAktif !== ''){
+        result += `\n${all.dataDaftar.ketAktif}`
       }
       if(process.env.FORM_LINK) {
         result += `\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
@@ -397,7 +400,7 @@ module.exports = class Core {
       case 'hari ini':
       case 'hariini':
         if(this.config.DAFTAR_HARI_INI) {
-          tgl = moment().add(0, 'd')
+          tgl = moment()//.add(0, 'd')
         }
         break
       case 'besok':

@@ -7,7 +7,11 @@ const {
 
 const keywords = ['tes', 'cek', 'cari', 'daftar']
 
-const days = ['besok', 'besuk', 'lusa']
+let days = ['besok', 'besuk', 'lusa']
+
+if(process.env.DAFTAR_HARI_INI) {
+  days = [...days, 'sekarang', 'hariini', 'hari ini']
+}
 
 const pols = [ {
   alias: ['umum', 'lansia', 'rujukan'], 
