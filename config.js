@@ -37,13 +37,13 @@ const waitOpt = {
 }
 
 const pptrOpt = {
-  headless: true,
-  // headless: false,
+  // headless: true,
+  headless: false,
   userDataDir: USER_DATA_PATH,
   // executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
   executablePath: "/usr/bin/google-chrome-stable",
   // args: ['--no-sandbox', '--disable-setuid-sandbox', '--auto-open-devtools-for-tabs' ]
-  args: [
+  // args: [
   //   // `--app=${whatsappUrl}`,
   //   '--log-level=3', // fatal only
   //   //'--start-maximized',
@@ -75,7 +75,7 @@ const pptrOpt = {
   //   '--disable-accelerated-mjpeg-decode',
   //   '--disable-app-list-dismiss-on-blur',
   //   '--disable-accelerated-video-decode'
-  ]
+  // ]
 }
 
 

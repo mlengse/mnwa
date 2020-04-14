@@ -3,13 +3,13 @@
     "name"        : "wa",
     "script"      : "index.js",
     "env": {
-      "DISPLAY": ":99"
+      "DISPLAY": ":101"
     }
   },
     {
       "name"        : "Xvfb",
       "interpreter" : "none",
       "script"      : "Xvfb",
-      "args"        : ":99"
+      "args"        : ":101"
     }]
 }
