@@ -102,8 +102,7 @@ module.exports = class Core {
       if (messageBody.includes('.')) {
         messageBody = messageBody.split('.').join('')
       }
-      contentArr = messageBody.split('#')
-      contentArr = contentArr.map(e => e.trim())
+      contentArr = messageBody.split('#').map(e => e.trim())
       contentArr.shift()
       let firstWord = contentArr.shift()
       if(firstWord){
@@ -156,6 +155,8 @@ module.exports = class Core {
     spinner.succeed()
     if(msg.tag) {
       msg = await this.generateReply(msg)
+    } else {
+      console.log(JSON.stringify(msg))
     }
     return msg
   }
@@ -811,9 +812,9 @@ module.exports = class Core {
         if(this.config.DAFTAR_HARI_INI) {
           // tgl = moment().add(0, 'd')
           let jam = tgl.format('H')
-          if(jam >= 8) {
+          if(jam >= 10) {
             // console.log(`${new Date()} request masuk jam: ${jam}`)
-            result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
+            result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 10.00\n'
             return result
           }
         }
@@ -823,7 +824,7 @@ module.exports = class Core {
         tgl = tgl.add(1, 'd')
         if(!this.config.DAFTAR_HARI_INI){
           let jam = tgl.format('H')
-          if(jam >= 21) {
+          if(jam >= 21 && this.config.PUSKESMAS === 'Pajang') {
             // console.log(`${new Date()} request masuk jam: ${jam}`)
             result = 'Pendaftaran via whatsapp untuk besok ditutup pukul 21.00\n'
             return result
@@ -841,7 +842,7 @@ module.exports = class Core {
       let tgll = tgl.format('YYYY-MM-DD')
       dddd = tgl.format('dddd')
 
-      console.log(tgll, dddd)
+      // console.log(tgll, dddd)
 
       if (tgl.weekday() == 6) {
         result = `Pelayanan rawat jalan ${tgl.format('dddd, D-M-YYYY')} tutup.\n`
