@@ -235,7 +235,6 @@ module.exports = class Core {
       this.page
         .waitForFunction(
           `
-          document.getElementById('side') ||
           document.getElementsByClassName('app')[0] &&
           document.getElementsByClassName('app')[0].attributes &&
           !!document.getElementsByClassName('app')[0].attributes.tabindex
