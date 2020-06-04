@@ -571,10 +571,12 @@ module.exports = class Core {
         $("#kartu").val("1");
         $("#aktif").val("1");
       }
-      if($('#nik').val() == '' && jsonData.noKTP.length == 16){
+      if($('#nik').val() == '' && jsonData.noKTP && jsonData.noKTP.length == 16){
         $('#nik').val(jsonData.noKTP);
       }
-      $("#kdProviderPst").val(jsonData.kdProviderPst.kdProvider);
+      if(jsonData.kdProviderPst && jsonData.kdProviderPst.kdProvider ) {
+        $("#kdProviderPst").val(jsonData.kdProviderPst.kdProvider);
+      }
       $("#jenis_pasien_bpjs").val(document.forms["Reg"]["data[Visit][typepatient_id]"].options[document.forms["Reg"]["data[Visit][typepatient_id]"].selectedIndex].getAttribute("bpjs"));
       return jsonData
     }, {
@@ -612,6 +614,8 @@ module.exports = class Core {
       $('#last_visit').html("<a href='#' onclick='return false' class='button' style='color:green;font-weight: bold;'>last visit : "+item.last_visit+"</a>");
       return item
     }, id)
+
+    spinner.start(`${JSON.stringify(ne)}`)
 
     if(ne.no_kartu) {
       return Object.assign({}, ne, await this.getVerBPJS({
@@ -712,10 +716,15 @@ module.exports = class Core {
     await this.simpusPage.type('#patient_id', rm.id)
     
     let ne = await this.getDataPasien({id: rm.id, tglDaftar: tgl})
+
+    spinner.start(`${JSON.stringify(ne)}`)
     let dataDaftar = await this.getDataPendaftaran({poli: idPoli, tglDaftar: tgl})
+
+    spinner.start(`${JSON.stringify(dataDaftar)}`)
 
     let res = await this.simpanPendaftaran(dataDaftar)
 
+    spinner.start(`${JSON.stringify(res)}`)
 
     let msg = await this.getTerdaftar(tgl, rm)
     spinner.succeed()
