@@ -44,7 +44,7 @@ if(process.platform === 'win32' || CHROME_PATH ) {
     // headless: true,
     headless: false,
     executablePath: `${CHROME_PATH}`, 
-    userDataDir: `${USER_DATA_PATH}`,
+    userDataDir: USER_DATA_PATH,
     // args: [
     //   '--content-shell-hide-toolbar',
     //   '--hide',
