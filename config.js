@@ -43,11 +43,11 @@ if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     // headless: true,
     headless: false,
-    userDataDir: './tmp',
-    executablePath: "/usr/bin/google-chrome-stable",
+    // userDataDir: './tmp',
+    // executablePath: "/usr/bin/google-chrome-stable",
   
-    // executablePath: `${CHROME_PATH}`, 
-    // userDataDir: USER_DATA_PATH,
+    executablePath: `${CHROME_PATH}`, 
+    userDataDir: USER_DATA_PATH,
     // args: [
     //   '--content-shell-hide-toolbar',
     //   '--hide',
