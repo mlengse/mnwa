@@ -43,8 +43,7 @@ if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     // headless: true,
     headless: false,
-    userDataDir: USER_DATA_PATH,
-    // executablePath: 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe',
+    userDataDir: './tmp',
     executablePath: "/usr/bin/google-chrome-stable",
   
     // executablePath: `${CHROME_PATH}`, 
