@@ -765,7 +765,7 @@ module.exports = class Core {
 
   async daftar(hari, dddd, tgl, poli, rm){
 
-    spinner.start(`daftar ${hari}, ${dddd}, ${tgl}, ${poli}, ${rm}`)
+    spinner.start(`daftar ${hari}, ${dddd}, ${tgl}, ${poli}, ${JSON.stringify(rm)}`)
     rm.nama = rm.nama.trim()
     let result = ''
   
@@ -789,7 +789,7 @@ module.exports = class Core {
     
     if(result.includes('atas nama')) {
       let plnama = this.config.pols.filter( e => JSON.stringify(e).toLowerCase().includes(poli.toLowerCase())).map(({ unit }) => unit )[0]
-      result = `${result}, ${hari}, ${dddd}, ${tgl} di poli tujuan ${plnama} untuk pemeriksaan ${poli.toUpperCase()}. \nSilahkan konfirmasi dengan loket pd hari kunjungan untuk mendapatkan nomor antrian poli tujuan.\n`
+      result = `${result}, ${hari}, ${dddd}, ${tgl} di poli tujuan ${plnama} untuk pelayanan ${poli.toUpperCase()}. \nSilahkan konfirmasi dengan loket pd hari kunjungan sebelum jam ${dddd === 'Jumat' ? `10.00` : `11.00`} untuk mendapatkan nomor antrian poli tujuan.\n`
     }
 
     return Object.assign({}, res, {
