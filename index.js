@@ -59,9 +59,9 @@ schedule('30 12 1 * *', async() => {
                     let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.\n ${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}\n` : ''}`
         
                     let from = `${patient.no_hp}@c.us`
+                    console.log(`${tglDaftar} jam ${moment(event.timestamp, 'x').format('H')} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         
                     await client.sendTextToID( from, text)
-                    console.log(`${tglDaftar} jam ${moment(event.timestamp, 'x').format('H')} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                   }
         
                 } catch (err) {
