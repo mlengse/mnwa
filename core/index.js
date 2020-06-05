@@ -234,15 +234,18 @@ module.exports = class Core {
     return from(
       this.page
         .waitForFunction(
-          `
-          document.getElementById('side') ||
-          document.getElementsByClassName('app')[0] &&
-          document.getElementsByClassName('app')[0].attributes &&
-          !!document.getElementsByClassName('app')[0].attributes.tabindex
-          `,
-          {
-            timeout: 0
-          }
+          `(
+            document.getElementsByClassName('app')[0] 
+            && document.getElementsByClassName('app')[0].attributes 
+            && !!document.getElementsByClassName('app')[0].attributes.tabindex
+            ) 
+            || (
+              document.getElementsByClassName('two')[0] 
+              && document.getElementsByClassName('two')[0].attributes 
+              && !!document.getElementsByClassName('two')[0].attributes.tabindex
+              )
+              `,
+          { timeout: 0 }
         )
         .then(() => true)
     );
