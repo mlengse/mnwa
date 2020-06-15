@@ -674,10 +674,43 @@ module.exports = class Core {
         data
       })
     
-      var item = eval("(" + request.responseText + ")");
+      let item = eval("(" + request.responseText + ")");
+      let incumObj = false
+
+      if(item.err === 'OK'){
+        if(item.ubah === 'FALSE'){
+          item.ubah === 'TRUE'
+        }
+        if(item.ubah === 'TRUE' && item.incum !== 'TRUE') {
+          confirmfrmSubmit();
+        }
+        if(item.incum === 'TRUE'){
+          if(item.ubah === 'TRUE') confirmSubmit(item.data);
+        }else{
+          incumObj = incum(item.data,2);
+        }
+      } else {
+        let class_ok = '';
+        if (typeof item.class !== 'undefined') {
+          class_ok = 'success';
+        }else{
+          class_ok = 'danger';
+        }
+        // $("#erMsg").html("<div id='ajaxMsg' class='"+class_ok+"'>"+ item.msg +"</div>");
+        // if(item.p == '1'){
+        //   window.open('/j-care/patients/print_krm/'+ item.id, 'Print Kartu Rekam Medis', '_blank');
+        //   window.open('/j-care/patients/print_kartu/'+ item.id, 'Print Kartu Pasien', '_blank');
+        // }
+        // $('#notes').empty().hide();
+        // $("#online_verification").css('display', 'none').val('');
+        // $('#inputUpper').each(function(){ this.reset() });
+        // $.ajax({async:true, type:'post', complete:function(request, json) {	$('#lsdusun').html(request.responseText); $("#patient_id").focus();}, url:'/j-care/visits/orchard/null/true'});
+        // $(".linkedit").empty().html('&nbsp;');
+      }
       return Object.assign({}, item, {
         alert: alert === '' ? undefined : alert,
-        request
+        request,
+        incum: incumObj ? incumObj : undefined
       })
     }, {obj, data} );
   }
