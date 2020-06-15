@@ -694,7 +694,7 @@ module.exports = class Core {
         re = await $.ajax({
           type: 'post',
           url: '/j-care/visits/save_visit/2',
-          data: item.data
+          data
         })
       } 
 
