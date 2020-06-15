@@ -592,6 +592,7 @@ module.exports = class Core {
   }
 
   async getDataPasien({id, tglDaftar}) {
+    spinner.start('getDataPasien')
     let ne = await this.simpusPage.evaluate(async pid =>{
       let data = await $.get( '/j-care/patients/getdata/' + pid)
       let item = $.parseJSON(data);
@@ -619,7 +620,7 @@ module.exports = class Core {
       return item
     }, id)
 
-    spinner.start(`${JSON.stringify(ne)}`)
+    // spinner.start(`${JSON.stringify(ne)}`)
 
     if(ne.no_kartu) {
       return Object.assign({}, ne, await this.getVerBPJS({
@@ -674,7 +675,7 @@ module.exports = class Core {
         data
       })
     
-      let item = eval("(" + request.responseText + ")");
+      var item = eval("(" + request.responseText + ")");
       let incumObj = false
 
       if(item.err === 'OK'){
