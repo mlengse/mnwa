@@ -565,6 +565,7 @@ module.exports = class Core {
   }
 
   async getVerBPJS({ noks, tglDaftar }){
+    spinner.start('getVerBPJS')
     return await this.simpusPage.evaluate(async({ noks, tglDaftar, kdpoli })=> {
       let jsonData = await $.getJSON('/j-care/bpjs/apis/verifikasi/noka/' + noks + '/' + tglDaftar + '/' + kdpoli)
       $('#online_verification').val(jsonData.status);
@@ -633,6 +634,7 @@ module.exports = class Core {
 
   async simpanPendaftaran( obj ) {
     let data = this.getParams(obj)
+    spinner.start('simpanPendaftaran')
     return await this.simpusPage.evaluate(async ({ obj, data }) => {
       let jenispasienbpjs = obj['data[Visit][jenis_pasien_bpjs]']
       let ppk = obj['data[Visit][ppk_cocok]']
@@ -684,7 +686,7 @@ module.exports = class Core {
 
       if(item && item.err === 'OK'){
         if(item.ubah === 'FALSE'){
-          item.ubah === 'TRUE'
+          item.ubah = 'TRUE'
         }
         if(item.incum === 'TRUE') {
           incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
