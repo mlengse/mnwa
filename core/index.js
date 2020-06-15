@@ -675,22 +675,23 @@ module.exports = class Core {
         data
       })
     
-      var item = eval("(" + request.responseText + ")");
+      let item = eval("(" + request.responseText + ")");
       let incumObj = false
+      let re = false
 
-      if(item.err === 'OK'){
+      if(item && item.err === 'OK'){
         if(item.ubah === 'FALSE'){
           item.ubah === 'TRUE'
         }
         if(item.incum === 'TRUE') {
           incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
         }
+        re = await $.ajax({
+          type: 'post',
+          url: '/j-care/visits/save_visit/2',
+          data
+        })
       } 
-      let re = await $.ajax({
-        type: 'post',
-        url: '/j-care/visits/save_visit/2',
-        data
-      })
 
       // else {
       //   let class_ok = '';
@@ -703,7 +704,7 @@ module.exports = class Core {
       return Object.assign({}, item, {
         alert: alert === '' ? undefined : alert,
         request,
-        re,
+        re: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
     }, {obj, data} );
