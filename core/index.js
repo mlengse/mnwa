@@ -194,9 +194,9 @@ module.exports = class Core {
         all = Object.assign({}, result)
         result = all.msg
       }
-      if(result.includes('pendaftaran gagal') && all.dataDaftar && all.dataDaftar.ketAktif && all.dataDaftar.ketAktif !== ''){
-        result += `\n${all.dataDaftar.ketAktif}`
-      }
+      // if(result.includes('pendaftaran gagal') && all.dataDaftar && all.dataDaftar.ketAktif && all.dataDaftar.ketAktif !== ''){
+      //   result += `\n${all.dataDaftar.ketAktif}`
+      // }
       if(process.env.FORM_LINK) {
         result += `\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
       }
@@ -676,7 +676,8 @@ module.exports = class Core {
     
       var item = eval("(" + request.responseText + ")");
       return Object.assign({}, item, {
-        alert: alert === '' ? 'tersimpan' : alert
+        alert: alert === '' ? undefined : alert,
+        request
       })
     }, {obj, data} );
   }
