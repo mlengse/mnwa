@@ -684,13 +684,13 @@ module.exports = class Core {
         if(item.incum === 'TRUE') {
           incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
         }
-        let re = await $.ajax({
-          type: 'post',
-          url: '/j-care/visits/save_visit/2',
-          data
-        })
-        request = Object.assign({}, request, re)
       } 
+      let re = await $.ajax({
+        type: 'post',
+        url: '/j-care/visits/save_visit/2',
+        data
+      })
+
       // else {
       //   let class_ok = '';
       //   if (typeof item.class !== 'undefined') {
@@ -702,6 +702,7 @@ module.exports = class Core {
       return Object.assign({}, item, {
         alert: alert === '' ? undefined : alert,
         request,
+        re,
         incum: incumObj ? incumObj : undefined
       })
     }, {obj, data} );
@@ -747,10 +748,10 @@ module.exports = class Core {
     
     let ne = await this.getDataPasien({id: rm.id, tglDaftar: tgl})
 
-    spinner.start(`${JSON.stringify(ne)}`)
+    // spinner.start(`${JSON.stringify(ne)}`)
     let dataDaftar = await this.getDataPendaftaran({poli: idPoli, tglDaftar: tgl})
 
-    spinner.start(`${JSON.stringify(dataDaftar)}`)
+    spinner.start(`${JSON.stringify(Object.assign({}, ne, dataDaftar))}`)
 
     let res = await this.simpanPendaftaran(dataDaftar)
 
