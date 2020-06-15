@@ -689,7 +689,7 @@ module.exports = class Core {
         re = await $.ajax({
           type: 'post',
           url: '/j-care/visits/save_visit/2',
-          data
+          data: item.data
         })
       } 
 
@@ -701,9 +701,10 @@ module.exports = class Core {
       //     class_ok = 'danger';
       //   }
       // }
-      return Object.assign({}, item, {
+      return Object.assign({}, {
         alert: alert === '' ? undefined : alert,
-        request,
+        item: item? item: undefined,
+        // request,
         re: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
