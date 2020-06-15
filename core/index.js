@@ -674,7 +674,10 @@ module.exports = class Core {
         url:'/j-care/visits/print_kartu',
         data
       })
-    
+      if(typeof item === 'string'){
+        item = JSON.parse(item)
+      }
+   
       // let item = eval("(" + request.responseText + ")");
       let incumObj = false
       let re = false
