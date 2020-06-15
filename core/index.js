@@ -669,13 +669,13 @@ module.exports = class Core {
         }
       }
 
-      let request = await $.ajax({
+      let item = await $.ajax({
         type:'post',
         url:'/j-care/visits/print_kartu',
         data
       })
     
-      let item = eval("(" + request.responseText + ")");
+      // let item = eval("(" + request.responseText + ")");
       let incumObj = false
       let re = false
 
