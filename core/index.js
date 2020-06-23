@@ -632,10 +632,10 @@ module.exports = class Core {
     return ne
   }
 
-  async simpanPendaftaran( obj ) {
-    let data = this.getParams(obj)
+  async simpanPendaftaran( { dataDaftar, tglDaftar} ) {
+    let data = this.getParams(dataDaftar)
     spinner.start('simpanPendaftaran')
-    return await this.simpusPage.evaluate(async ({ obj, data }) => {
+    return await this.simpusPage.evaluate(async ({ obj, data, tglDaftar }) => {
       let jenispasienbpjs = obj['data[Visit][jenis_pasien_bpjs]']
       let ppk = obj['data[Visit][ppk_cocok]']
       let kartu = obj.kartu
@@ -713,7 +713,7 @@ module.exports = class Core {
         re: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
-    }, {obj, data} );
+    }, {obj: dataDaftar, data, tglDaftar} );
   }
 
   async getDataPendaftaran({ poli, tglDaftar }) {
@@ -761,12 +761,12 @@ module.exports = class Core {
 
     spinner.start(`${JSON.stringify(Object.assign({}, ne, dataDaftar))}`)
 
-    let res = await this.simpanPendaftaran(dataDaftar)
+    let res = await this.simpanPendaftaran({dataDaftar, tglDaftar: tgl})
 
     spinner.start(`${JSON.stringify(res)}`)
 
     let msg = await this.getTerdaftar(tgl, rm)
-    spinner.succeed()
+    // spinner.succeed()
     if(msg === ''){
 			msg = 'Maaf, ada kesalahan sistem, pendaftaran gagal. \nMohon ulangi beberapa saat lagi.'
     }
@@ -785,6 +785,8 @@ module.exports = class Core {
   }
 
   async getTerdaftar(tgl, rm) {
+
+    this.spinner.start(`start getTerdaftar ${rm.id}`)
     let terdaft = ''
 
 		let res = await this.data_kunj(tgl.split('-').reverse().join('-'))
@@ -960,7 +962,7 @@ module.exports = class Core {
             return await this.daftar(hari, dddd, tgld, poli, rm[0])
 
           } else {
-            return `Parameter ketiga adalah nama poli.\nNama poli tidak sesuai referensi sistem.\nGunakan: ${poliArr.map(e=>`#${e},`).join(' ')}.`
+            return `Parameter ketiga adalah nama poli.\nNama poli tidak sesuai referensi sistem.\nGunakan: ${this.config.polArr.map(e=>`#${e},`).join(' ')}.`
           }
         }
 
