@@ -19,18 +19,26 @@ const pols = [ {
 }, {
   alias: ['gigi'],
 },{
-  alias: ['kia', 'bumil', 'mtbs']
-}, {
+  alias: ['kia', 'bumil', 'mtbs'],
+  hari: process.env.KIA || undefined
+},{
+  alias: ['mtbs'],
+  hari: process.env.MTBS || undefined
+},{
   alias: ['gizi'],
+  hari: process.env.GIZI || undefined
 }, {
   alias: ['kesling'],
+  hari: process.env.KESLING || undefined
 }, {
   alias: ['tb'],
+  hari: process.env.TB || undefined
 }, {
   alias: ['kb'],
+  hari: process.env.KB || undefined
 }, {
   alias: ['imunisasi'],
-  hari: [1]
+  hari: process.env.IMUNISASI || [1]
 }]
 
 const waitOpt = {

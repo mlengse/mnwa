@@ -365,12 +365,16 @@ module.exports = class Core {
 
   async getUnits() {
     let units = await connect('SELECT * FROM units')
-    let uns = units.map(({unit})=> unit)
+    // let uns = units.map(({unit})=> unit)
     this.config.pols = this.config.pols.map(e => {
       for( let b of e.alias) {
-        for(let u of uns){
-          if(u.toLowerCase().includes(b)){
-            return Object.assign({}, e, units[uns.indexOf(u)])
+        for(let u of units){
+          if(u.unit.toLowerCase().includes(b)){
+            return Object.assign({}, e, u)
+          } else {
+            return Object.assign({}, e, {
+              id: '01'
+            })
           }
         }
       }
