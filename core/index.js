@@ -356,6 +356,7 @@ module.exports = class Core {
   }
 
   async cekDaftar(tgl){
+    spinner.start(`cekDaftar ${tgl}`)
     return await _cekDaftar(tgl, this.config.unit)
   }
 
@@ -402,6 +403,7 @@ module.exports = class Core {
   async cekApi({chatArr, result }) {
     let hari = chatArr.shift()
     hari = hari.toLowerCase().replace(' ', '')
+    spinner.start(`cekApi ${hari}`)
     //console.log(hari)
     let tgl
     switch(hari){

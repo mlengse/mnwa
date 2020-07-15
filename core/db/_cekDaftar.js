@@ -1,6 +1,7 @@
 const data_kunj = require('./_data_kunj')
 
 module.exports = async(tgl, unit) => {
+	console.log(unit)
 		
 	let terdaft = ''
 	let res = await data_kunj(tgl.split('-').reverse().join('-'))
