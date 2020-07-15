@@ -649,7 +649,7 @@ module.exports = class Core {
     
       if(jenispasienbpjs == "1") {
         if(onlinever == "GANDA") {
-          alert += "Pasien sudah terdaftar sebelumnya. Pasien BPJS hanya bisa didaftarkan satu kali dalam sehari.\n "
+          alert += "Pasien sudah terdaftar hari ini. Pasien BPJS hanya bisa didaftarkan satu kali dalam sehari.\n "
         } else if(onlinever == "DATA TIDAK DITEMUKAN") {
           alert += "Data pasien tidak ditemukan di database BPJS. Periksa kembali no kartu yang diisikan, lalu ulang proses verifikasi.\n "
         } else {
@@ -676,6 +676,7 @@ module.exports = class Core {
         url:'/j-care/visits/print_kartu',
         data
       })
+      
       if(typeof item === 'string'){
         item = JSON.parse(item)
       }
@@ -683,29 +684,33 @@ module.exports = class Core {
       // let item = eval("(" + request.responseText + ")");
       let incumObj = false
       let re = false
+      let send = false
 
       if(item && item.err === 'OK'){
         if(item.ubah === 'FALSE'){
           item.ubah = 'TRUE'
+          send = true
         }
         if(item.incum === 'TRUE') {
-          incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
+          let tglSkrg = $("#tglSkrg").val();
+          if(tglDaftar !== tglSkrg) {
+            send = true
+          } else {
+            send = false
+            incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
+            alert += incumObj
+          }
         }
+      } 
+
+      if(send) {
         re = await $.ajax({
           type: 'post',
           url: '/j-care/visits/save_visit/2',
           data
         })
-      } 
+      }
 
-      // else {
-      //   let class_ok = '';
-      //   if (typeof item.class !== 'undefined') {
-      //     class_ok = 'success';
-      //   }else{
-      //     class_ok = 'danger';
-      //   }
-      // }
       return Object.assign({}, {
         alert: alert === '' ? undefined : alert,
         item: item? item: undefined,
@@ -768,9 +773,13 @@ module.exports = class Core {
     let msg = await this.getTerdaftar(tgl, rm)
     // spinner.succeed()
     if(msg === ''){
-			msg = 'Maaf, ada kesalahan sistem, pendaftaran gagal. \nMohon ulangi beberapa saat lagi.'
+      msg = 'Maaf, ada kesalahan sistem, pendaftaran gagal. \nMohon ulangi beberapa saat lagi.'
     }
-    
+
+    if(res.alert) {
+      msg += res.alert
+    }
+
     await this.simpusClose()
 
     return {
