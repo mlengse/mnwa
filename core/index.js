@@ -410,6 +410,8 @@ module.exports = class Core {
       case 'hariini':
         if(this.config.DAFTAR_HARI_INI) {
           tgl = moment()//.add(0, 'd')
+        } else {
+          return 'ok'
         }
         break
       case 'besok':
@@ -794,6 +796,7 @@ module.exports = class Core {
 	}
 	
   async data_kunj(tgl){
+    this.spinner.start(`data_kunj ${tgl}`)
     return await connect(`SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`)
   }
 
