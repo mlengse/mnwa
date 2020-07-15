@@ -796,13 +796,13 @@ module.exports = class Core {
 	}
 	
   async data_kunj(tgl){
-    this.spinner.start(`data_kunj ${tgl}`)
+    spinner.start(`data_kunj ${tgl}`)
     return await connect(`SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`)
   }
 
   async getTerdaftar(tgl, rm) {
 
-    this.spinner.start(`start getTerdaftar ${rm.id}`)
+    spinner.start(`start getTerdaftar ${rm.id}`)
     let terdaft = ''
 
 		let res = await this.data_kunj(tgl.split('-').reverse().join('-'))
