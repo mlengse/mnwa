@@ -88,7 +88,7 @@ schedule('30 12 1 * *', async() => {
 
     	for(let message of messages) {
         let msg = await wa.handleMessage(message)
-        console.log(msg)
+        console.log(JSON.stringify(msg))
       }
     	
     }

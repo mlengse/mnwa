@@ -157,7 +157,7 @@ module.exports = class Core {
     if(msg.tag) {
       msg = await this.generateReply(msg)
     } else {
-      console.log(JSON.stringify(msg))
+      spinner.start(JSON.stringify(msg))
     }
     return msg
   }
@@ -559,8 +559,8 @@ module.exports = class Core {
       this.simpusPage = this.pages[1]
       this.simpusPage.on('dialog', async dialog => {
         dial = `${dialog.message()}\n`
-        console.log(`${new Date()} ${dialog.type()}`)
-        if(dial !== '') console.log(`${new Date()} ${dial}`)
+        spinner.start(`${new Date()} ${dialog.type()}`)
+        if(dial !== '') spinner.start(`${new Date()} ${dial}`)
         if(dialog.type() === 'alert'){
           await dialog.dismiss()
         } else {
@@ -644,7 +644,7 @@ module.exports = class Core {
 
   async simpanPendaftaran( { dataDaftar, tglDaftar} ) {
     let data = this.getParams(dataDaftar)
-    spinner.start('simpanPendaftaran')
+    spinner.start(`simpanPendaftaran ${tglDaftar} ${JSON.stringify(dataDaftar)}`)
     return await this.simpusPage.evaluate(async ({ obj, data, tglDaftar }) => {
       let jenispasienbpjs = obj['data[Visit][jenis_pasien_bpjs]']
       let ppk = obj['data[Visit][ppk_cocok]']
@@ -681,17 +681,17 @@ module.exports = class Core {
         }
       }
 
-      let item = await $.ajax({
-        type:'post',
-        url:'/j-care/visits/print_kartu',
-        data
-      })
+      // let item = await $.ajax({
+      //   type:'post',
+      //   url:'/j-care/visits/print_kartu',
+      //   data
+      // })
       
-      if(typeof item === 'string'){
-        item = JSON.parse(item)
-      }
+      // if(typeof item === 'string'){
+      //   item = JSON.parse(item)
+      // }
    
-      // let item = eval("(" + request.responseText + ")");
+      // // let item = eval("(" + request.responseText + ")");
       // let incumObj = false
       // let re = false
       // let send = false
@@ -714,11 +714,11 @@ module.exports = class Core {
       // } 
 
       // if(send) {
-      //   re = await $.ajax({
-      //     type: 'post',
-      //     url: '/j-care/visits/save_visit/1',
-      //     data
-      //   })
+        re = await $.ajax({
+          type: 'post',
+          url: '/j-care/visits/save_visit/1',
+          data
+        })
       // }
 
       return Object.assign({}, {
@@ -977,7 +977,7 @@ module.exports = class Core {
 
             let tgld = tgl.format('DD-MM-YYYY')
 
-            console.log(dddd, tgld, poli)
+            spinner.start(dddd, tgld, poli)
 
             return await this.daftar(hari, dddd, tgld, poli, rm[0])
 
