@@ -13,6 +13,7 @@ const { connect } = require('./db/_mysqlconn')
 const { cariFunc } = require('./db/_cari')
 const { Whatsapp } = require('./api/whatsapp')
 const _cekDaftar = require('./db/_cekDaftar')
+const { waitOpt } = require('../config')
 moment.locale('id')
 db.defaults({ liburnas: [] }).write()    
 
@@ -273,7 +274,8 @@ module.exports = class Core {
 
     let messages = []
     messages = await this.page.evaluate( id => {
-      return WAPI.getAllMessagesInChat(id)
+      // return WAPI.getAllMessagesInChat(id)
+      return WAPI.getUnreadMessagesInChat(id, false, false)
     }, unread.id)
     // console.log(messages)
 
