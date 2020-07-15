@@ -692,34 +692,34 @@ module.exports = class Core {
       }
    
       // let item = eval("(" + request.responseText + ")");
-      let incumObj = false
-      let re = false
-      let send = false
+      // let incumObj = false
+      // let re = false
+      // let send = false
 
-      if(item && item.err === 'OK'){
-        if(item.ubah === 'FALSE'){
-          item.ubah = 'TRUE'
-          send = true
-        }
-        if(item.incum === 'TRUE') {
-          let tglSkrg = $("#tglSkrg").val();
-          if(tglDaftar !== tglSkrg) {
-            send = true
-          } else {
-            send = false
-            incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
-            alert += incumObj
-          }
-        }
-      } 
+      // if(item && item.err === 'OK'){
+      //   if(item.ubah === 'FALSE'){
+      //     item.ubah = 'TRUE'
+      //     send = true
+      //   }
+      //   if(item.incum === 'TRUE') {
+      //     let tglSkrg = $("#tglSkrg").val();
+      //     if(tglDaftar !== tglSkrg) {
+      //       send = true
+      //     } else {
+      //       send = false
+      //       incumObj = 'PERHATIAN! PASIEN TERSEBUT SUDAH PERNAH BERKUNJUNG PADA HARI INI'
+      //       alert += incumObj
+      //     }
+      //   }
+      // } 
 
-      if(send) {
-        re = await $.ajax({
-          type: 'post',
-          url: '/j-care/visits/save_visit/1',
-          data
-        })
-      }
+      // if(send) {
+      //   re = await $.ajax({
+      //     type: 'post',
+      //     url: '/j-care/visits/save_visit/1',
+      //     data
+      //   })
+      // }
 
       return Object.assign({}, {
         alert: alert === '' ? undefined : alert,
