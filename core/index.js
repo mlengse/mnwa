@@ -274,8 +274,8 @@ module.exports = class Core {
 
     let messages = []
     messages = await this.page.evaluate( id => {
-      // return WAPI.getAllMessagesInChat(id)
-      return WAPI.getUnreadMessagesInChat(id, false, false)
+      return WAPI.getAllMessagesInChat(id)
+      // return WAPI.getUnreadMessagesInChat(id, false, false)
     }, unread.id)
     // console.log(messages)
 

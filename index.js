@@ -87,8 +87,9 @@ schedule('30 12 1 * *', async() => {
 			let messages = await wa.getUnreadMessagesInChat(unread)
 
     	for(let message of messages) {
-        let msg = await wa.handleMessage(message)
-        console.log(JSON.stringify(msg))
+        console.log(message)
+        // let msg = await wa.handleMessage(message)
+        // console.log(JSON.stringify(msg))
       }
     	
     }
