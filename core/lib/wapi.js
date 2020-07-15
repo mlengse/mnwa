@@ -488,59 +488,6 @@ window.WAPI.getChatById = function (id) {
 
 
 /**
-* I return all unread messages from an asked chat and mark them as read.
-*
-* :param id: chat id
-* :type  id: string
-*
-* :param includeMe: indicates if user messages have to be included
-* :type  includeMe: boolean
-*
-* :param includeNotifications: indicates if notifications have to be included
-* :type  includeNotifications: boolean
-*
-* :returns: list of unread messages from asked chat
-* :rtype: object
-*/
-window.WAPI.getUnreadMessagesInChat = function (id, includeMe, includeNotifications) {
-	// get chat and its messages
-	let chat = WAPI.getChat(id);
-	let messages = chat.msgs._models;
-
-	// initialize result list
-	let output = [];
-
-	// look for unread messages, newest is at the end of array
-	for (let i = messages.length - 1; i >= 0; i--) {
-			// system message: skip it
-			if (i === "remove") {
-					continue;
-			}
-
-			// get message
-			let messageObj = messages[i];
-
-			// found a read message: stop looking for others
-			if (typeof (messageObj.isNewMsg) !== "boolean" || messageObj.isNewMsg === false) {
-					continue;
-			} else {
-					messageObj.isNewMsg = false;
-					// process it
-					let message = WAPI.processMessageObj(messageObj,
-							includeMe,
-							includeNotifications);
-
-					// save processed message on result list
-					if (message)
-							output.push(message);
-			}
-	}
-	// return result list
-	return output;
-};
-
-
-/**
 * Load more messages in chat object from server. Use this in a while loop
 *
 * @param id ID of chat
@@ -691,6 +638,60 @@ window.WAPI.processMessageObj = function (messageObj, includeMe, includeNotifica
 			return WAPI._serializeMessageObj(messageObj);
 	}
 	return;
+};
+
+/**
+* I return all unread messages from an asked chat and mark them as read.
+*
+* :param id: chat id
+* :type  id: string
+*
+* :param includeMe: indicates if user messages have to be included
+* :type  includeMe: boolean
+*
+* :param includeNotifications: indicates if notifications have to be included
+* :type  includeNotifications: boolean
+*
+* :returns: list of unread messages from asked chat
+* :rtype: object
+*/
+window.WAPI.getUnreadMessagesInChat = function (id, includeMe, includeNotifications) {
+	// get chat and its messages
+	const chat = WAPI.getChat(id);
+	let messages = chat.msgs._models;
+
+	// initialize result list
+	let output = [];
+
+	// look for unread messages, newest is at the end of array
+	for (const i in messages) {
+		// for (let i = messages.length - 1; i >= 0; i--) {
+			// system message: skip it
+			if (i === "remove") {
+					continue;
+			}
+
+			// get message
+			const messageObj = messages[i];
+
+			// found a read message: stop looking for others
+			if (typeof (messageObj.isNewMsg) !== "boolean" || messageObj.isNewMsg === false) {
+					continue;
+			} else {
+					messageObj.isNewMsg = false;
+					// process it
+					let message = WAPI.processMessageObj(messageObj,
+							includeMe,
+							includeNotifications);
+
+					// save processed message on result list
+					if (message)
+							output.push(message);
+			}
+	}
+	// return result list
+	return WAPI.quickClean(output);
+	// return output;
 };
 
 window.WAPI.getAllMessagesInChat = function (id, includeMe, includeNotifications) {
