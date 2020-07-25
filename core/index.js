@@ -797,19 +797,19 @@ module.exports = class Core {
 
     let res = await this.simpanPendaftaran({dataDaftar, tglDaftar: tgl})
 
-    spinner.start(`${JSON.stringify(res)}`)
+    // spinner.start(`${JSON.stringify(res)}`)
 
     let msg = await this.getTerdaftar(tgl, rm)
 
     let count = 0
 
     // spinner.succeed()
-    while(msg === '' || count < 1000 ){
+    while(msg == '' || count < 10 ){
       msg = await this.getTerdaftar(tgl, rm)
       count++
     }
 
-    if(msg === ''){
+    if(msg == ''){
       msg = 'Maaf, ada kesalahan sistem, pendaftaran gagal. \nMohon ulangi beberapa saat lagi.'
     }
 
@@ -827,13 +827,13 @@ module.exports = class Core {
 	}
 	
   async data_kunj(tgl){
-    spinner.start(`data_kunj ${tgl}`)
+    // spinner.start(`data_kunj ${tgl}`)
     return await connect(`SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`)
   }
 
   async getTerdaftar(tgl, rm) {
 
-    spinner.start(`start getTerdaftar ${rm.id}`)
+    // spinner.start(`start getTerdaftar ${rm.id}`)
     let terdaft = ''
 
 		let res = await this.data_kunj(tgl.split('-').reverse().join('-'))
