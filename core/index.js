@@ -645,7 +645,7 @@ module.exports = class Core {
   async simpanPendaftaran( { dataDaftar, tglDaftar} ) {
     let data = this.getParams(dataDaftar)
     spinner.start(`simpanPendaftaran ${tglDaftar} ${JSON.stringify(dataDaftar)}`)
-    let re = await this.simpusPage.evaluate( ({ obj, data, tglDaftar }) => {
+    return await this.simpusPage.evaluate( ({ obj, data, tglDaftar }) => {
       let jenispasienbpjs = obj['data[Visit][jenis_pasien_bpjs]']
       let ppk = obj['data[Visit][ppk_cocok]']
       let kartu = obj.kartu
@@ -735,19 +735,19 @@ module.exports = class Core {
       // }
       // }
 
-      let a = Object.assign({}, {
+      return Object.assign({}, {
         alert: alert === '' ? undefined : alert,
         item: item? item: undefined,
         // request,
         // re: JSON.parse(JSON.stringify(re)),//: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
-      return a
+      // return a
     }, {obj: dataDaftar, data, tglDaftar} );
 
-    console.log(re)
+    // console.log(re)
 
-    return re
+    // return re
   }
 
   async getDataPendaftaran({ poli, tglDaftar }) {
@@ -800,7 +800,15 @@ module.exports = class Core {
     spinner.start(`${JSON.stringify(res)}`)
 
     let msg = await this.getTerdaftar(tgl, rm)
+
+    let count = 0
+
     // spinner.succeed()
+    while(msg === '' || count < 1000 ){
+      msg = await this.getTerdaftar(tgl, rm)
+      count++
+    }
+
     if(msg === ''){
       msg = 'Maaf, ada kesalahan sistem, pendaftaran gagal. \nMohon ulangi beberapa saat lagi.'
     }
