@@ -869,9 +869,9 @@ module.exports = class Core {
   }
 
   async daftarApi({ chatArr, result}) {
-    spinner.start('daftar')
     let hari = chatArr.shift()
     hari = hari.toLowerCase().split(' ').join('')
+    spinner.start(`daftarApi ${hari}`)
     // console.log(hari)
     let tgl = moment()
     let dddd
