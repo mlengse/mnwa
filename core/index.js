@@ -645,7 +645,7 @@ module.exports = class Core {
   async simpanPendaftaran( { dataDaftar, tglDaftar} ) {
     let data = this.getParams(dataDaftar)
     spinner.start(`simpanPendaftaran ${tglDaftar} ${JSON.stringify(dataDaftar)}`)
-    let re = await this.simpusPage.evaluate(async ({ obj, data, tglDaftar }) => {
+    let re = await this.simpusPage.evaluate( ({ obj, data, tglDaftar }) => {
       let jenispasienbpjs = obj['data[Visit][jenis_pasien_bpjs]']
       let ppk = obj['data[Visit][ppk_cocok]']
       let kartu = obj.kartu
@@ -692,7 +692,7 @@ module.exports = class Core {
       // }
    
       // // let item = eval("(" + request.responseText + ")");
-      // let incumObj = false
+      let incumObj = false
       // let re = false
       // let send = false
 
@@ -735,13 +735,14 @@ module.exports = class Core {
       // }
       // }
 
-      return Object.assign({}, {
+      let a = Object.assign({}, {
         alert: alert === '' ? undefined : alert,
         item: item? item: undefined,
         // request,
         // re: JSON.parse(JSON.stringify(re)),//: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
+      return a
     }, {obj: dataDaftar, data, tglDaftar} );
 
     console.log(re)
