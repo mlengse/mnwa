@@ -725,7 +725,7 @@ module.exports = class Core {
         alert: alert === '' ? undefined : alert,
         item: item? item: undefined,
         // request,
-        re: re? re: undefined,
+        re,//: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
     }, {obj: dataDaftar, data, tglDaftar} );
