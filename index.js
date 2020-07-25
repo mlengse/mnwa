@@ -99,8 +99,8 @@ schedule('30 12 1 * *', async() => {
           console.log(message.chat.unreadCount)
 
         }
-        // let msg = await wa.handleMessage(message)
-        // console.log(JSON.stringify(msg))
+        let msg = await wa.handleMessage(message)
+        console.log(JSON.stringify(msg))
       }
     	
     }
