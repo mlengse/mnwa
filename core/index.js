@@ -960,9 +960,8 @@ module.exports = class Core {
           let ada = this.config.polArr.filter(e => e == poli)
           if(ada.length){
 
-            if(this.config.jadwal[poli] && this.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
+            if(this.config.jadwal[poli] && Array.isArray(this.config.jadwal[poli]) && this.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
               return `poli ${poli} hanya buka hari ${this.config.jadwal[poli].map(e => moment( e, 'e').format('dddd').join(', '))}`
-
             }
 
             if(poli === 'rujukan') {
