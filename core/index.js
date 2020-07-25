@@ -717,11 +717,15 @@ module.exports = class Core {
       let re = false
 
       try {
-        re = await $.ajax({
+        re = await new Promise( resolve => $.ajax({
+          async: true,
           type: 'post',
           url: '/j-care/visits/save_visit/1',
+          complete: req => {
+            resolve(req)
+          },
           data
-        })
+        }))
   
       } catch(e){
         re = e
