@@ -84,7 +84,13 @@ schedule('30 12 1 * *', async() => {
 
     for(let unread of unreads) if(!unread.isGroup) {
 
-			let messages = await wa.getUnreadMessagesInChat(unread)
+      let messages = await wa.getUnreadMessagesInChat(unread)
+      
+      let unreadCount = messages[0].chat.unreadCount
+
+      while(messages.length > unreadCount) {
+        messages.shift()
+      }
 
     	for(let message of messages) {
         if(message && message.chat && message.chat.unreadCount) {
