@@ -714,18 +714,25 @@ module.exports = class Core {
       // } 
 
       // if(send) {
-      let re = await $.ajax({
-        type: 'post',
-        url: '/j-care/visits/save_visit/1',
-        data
-      })
+      let re = false
+
+      try {
+        re = await $.ajax({
+          type: 'post',
+          url: '/j-care/visits/save_visit/1',
+          data
+        })
+  
+      } catch(e){
+        re = e
+      }
       // }
 
       return Object.assign({}, {
         alert: alert === '' ? undefined : alert,
         item: item? item: undefined,
         // request,
-        re,//: re? re: undefined,
+        re: JSON.parse(JSON.stringify(re)),//: re? re: undefined,
         incum: incumObj ? incumObj : undefined
       })
     }, {obj: dataDaftar, data, tglDaftar} );
