@@ -721,8 +721,9 @@ module.exports = class Core {
           async: true,
           type: 'post',
           url: '/j-care/visits/save_visit/1',
-          complete: req => {
-            resolve(req)
+          complete: request => {
+            let item = eval("(" + request.responseText + ")");
+            resolve(item)
           },
           data
         }))
