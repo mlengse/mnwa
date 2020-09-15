@@ -392,7 +392,9 @@ module.exports = class Core {
       if(alias && Array.isArray(alias) ){
         alias.map( e => this.config.polArr.push(e))
       }
-      this.config.unit[id] = unit
+      if(id !== undefined ) {
+        this.config.unit[id] = unit
+      }
     })
 
     this.config.polArr = [...new Set(this.config.polArr)]

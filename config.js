@@ -19,7 +19,7 @@ const pols = [ {
 }, {
   alias: ['gigi'],
 },{
-  alias: ['kia', 'bumil', 'mtbs'],
+  alias: ['kia', 'bumil'],
   hari: process.env.KIA || undefined
 },{
   alias: ['mtbs'],
