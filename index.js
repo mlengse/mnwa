@@ -29,6 +29,7 @@ schedule('30 12 1 * *', async() => {
     const client = await wa.init()
 
 		client.onMessage( async message => {
+      console.log(message)
       let msg = await wa.handleMessage(message)
       console.log(msg)
     })
