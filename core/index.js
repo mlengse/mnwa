@@ -911,10 +911,18 @@ module.exports = class Core {
         if(this.config.DAFTAR_HARI_INI) {
           // tgl = moment().add(0, 'd')
           let jam = tgl.format('H')
-          if(jam >= 10) {
-            // console.log(`${new Date()} request masuk jam: ${jam}`)
-            result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 10.00\n'
-            return result
+          if(this.config.PUSKESMAS !== 'Jayengan'){
+            if(jam >= 8) {
+              // console.log(`${new Date()} request masuk jam: ${jam}`)
+              result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
+              return result
+            }
+          } else {
+            if(jam >= 10) {
+              // console.log(`${new Date()} request masuk jam: ${jam}`)
+              result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 10.00\n'
+              return result
+            }
           }
         }
         break
