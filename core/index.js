@@ -908,7 +908,7 @@ module.exports = class Core {
       case 'sekarang':
       case 'hari ini':
       case 'hariini':
-        if(this.config.DAFTAR_HARI_INI) {
+        if(this.config.DAFTAR_HARI_INI  && this.config.PUSKESMAS !== 'Pajang') {
           // tgl = moment().add(0, 'd')
           let jam = tgl.format('H')
           if(this.config.PUSKESMAS !== 'Jayengan'){
@@ -1007,6 +1007,12 @@ module.exports = class Core {
               return `poli ${poli} hanya melayani balita kurang dari 6 tahun.\n`
             } else if(poli === 'lansia' && umur < 60) {
               return `poli lansia hanya melayani pasien lanjut usia 60 tahun ke atas.\n`
+            } else if(poli==='kb') {
+              if(umur <= 6) {
+                return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
+              } else if(umur <= 15){
+                return `usia terdaftar kurang dari 15 tahun, mohon cek kembali nama poli.\n`								
+              }
             } else if(poli==='kia' && umur <= 5) {
               return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
             }
