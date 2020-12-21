@@ -31,7 +31,7 @@ schedule('30 12 1 * *', async() => {
 		client.onMessage( async message => {
       // console.log(message)
       let msg = await wa.handleMessage(message)
-      // console.log(msg)
+      console.log(msg)
     })
 
     if( subscriber ){
