@@ -38,7 +38,7 @@ const findQuery = Arr => {
 		} //else if(params.match(/^(08)([0-9]){1,12}$/)) {
 			//query +=  ' WHERE (`no_hp` LIKE "' + params + '%")';
 		//} 
-		console.log(params)
+		// console.log(params)
 	
 	}
 
@@ -88,7 +88,7 @@ const cari = async (chatArr) => {
 
 	let query = findQuery(chatArr)
 
-	console.log(query)
+	// console.log(query)
 
 	if(query !== 'SELECT `id`, `nama`, `tgl_lahir`, `sex_id`, `alamat`,  `orchard_id`, `village_id`, `nik`, `no_kartu`, `no_hp` FROM `patients`') {
 		let res = await connect(query)
