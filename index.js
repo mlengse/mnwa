@@ -63,9 +63,10 @@ schedule('30 12 1 * *', async() => {
                     `
         
                     let from = `${patient.no_hp}@c.us`
-                    console.log(`${tglDaftar} jam ${moment(event.timestamp, 'x').format('H')} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         
-                    await client.sendTextToID( from, text)
+                    await client.sendText( from, text)
+
+                    console.log(`${tglDaftar} jam ${moment(event.timestamp, 'x').format('H')} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                   }
         
                 } catch (err) {
