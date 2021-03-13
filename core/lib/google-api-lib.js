@@ -118,7 +118,7 @@ exports._saveContact = async ({ that, name, number }) => {
   that.spinner.start(`will save as name: ${name}, number: ${number}`)
   const auth = await authorize()
   const service = google.people({version: 'v1', auth});
-  const existsContact = await service.people.searchContacts({
+  const existsContact = await service.people.searchDirectoryPeople({
     query: number,
     readMask: 'phoneNumbers'
   })
