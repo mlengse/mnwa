@@ -1,14 +1,29 @@
 const ora = require('ora')
 
+let textPersist
+
 exports.spinner =(process.platform === 'win32' && !process.env.NODE_APP_INSTANCE) ? ora({
   stream: process.stdout
 }): {
-  start: text => '', //console.log('start:', text),
+  start: text => {
+    textPersist = text
+    // console.log('start:', text)
+  },
   stop: _ => '',
-  succeed: text => console.log('succeed:', text),
+  succeed: text => {
+    if(!text){
+      text = textPersist
+    }
+    console.log('succeed:', text)
+  },
   warn: text => console.info('warn:', text),
   info: text => console.info('info:', text),
-  fail: text => console.error('fail:', text)
+  fail: text => {
+    if(!text){
+      text = textPersist
+    }
+    console.error('fail:', text)
+  }
 }
 
 exports.processText = text => {

@@ -79,7 +79,7 @@ const profile = await client.getNumberProfile('000000000000@c.us');
         for(let newMessage of messages) {
           bot.spinner.succeed('--------------')
           bot.spinner.succeed('chat with new message')
-          bot.spinner.succeed(`chat: ${chat.name} | ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+          bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
           bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
           if(newMessage.type === 'chat'){
             await bot.addContact({ msg: newMessage})
