@@ -68,8 +68,6 @@ const profile = await client.getNumberProfile('000000000000@c.us');
 
 		let chatWithNewMsg = await client.getAllChatsNewMsg()
     if(chatWithNewMsg.length) {
-      bot.spinner.succeed('--------------')
-      bot.spinner.succeed('chat with new message')
       for(let chat of chatWithNewMsg){
         let messages = await client.getAllMessagesInChat(chat.id._serialized);
         while(messages.length < chat.unreadCount){
@@ -79,6 +77,8 @@ const profile = await client.getNumberProfile('000000000000@c.us');
           messages.shift()
         }
         for(let newMessage of messages) {
+          bot.spinner.succeed('--------------')
+          bot.spinner.succeed('chat with new message')
           bot.spinner.succeed(`chat: ${chat.name} | ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
           bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
           if(newMessage.type === 'chat'){
