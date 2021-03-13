@@ -109,4 +109,6 @@ tmp*
 
 *.png
 
-db.json
+db*
+
+tokens*

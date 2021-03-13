@@ -1,6 +1,10 @@
 require('dotenv').config()
 
 const {
+  MYSQL_HOST,
+	MYSQL_USER,
+	MYSQL_PWD,
+	MYSQL_DB,
   USER_DATA_PATH,
   RM_REGEX,
   CHROME_PATH
@@ -50,9 +54,9 @@ let pptrOpt = {}
 if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     // headless: true,
-    headless: false,
+    // headless: false,
     executablePath: `${CHROME_PATH}`, 
-    userDataDir: `${USER_DATA_PATH}`,
+    // userDataDir: `${USER_DATA_PATH}`,
     // args: [
     //   '--content-shell-hide-toolbar',
     //   '--hide',
@@ -70,6 +74,14 @@ if(process.platform === 'win32' || CHROME_PATH ) {
       '--disable-setuid-sandbox', 
     ]
   }
+}
+
+const mysqlConfig = {
+  // connectionLimit: 10,
+  host: MYSQL_HOST,
+  user: MYSQL_USER,
+  password: MYSQL_PWD,
+  database: MYSQL_DB
 }
 
 
@@ -125,5 +137,6 @@ module.exports = Object.assign({},
     pols,
     keywords,
     waitOpt,
-    pptrOpt
+    pptrOpt,
+    mysqlConfig
   })
