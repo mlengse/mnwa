@@ -118,19 +118,28 @@ exports._saveContact = async ({ that, name, number }) => {
   that.spinner.start(`will save as name: ${name}, number: ${number}`)
   const auth = await authorize()
   const service = google.people({version: 'v1', auth});
-  const {data: newContact} = await service.people.createContact({
-    requestBody: {
-      phoneNumbers: [{value: number}],
-      names: [
-        {
-          displayName: name + ' ' + number,
-          familyName: number,
-          givenName: name,
-        },
-      ],
-    },
-  });
-  that.spinner.succeed(`Created Contact: ${JSON.stringify(newContact)}`);
+  const existsContact = await service.people.searchContact({
+    query: number,
+    readMask: 'phoneNumbers'
+  })
+
+  if(!existsContact) {
+    const {data: newContact} = await service.people.createContact({
+      requestBody: {
+        phoneNumbers: [{value: number}],
+        names: [
+          {
+            displayName: name + ' ' + number,
+            familyName: number,
+            givenName: name,
+          },
+        ],
+      },
+    });
+    that.spinner.succeed(`Created Contact: ${JSON.stringify(newContact)}`);
+  } else {
+    that.spinner.succeed(`Contact is exist: ${JSON.stringify(existsContact)}`)
+  }
 }
 
 exports._addContact = async( { that, contact, msg }) => {
