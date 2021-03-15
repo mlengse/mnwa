@@ -126,12 +126,12 @@ exports._saveContact = async ({ that, name, number }) => {
   // if(!existsContact) {
     const {data: newContact} = await service.people.createContact({
       requestBody: {
-        phoneNumbers: [{value: number}],
+        phoneNumbers: [{value: '0' + number.substring(2)}],
         names: [
           {
-            displayName: name + ' ' + number,
-            familyName: number,
-            givenName: name,
+            displayName: name,
+            familyName: name.split(' ')[1],
+            givenName: name.split(' ')[0],
           },
         ],
       },
@@ -149,6 +149,8 @@ exports._addContact = async( { that, contact, msg }) => {
   if(contact && contact.isMyContact){
     that.spinner.succeed(`contact is saved as name: ${contact.name}`)
   } else {
+    // const profile = await client.getNumberProfile(from);
+
     if(contact.pushname){
       let number
       if(contact.id) {
@@ -165,7 +167,23 @@ exports._addContact = async( { that, contact, msg }) => {
       })
       
     } else {
-      console.log(contact)
+      if(contact.id) {
+        if(contact.id.user){
+          number = contact.id.user
+        } else if(contact.id.includes('@')){
+          number = contact.id.split('@')[0]
+        }
+        number && await that.saveContact({ 
+          name: number+ ' wa',
+          number
+        })
+  
+      } else {
+        console.log(contact)
+
+      }
+
+
     }
   }
 }

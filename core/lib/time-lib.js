@@ -25,4 +25,4 @@ exports.getTglLusa = () => moment().add(2, 'd')
 exports.getTglLusaBy = tgl => tgl.add(2, 'd')
 exports.getUmur = tgl =>  moment(tgl).fromNow().split(' ').slice(0, 2).join(' ')
 exports.getUmurArr = e => moment(e).fromNow().split(' ').slice(0, 2)
-exports.isMinggu = tgl => moment(tgl).weekday() == 6
+exports.isMinggu = tgl => moment(tgl).weekday() === 0
