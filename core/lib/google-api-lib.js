@@ -143,37 +143,37 @@ exports._saveContact = async ({ that, name, number }) => {
 }
 
 exports._addContact = async( { that, contact, msg }) => {
+  if(!contact) {
+    contact = msg.sender || msg.contact
+  }
+   
   if(contact && contact.isMyContact){
     that.spinner.succeed(`contact is saved as name: ${contact.name}`)
   } else {
     let number
     let name
-    if(!contact) {
-      contact = msg.sender || msg.contact
-    } else {
-      if(contact.chat){
-        contact = Object.assign({}, contact, contact.chat)
-      }
-      if(contact.profile !== '404'){
-        contact = Object.assign({}, contact, contact.profile)
-      }
-      if(contact.pushname){
-        name = contact.pushname
-      } 
-      if(contact.patient && contact.patient.nama){
-        name = contact.patient.nama + ' Pasien'
-      }
-      if(contact.patient && contact.patient.no_hp){
-        number = contact.patient.number
-      }
-      if(contact.id) {
-        if(contact.id.user){
-          number = contact.id.user
-        } else if(contact.id.includes('@')){
-          number = contact.id.split('@')[0]
-        }
-      }
   
+    if(contact.chat){
+      contact = Object.assign({}, contact, contact.chat)
+    }
+    if(contact.profile !== '404'){
+      contact = Object.assign({}, contact, contact.profile)
+    }
+    if(contact.pushname){
+      name = contact.pushname
+    } 
+    if(contact.patient && contact.patient.nama){
+      name = contact.patient.nama + ' Pasien'
+    }
+    if(contact.patient && contact.patient.no_hp){
+      number = contact.patient.number
+    }
+    if(contact.id) {
+      if(contact.id.user){
+        number = contact.id.user
+      } else if(contact.id.includes('@')){
+        number = contact.id.split('@')[0]
+      }
     }
 
     if(!name && number){
