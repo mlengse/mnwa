@@ -143,47 +143,49 @@ exports._saveContact = async ({ that, name, number }) => {
 }
 
 exports._addContact = async( { that, contact, msg }) => {
-  if(!contact) {
-    contact = msg.sender || msg.contact
-  } 
   if(contact && contact.isMyContact){
     that.spinner.succeed(`contact is saved as name: ${contact.name}`)
   } else {
-    // const profile = await client.getNumberProfile(from);
-
-    if(contact.pushname){
-      let number
-      if(contact.id) {
-        if(contact.id.user){
-          number = contact.id.user
-        } else if(contact.id.includes('@')){
-          number = contact.id.split('@')[0]
-        }
-      }
-
-      number && await that.saveContact({ 
-        name: contact.pushname,
-        number
-      })
-      
+    let number
+    let name
+    if(!contact) {
+      contact = msg.sender || msg.contact
     } else {
+      if(contact.chat){
+        contact = Object.assign({}, contact, contact.chat)
+      }
+      if(contact.profile !== '404'){
+        contact = Object.assign({}, contact, contact.profile)
+      }
+      if(contact.pushname){
+        name = contact.pushname
+      } 
+      if(contact.patient && contact.patient.nama){
+        name = contact.patient.nama + ' Pasien'
+      }
+      if(contact.patient && contact.patient.no_hp){
+        number = contact.patient.number
+      }
       if(contact.id) {
         if(contact.id.user){
           number = contact.id.user
         } else if(contact.id.includes('@')){
           number = contact.id.split('@')[0]
         }
-        number && await that.saveContact({ 
-          name: number+ ' wa',
-          number
-        })
-  
-      } else {
-        console.log(contact)
-
       }
-
-
+  
     }
+
+    if(!name && number){
+      name = number+ ' wa'
+    }
+  
+    name && number && await that.saveContact({ 
+      name,
+      number
+    })
+  
+    (!name || !number) && console.log(contact)
+        
   }
 }
