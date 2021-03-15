@@ -180,10 +180,12 @@ exports._addContact = async( { that, contact, msg }) => {
       name = number+ ' wa'
     }
   
-    name && number && await that.saveContact({ 
-      name,
-      number
-    })
+    if(name && number) {
+      await that.saveContact({ 
+      	name,
+      	number
+    	})
+    }
   
     (!name || !number) && console.log(contact)
         
