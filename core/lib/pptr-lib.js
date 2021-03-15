@@ -19,6 +19,7 @@ exports._simpusGoto =  async ({that, url}) => {
 }
 
 exports._initSimpus = async ({ that }) => {
+  // console.log(that.config.pptrOpt)
   if(!that.pages){
     that.browser = await pptr.launch(that.config.pptrOpt);
     that.pages = await that.browser.pages()
