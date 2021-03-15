@@ -32,10 +32,10 @@ schedule('30 12 1 * *', async() => {
                   let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
                   // let from = `6287833597999@c.us`
                   let from = `${patient.no_hp}@c.us`
-                  const chat = await client.checkNumberStatus(from);
-                  const profile = await client.getNumberProfile(from);
+                  let chat = await client.checkNumberStatus(from);
+                  let profile = await client.getNumberProfile(from);
 
-
+                  bot.spinner.succeed(`---------------`)
                   bot.spinner.succeed(`on new simpus registration`)
                   await bot.addContact({ contact: {
                     from,

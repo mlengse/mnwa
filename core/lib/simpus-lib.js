@@ -302,7 +302,7 @@ exports._daftarSimpus = async ({that, tgl, poli, rm}) => {
   await that.simpusClose()
 
   return {
-    dataDaftar: Object.assign({}, ne, dataDaftar),
+    // dataDaftar: Object.assign({}, ne, dataDaftar),
     res,
     msg
   }
