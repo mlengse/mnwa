@@ -27,7 +27,8 @@ const pols = [ {
   hari: process.env.KIA || undefined
 },{
   alias: ['mtbs'],
-  hari: process.env.MTBS || undefined
+  hari: process.env.MTBS || undefined,
+  unit: 'KIA'
 },{
   alias: ['gizi'],
   hari: process.env.GIZI || undefined
