@@ -156,15 +156,15 @@ exports._addContact = async( { that, contact, msg }) => {
     let number
     let name
   
-    if(contact.chat){
+    if(!contact.pushname && contact.chat){
       contact = Object.assign({}, contact, contact.chat)
     }
-    if(contact.profile !== '404'){
+    if(!contact.pushname && contact.profile !== '404'){
       contact = Object.assign({}, contact, contact.profile)
     }
     if(contact.pushname){
       name = contact.pushname
-    } 
+    }
     if(contact.patient && contact.patient.nama){
       name = contact.patient.nama + ' Pasien'
     }
