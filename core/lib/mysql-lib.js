@@ -209,7 +209,9 @@ exports._cariFunc = async ({ chatArr, result} ) => {
 					while(noParams.length > 6 && !resultArr.length) {
 						noParams = noParams.slice(0, -1)
 						cParams[id] = noParams
-						resultArr = await cari([...cParams])
+						resultArr = await this._cari({
+							chatArr: [...cParams]
+						})
 						if(resultArr.length) {
 							result += `mencoba #cari#${cParams.join('#')}\n`
 							result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
