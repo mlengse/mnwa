@@ -86,9 +86,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
             return `Tidak ditemukan rekam medis berdasarkan parameter tersebut.\n`
           } 
 
-          let umurArr = that.getUmurArr({
-            tgl: rm[0].tgl_lahir
-          })
+          let umurArr = that.getUmurArr(rm[0].tgl_lahir)
           let umur = umurArr[0]
           if(umur == 'setahun'){
             umur = '1'
