@@ -60,7 +60,7 @@ const profile = await client.getNumberProfile('000000000000@c.us');
                   bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                 }
               } catch (err) {
-                console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${err}`)
+                console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
               }
             }
           }
