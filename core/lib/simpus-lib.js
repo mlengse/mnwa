@@ -109,7 +109,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
               return `usia terdaftar kurang dari 15 tahun, mohon cek kembali nama poli.\n`								
             }
           } else if(poli==='kia' && umur <= 5) {
-            console.log("daftar kia", poli, umur)
+            console.log("daftar kia", poli, umur, umurArr)
             return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
           }
 
