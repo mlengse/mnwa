@@ -24,6 +24,7 @@ schedule('30 12 1 * *', async() => {
           if( event.type === 'INSERT' && event.table === 'visits' ) {
             let tglDaftar = bot.getTglDaftar(event.timestamp)
             if(tglDaftar === bot.getTglDaftarHariIni()){
+              let chat
               try{
                 let patient = await bot.getPatient({event})
                 if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
@@ -32,7 +33,7 @@ schedule('30 12 1 * *', async() => {
                   let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
                   // let from = `6287833597999@c.us`
                   let from = `${patient.no_hp}@c.us`
-                  let chat = await client.checkNumberStatus(from);
+                  chat = await client.checkNumberStatus(from);
                   let profile = await client.getNumberProfile(from);
 
                   bot.spinner.succeed(`---------------`)
@@ -65,6 +66,7 @@ const profile = await client.getNumberProfile('000000000000@c.us');
                 }
               } catch (err) {
                 console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
+                console.error(chat)
               }
             }
           }
