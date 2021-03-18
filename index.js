@@ -98,9 +98,16 @@ const profile = await client.getNumberProfile('000000000000@c.us');
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg.length){
+              bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas:`)
+              console.log('')
+              console.log('-------------')
+              console.log(msg.msg)
+              console.log(`-----------`)
+    
+            } else {
               console.log(msg)
             }
-  
+      
           }
         }
       }
@@ -115,7 +122,12 @@ const profile = await client.getNumberProfile('000000000000@c.us');
         await bot.addContact({ msg: message})
         let msg = await bot.handleMessage({message})
         if(msg.reply && msg.msg.length){
-          bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg}`)
+          bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas:`)
+          console.log('')
+          console.log('-------------')
+          console.log(msg.msg)
+          console.log(`-----------`)
+
         } else {
           console.log(msg)
         }
