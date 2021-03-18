@@ -59,11 +59,11 @@ const profile = await client.getNumberProfile('000000000000@c.us');
 */
                   if(chat) {
                     await client.sendText( from, text)
-                    bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi:`)
-                    console.log('')
-                    console.log('-------------')
-                    console.log(text)
-                    console.log(`-----------`)
+                    bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+                    // console.log('')
+                    // console.log('-------------')
+                    // console.log(text)
+                    // console.log(`-----------`)
                   } else {
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists`)
                   }
@@ -98,11 +98,11 @@ const profile = await client.getNumberProfile('000000000000@c.us');
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg.length){
-              bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas:`)
-              console.log('')
-              console.log('-------------')
-              console.log(msg.msg)
-              console.log(`-----------`)
+              bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
+              // console.log('')
+              // console.log('-------------')
+              // console.log(msg.msg)
+              // console.log(`-----------`)
     
             } else {
               console.log(msg)
@@ -122,11 +122,11 @@ const profile = await client.getNumberProfile('000000000000@c.us');
         await bot.addContact({ msg: message})
         let msg = await bot.handleMessage({message})
         if(msg.reply && msg.msg.length){
-          bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas:`)
-          console.log('')
-          console.log('-------------')
-          console.log(msg.msg)
-          console.log(`-----------`)
+          bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
+          // console.log('')
+          // console.log('-------------')
+          // console.log(msg.msg)
+          // console.log(`-----------`)
 
         } else {
           console.log(msg)
