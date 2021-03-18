@@ -59,7 +59,7 @@ const profile = await client.getNumberProfile('000000000000@c.us');
 */
                   if(chat) {
                     await client.sendText( from, text)
-                    bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+                    bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ').split('+').join(' ')}`)
                   } else {
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists`)
                   }
