@@ -57,7 +57,7 @@ const profile = await client.getNumberProfile('000000000000@c.us');
 3. save kontak dulu jika blm masuk
 //pake google api
 */
-                  if(chat) {
+                  if(chat && chat.canReceiveMessage) {
                     await client.sendText( from, text)
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                     // console.log('')
