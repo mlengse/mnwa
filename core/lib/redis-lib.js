@@ -21,7 +21,7 @@ exports._getSubscriber = async ({ that }) => {
         if(Array.isArray(response)) {
           for(let { field, message} of response ){
             if(field === 'noKartu'){
-              errText = `${text}\n${field}: ${message}`
+              errText = `\n${field}: ${message}`
             } else {
               console.log(response)
             }
@@ -53,7 +53,7 @@ exports._getSubscriber = async ({ that }) => {
             profile,
           }})
 
-          if(errText){
+          if(errText.length){
             text = `${text}\nKami menemukan pesan dari sistem JKN:${errText}`
           }
 
