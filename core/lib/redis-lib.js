@@ -14,9 +14,9 @@ exports._getSubscriber = async ({ that }) => {
   subscriber.on('message', async (topic, message) => {
     message = JSON.parse(message)
     if(topic === 'kontak'){
-      console.log(message.daftResponse)
-      console.log(message.kunjResponse)
-      console.log(message.mcuResponse)
+      message.daftResponse && console.log(message.daftResponse)
+      message.kunjResponse && console.log(message.kunjResponse)
+      message.mcuResponse && console.log(message.mcuResponse)
       let text, from
       if(message.Tlp_Peserta.match(/^(08)([0-9]){1,12}$/)){
         from = message.Tlp_Peserta
