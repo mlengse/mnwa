@@ -37,7 +37,6 @@ exports._getSubscriber = async ({ that }) => {
             from,
             chat,
             profile,
-            patient
           }})
 
           // await that.client.sendText( from, text)
