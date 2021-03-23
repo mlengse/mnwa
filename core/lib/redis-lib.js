@@ -22,11 +22,13 @@ exports._getSubscriber = async ({ that }) => {
           text = `${text}\nKami menemukan beberapa pesan dari sistem JKN:`
           for(let { field, message} of response ){
             if(field === 'noKartu'){
-              text = `${text}\n${message}`
+              text = `${text}\n${field}: ${message}`
             } else {
               console.log(message.daftResponse)
             }
           }
+        } else {
+          console.log(message.daftResponse)
         }
 
       } 
