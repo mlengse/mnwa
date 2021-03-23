@@ -173,6 +173,7 @@ exports._generateReply = async ({that, msg}) => {
       result += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
     }
     that.spinner.start(`send wa`)
+    console.log(msg)
     await that.client.sendText( msg.to, result)
     that.spinner.succeed()
   }
