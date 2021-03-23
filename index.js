@@ -86,7 +86,7 @@ schedule('30 12 1 * *', async() => {
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg.length){
-              bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
+              bot.spinner.succeed(`${msg.time} dari: ${msg.to.user} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
               // console.log('')
               // console.log('-------------')
               // console.log(msg.msg)
