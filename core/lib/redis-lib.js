@@ -53,7 +53,7 @@ exports._getSubscriber = async ({ that }) => {
             profile,
           }})
 
-          if(errText.length){
+          if(errText && errText.length){
             text = `${text}\nKami menemukan pesan dari sistem JKN:${errText}`
           }
 
