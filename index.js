@@ -16,7 +16,7 @@ schedule('30 12 1 * *', async() => {
 
     const client = await bot.init()
 
-    const subscriber = bot.getSubscriber()
+    const subscriber = await bot.getSubscriber()
     if( subscriber ){
       subscriber.on('message', async (channel, message) => {
         if(channel === 'simpus') {

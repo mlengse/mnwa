@@ -10,7 +10,6 @@ if(process.env.REDIS_HOST){
 
 exports._getSubscriber = async ({ that }) => {
 
-  subscriber.subscribe('kontak')
 
   subscriber.on('message', async (topic, message) => {
     message = JSON.parse(message)
@@ -49,6 +48,8 @@ exports._getSubscriber = async ({ that }) => {
       }
     }
   })
+
+  subscriber.subscribe('kontak')
 
   return subscriber
 }
