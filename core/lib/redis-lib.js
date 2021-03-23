@@ -25,7 +25,7 @@ exports._getSubscriber = async ({ that }) => {
         from = message.noHP
       }
       if(from) {
-        from = `62${sendTo.substr(1)}@c.us`
+        from = `62${from.substr(1)}@c.us`
         text = `Terima kasih atas kepercayaan ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
         chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
