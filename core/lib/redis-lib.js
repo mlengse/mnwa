@@ -14,15 +14,14 @@ exports._getSubscriber = async ({ that }) => {
   subscriber.on('message', async (topic, message) => {
     message = JSON.parse(message)
     if(topic === 'kontak'){
-      let text, from
+      let text, from, errText
       text = `Terima kasih atas kepercayaan ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.`
       if(message.daftResponse){
         let { response } = message.daftResponse
         if(Array.isArray(response)) {
-          text = `${text}\nKami menemukan pesan dari sistem JKN:`
           for(let { field, message} of response ){
             if(field === 'noKartu'){
-              text = `${text}\n${field}: ${message}`
+              errText = `${text}\n${field}: ${message}`
             } else {
               console.log(response)
             }
@@ -53,6 +52,10 @@ exports._getSubscriber = async ({ that }) => {
             chat,
             profile,
           }})
+
+          if(errText){
+            text = `${text}\nKami menemukan pesan dari sistem JKN:${errText}`
+          }
 
           text = `${text}\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
 
