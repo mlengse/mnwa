@@ -15,7 +15,7 @@ exports._getSubscriber = async ({ that }) => {
     message = JSON.parse(message)
     if(topic === 'kontak'){
       let text, from, errText
-      text = `Terima kasih atas kepercayaan ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.`
+      text = `Terima kasih atas kepercayaan Bpk/Ibu ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.`
       if(message.daftResponse){
         let { response } = message.daftResponse
         if(Array.isArray(response)) {
