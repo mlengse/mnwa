@@ -14,10 +14,24 @@ exports._getSubscriber = async ({ that }) => {
   subscriber.on('message', async (topic, message) => {
     message = JSON.parse(message)
     if(topic === 'kontak'){
-      message.daftResponse && console.log(message.daftResponse)
+      let text, from
+      text = `Terima kasih atas kepercayaan ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.`
+      if(message.daftResponse){
+        let { response } = message.daftResponse
+        if(Array.isArray(response)) {
+          text = `${text}\nKami menemukan beberapa pesan dari sistem JKN:`
+          for(let { field, message} of response ){
+            if(field === 'noKartu'){
+              text = `${text}\n${message}`
+            } else {
+              console.log(message.daftResponse)
+            }
+          }
+        }
+
+      } 
       message.kunjResponse && console.log(message.kunjResponse)
       message.mcuResponse && console.log(message.mcuResponse)
-      let text, from
       if(message.Tlp_Peserta.match(/^(08)([0-9]){1,12}$/)){
         from = message.Tlp_Peserta
       }
@@ -26,7 +40,6 @@ exports._getSubscriber = async ({ that }) => {
       }
       if(from) {
         from = `62${from.substr(1)}@c.us`
-        text = `Terima kasih atas kepercayaan ${message.nama} terhadap pelayanan Puskesmas ${process.env.PUSKESMAS}.\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
         chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
 
@@ -39,10 +52,12 @@ exports._getSubscriber = async ({ that }) => {
             profile,
           }})
 
+          text = `${text}\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
+
           // await that.client.sendText( from, text)
-          that.spinner.succeed(`${det.tglDaftar} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+          that.spinner.succeed(`${message.det.tglDaftar} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         } else {
-          that.spinner.succeed(`${det.tglDaftar} ${from} doesn't exists`)
+          that.spinner.succeed(`${message.det.tglDaftar} ${from} doesn't exists`)
         }
       }
     }
