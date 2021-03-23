@@ -41,7 +41,7 @@ exports._getSubscriber = async ({ that }) => {
             patient
           }})
 
-          await that.client.sendText( from, text)
+          // await that.client.sendText( from, text)
           that.spinner.succeed(`${det.tglDaftar} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         } else {
           that.spinner.succeed(`${det.tglDaftar} ${from} doesn't exists`)
