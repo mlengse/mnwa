@@ -19,16 +19,16 @@ exports._getSubscriber = async ({ that }) => {
       if(message.daftResponse){
         let { response } = message.daftResponse
         if(Array.isArray(response)) {
-          text = `${text}\nKami menemukan beberapa pesan dari sistem JKN:`
+          text = `${text}\nKami menemukan pesan dari sistem JKN:`
           for(let { field, message} of response ){
             if(field === 'noKartu'){
               text = `${text}\n${field}: ${message}`
             } else {
-              console.log(message.daftResponse)
+              console.log(response)
             }
           }
         } else {
-          console.log(message.daftResponse)
+          console.log(response)
         }
 
       } 
