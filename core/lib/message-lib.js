@@ -173,8 +173,13 @@ exports._generateReply = async ({that, msg}) => {
       result += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
     }
     that.spinner.start(`send wa`)
-    console.log(msg)
-    await that.client.sendText( msg.to, result)
+    let sendTo
+    if(typeof msg.to === 'string'){
+      sendTo = msg.to
+    } else {
+      sendTo = msg.to._serialized
+    }
+    await that.client.sendText( sendTo, result)
     that.spinner.succeed()
   }
   return Object.assign(msg, all, {
