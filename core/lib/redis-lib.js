@@ -12,7 +12,7 @@ exports._getSubscriber = async ({ that }) => {
 
   subscriber.subscribe('kontak')
 
-  subscriber.on('message', (topic, message) => {
+  subscriber.on('message', async (topic, message) => {
     message = JSON.parse(message)
     if(topic === 'kontak'){
       console.log(message.daftResponse)
