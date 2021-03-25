@@ -12,6 +12,7 @@ exports._getSubscriber = async ({ that }) => {
 
   subscriber.on('message', async (topic, message) => {
     let {
+      nama,
       from,
       text
     } = JSON.parse(message)
@@ -24,6 +25,7 @@ exports._getSubscriber = async ({ that }) => {
     
       if(chat && chat.canReceiveMessage) {
         await that.addContact({ contact: {
+          nama,
           from,
           chat,
           profile,

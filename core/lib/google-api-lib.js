@@ -165,6 +165,9 @@ exports._addContact = async( { that, contact, msg }) => {
     if(contact.pushname){
       name = contact.pushname
     }
+    if(contact.nama){
+      name = contact.nama
+    }
     if(contact.patient && contact.patient.nama){
       name = contact.patient.nama + ' Pasien'
     }
