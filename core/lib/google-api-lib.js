@@ -137,7 +137,7 @@ exports._saveContact = async ({ that, name, number }) => {
           ],
         },
       });
-      that.spinner.succeed(`Created Contact: ${JSON.stringify(newContact)}`);
+      that.spinner.succeed(`Created Contact: ${newContact.phoneNumbers[0].value} | ${newContact.names[0].displayName} `);
     // } else {
     //   that.spinner.succeed(`Contact is exist: ${JSON.stringify(existsContact)}`)
    
