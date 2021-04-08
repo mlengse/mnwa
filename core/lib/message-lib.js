@@ -47,7 +47,9 @@ exports._processUnstructured = async ({that, messageBody}) => {
     if (rawArr.length > 1) {
       formattedArr.push(rawArr[rawArr.length - 1].trim())
     }
-    formattedText = `#${formattedArr.join('#')}`
+    if(formattedArr.length) {
+      formattedText = `#${formattedArr.join('#')}`
+    }
     if ((formattedArr[0] === 'cari' && formattedArr.length > 1) || (formattedArr[0] === 'daftar' && formattedArr.length > 3)) {
       formattedArr.shift()
     }
