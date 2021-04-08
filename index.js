@@ -83,13 +83,8 @@ schedule('30 12 1 * *', async() => {
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg.length){
               bot.spinner.succeed(`${msg.time} dari: ${msg.to.user} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
-              // console.log('')
-              // console.log('-------------')
-              // console.log(msg.msg)
-              // console.log(`-----------`)
-    
             } else {
-              console.log(msg)
+              console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
       
           }
@@ -107,13 +102,8 @@ schedule('30 12 1 * *', async() => {
         let msg = await bot.handleMessage({message})
         if(msg.reply && msg.msg.length){
           bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
-          // console.log('')
-          // console.log('-------------')
-          // console.log(msg.msg)
-          // console.log(`-----------`)
-
         } else {
-          console.log(msg)
+          console.error(`${new Date()} ${JSON.stringify(msg)}`)
         }
       }
     })
