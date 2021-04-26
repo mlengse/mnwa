@@ -328,7 +328,7 @@ exports._simpanPendaftaran = async ( { that, dataDaftar, tglDaftar} ) => {
       } else if(onlinever == "DATA TIDAK DITEMUKAN") {
         alert += "Data pasien tidak ditemukan di database BPJS. Periksa kembali no kartu yang diisikan, lalu ulang proses verifikasi.\n "
       } else {
-        if(nik || nokartu.length > 0 && onlinever.length > 0) {
+        if(nik || nokartu && nokartu.length > 0 && onlinever && onlinever.length > 0) {
           if(!(ppk == "1" && kartu == "1" && aktif == "1")) {
             if(ppk == "0") {
               alert += "Pasien terdaftar di PPK lain.\n ";
