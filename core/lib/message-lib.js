@@ -51,11 +51,11 @@ exports._processUnstructured = async ({that, messageBody}) => {
     if(formattedArr.length) {
       formattedText = `#${formattedArr.join('#')}`
     }
-    if (/*(formattedArr[0] === 'cari' && formattedArr.length > 1) ||*/ (formattedArr[0] === 'daftar' && formattedArr.length > 3)) {
+    if ((formattedArr[0] === 'cari' && formattedArr.length > 1) || (formattedArr[0] === 'daftar' && formattedArr.length > 3)) {
       formattedArr.shift()
     }
     if(!poli && !hari && (!noBPJS || !nik || !norm)) {
-      return undefined
+      return null
     }
     return formattedText
   }
