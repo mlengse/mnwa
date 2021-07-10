@@ -1,6 +1,5 @@
 exports._processUnstructured = async ({that, messageBody}) => {
-  let formattedText
-  let poli
+  let formattedText, poli, hari, noBPJS, nik, norm
   messageBody = messageBody.toLowerCase()
   let rawArr = messageBody.match(/\b\w+/g)
   let formattedArr = []
@@ -14,7 +13,6 @@ exports._processUnstructured = async ({that, messageBody}) => {
       }
     }
     if (formattedArr.indexOf('daftar') > -1) {
-      let hari
       for (let day of that.config.days) {
         if (messageBody.includes(day)) {
           hari = `${day}`
@@ -37,10 +35,13 @@ exports._processUnstructured = async ({that, messageBody}) => {
     if(Array.isArray(rawArr)) rawArr.map(params => {
       if (params.match(new RegExp(that.config.RM_REGEX))) {
         formattedArr.push(params)
+        norm = params
       } else if (params.match(new RegExp(that.config.BPJS_REGEX))) {
         formattedArr.push(params)
+        noBPJS = params
       } else if (params.match(new RegExp(that.config.NIK_REGEX))) {
         formattedArr.push(params)
+        nik = params
       }
     })
     rawArr = rawArr.join(' ').split(formattedArr[formattedArr.length - 1])
@@ -52,6 +53,9 @@ exports._processUnstructured = async ({that, messageBody}) => {
     }
     if ((formattedArr[0] === 'cari' && formattedArr.length > 1) || (formattedArr[0] === 'daftar' && formattedArr.length > 3)) {
       formattedArr.shift()
+    }
+    if(!poli && !hari && (!noBPJS || !nik || !norm)) {
+      return null
     }
     return formattedText
   }
@@ -77,7 +81,7 @@ exports._processTag = async ({that, messageBody}) => {
       firstWord = firstWord.split(' ').join('')
     }
     if(!that.config.keywords.filter(e => firstWord === e).length){
-      formattedText = that.processUnstructured({messageBody})
+      formattedText = await that.processUnstructured({messageBody})
     } else {
       formattedText = messageBody
     }
