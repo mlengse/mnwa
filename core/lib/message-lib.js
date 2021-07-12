@@ -86,7 +86,7 @@ exports._processTag = async ({that, messageBody}) => {
       formattedText = messageBody
     }
   } else {
-    formattedText = await that.processUnstructured({messageBody})
+    // formattedText = await that.processUnstructured({messageBody})
   }
   return formattedText
 }
