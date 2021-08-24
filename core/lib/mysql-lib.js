@@ -253,7 +253,7 @@ exports._cekDaftar = async ({ that, tgl }) => {
 			poli: that.config.unit[r.unit_id]
 		}
 	
-		daftArr[daftArr.length] = `rekam medis ${kun.rm} atas nama ${kun.nama} sudah terdaftar dgn no urut ${1+daftArr.length} di ${kun.poli}\n`
+		daftArr[daftArr.length] = `rekam medis ${kun.rm} atas nama ${kun.nama} sudah terdaftar${/* dgn no urut ${1+daftArr.length}*/''} di ${kun.poli}\n`
 	
 	}
 
