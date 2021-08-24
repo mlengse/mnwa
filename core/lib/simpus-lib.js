@@ -239,7 +239,7 @@ exports._getTerdaftar = async ({that, tgl, rm}) => {
     let kunnama = kun.nama.split(' ').join('')
     let rmnama = rm.nama.split(' ').join('')
     if(kun.rm.includes(rm.id.toUpperCase()), kunnama.includes(rmnama)){
-      terdaft += `rekam medis ${rm.id.toUpperCase()} atas nama ${kun.nama} sudah terdaftar dgn no urut ${i+1}`
+      terdaft += `rekam medis ${rm.id.toUpperCase()} atas nama ${kun.nama} sudah terdaftar${/** dgn no urut ${i+1} */''}`
       return terdaft
     }
   }
