@@ -46,7 +46,12 @@ schedule('30 12 1 * *', async() => {
                       patient
                     }})
 
-                    await client.sendText( from, text)
+                    try{
+                      await client.sendText( from, text)
+                    }catch(e){
+                      bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
+                    }
+
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                   } else {
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists`)

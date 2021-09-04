@@ -33,6 +33,12 @@ exports._getSubscriber = async ({ that }) => {
           }})
       
           text = `${text}\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
+
+          try{
+            await that.client.sendText( from, text)
+          }catch(e){
+            that.spinner.fail(`contact not saved`)
+          }
       
           await that.client.sendText( from, text)
           that.spinner.succeed(`${that.getTglDaftarHariIni()} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
