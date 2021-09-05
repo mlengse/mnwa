@@ -188,7 +188,8 @@ exports._generateReply = async ({that, msg}) => {
     try{
       await that.client.sendText( from, text)
     }catch(e){
-      that.spinner.fail(`contact not saved`)
+      console.error(e)
+      // that.spinner.fail(`contact not saved`)
     }
 
     that.spinner.succeed()

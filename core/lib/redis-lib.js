@@ -37,10 +37,10 @@ exports._getSubscriber = async ({ that }) => {
           try{
             await that.client.sendText( from, text)
           }catch(e){
-            that.spinner.fail(`contact not saved`)
+            console.error(e)
           }
       
-          await that.client.sendText( from, text)
+          // await that.client.sendText( from, text)
           that.spinner.succeed(`${that.getTglDaftarHariIni()} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         } else {
           that.spinner.succeed(`${that.getTglDaftarHariIni()} ${from} doesn't exists`)
