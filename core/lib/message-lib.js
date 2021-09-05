@@ -186,7 +186,7 @@ exports._generateReply = async ({that, msg}) => {
       sendTo = msg.to._serialized
     }
     try{
-      await that.client.sendText( from, text)
+      await that.client.sendText( sendTo, result)
     }catch(e){
       console.error(e)
       // that.spinner.fail(`contact not saved`)
