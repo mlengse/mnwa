@@ -21,9 +21,9 @@ exports._getSubscriber = async ({ that }) => {
         that.spinner.succeed(`---------------`)
         that.spinner.succeed(`on new send wa request`)
       
-        chat = await that.client.checkNumberStatus(from);
+        let chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
-      
+
         if(chat && chat.canReceiveMessage) {
           await that.addContact({ contact: {
             nama,
@@ -38,6 +38,9 @@ exports._getSubscriber = async ({ that }) => {
             await that.client.sendText( from, text)
           }catch(e){
             console.error(e)
+            console.error(chat)
+            console.error(profile)
+            console.error('error dari on Simpus Reg')
           }
       
           // await that.client.sendText( from, text)

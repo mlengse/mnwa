@@ -50,6 +50,8 @@ schedule('30 12 1 * *', async() => {
                       await client.sendText( from, text)
                     }catch(e){
                       console.error(e)
+                      console.error(chat)
+                      console.error(profile)
                       bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
                     }
 
