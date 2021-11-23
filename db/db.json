@@ -1,0 +1,1180 @@
+{
+  "liburnas": [
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "22 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200522"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "26 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200526"
+    },
+    {
+      "date": "27 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200527"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "22 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200522"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "26 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200526"
+    },
+    {
+      "date": "27 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200527"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "22 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200522"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "26 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200526"
+    },
+    {
+      "date": "27 Mei 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200527"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "21 Agustus 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200821"
+    },
+    {
+      "date": "28 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201028"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "30 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201030"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "28 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201228"
+    },
+    {
+      "date": "29 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201229"
+    },
+    {
+      "date": "30 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201230"
+    },
+    {
+      "date": "31 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201231"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "21 Agustus 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200821"
+    },
+    {
+      "date": "28 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201028"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "30 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201030"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "28 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201228"
+    },
+    {
+      "date": "29 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201229"
+    },
+    {
+      "date": "30 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201230"
+    },
+    {
+      "date": "31 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201231"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "21 Agustus 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200821"
+    },
+    {
+      "date": "28 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201028"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "30 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201030"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "28 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201228"
+    },
+    {
+      "date": "29 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201229"
+    },
+    {
+      "date": "30 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201230"
+    },
+    {
+      "date": "31 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201231"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "21 Agustus 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200821"
+    },
+    {
+      "date": "28 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201028"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "30 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201030"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "28 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201228"
+    },
+    {
+      "date": "29 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201229"
+    },
+    {
+      "date": "30 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201230"
+    },
+    {
+      "date": "31 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201231"
+    },
+    {
+      "date": "1 Januari 2020",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2020",
+      "id": "20200101"
+    },
+    {
+      "date": "25 Februari 2020",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2020",
+      "id": "20200225"
+    },
+    {
+      "date": "22 Maret 2020",
+      "ket": "Isra Miraj",
+      "tahun": "2020",
+      "id": "20200322"
+    },
+    {
+      "date": "25 Maret 2020",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2020",
+      "id": "20200325"
+    },
+    {
+      "date": "10 April 2020",
+      "ket": "Jumat Agung",
+      "tahun": "2020",
+      "id": "20200410"
+    },
+    {
+      "date": "1 Mei 2020",
+      "ket": "Hari Buruh",
+      "tahun": "2020",
+      "id": "20200501"
+    },
+    {
+      "date": "7 Mei 2020",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2020",
+      "id": "20200507"
+    },
+    {
+      "date": "21 Mei 2020",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2020",
+      "id": "20200521"
+    },
+    {
+      "date": "24 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200524"
+    },
+    {
+      "date": "25 Mei 2020",
+      "ket": "Idul Fitri",
+      "tahun": "2020",
+      "id": "20200525"
+    },
+    {
+      "date": "1 Juni 2020",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2020",
+      "id": "20200601"
+    },
+    {
+      "date": "31 Juli 2020",
+      "ket": "Idul Adha",
+      "tahun": "2020",
+      "id": "20200731"
+    },
+    {
+      "date": "17 Agustus 2020",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2020",
+      "id": "20200817"
+    },
+    {
+      "date": "20 Agustus 2020",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2020",
+      "id": "20200820"
+    },
+    {
+      "date": "21 Agustus 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20200821"
+    },
+    {
+      "date": "28 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201028"
+    },
+    {
+      "date": "29 Oktober 2020",
+      "ket": "Maulid Nabi",
+      "tahun": "2020",
+      "id": "20201029"
+    },
+    {
+      "date": "30 Oktober 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201030"
+    },
+    {
+      "date": "24 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201224"
+    },
+    {
+      "date": "25 Desember 2020",
+      "ket": "Hari Natal",
+      "tahun": "2020",
+      "id": "20201225"
+    },
+    {
+      "date": "28 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201228"
+    },
+    {
+      "date": "29 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201229"
+    },
+    {
+      "date": "30 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201230"
+    },
+    {
+      "date": "31 Desember 2020",
+      "ket": "Cuti Bersama",
+      "tahun": "2020",
+      "id": "20201231"
+    },
+    {
+      "date": "1 Januari 2021",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2021",
+      "id": "20210101"
+    },
+    {
+      "date": "12 Februari 2021",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2021",
+      "id": "20210212"
+    },
+    {
+      "date": "11 Maret 2021",
+      "ket": "Isra Miraj",
+      "tahun": "2021",
+      "id": "20210311"
+    },
+    {
+      "date": "14 Maret 2021",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2021",
+      "id": "20210314"
+    },
+    {
+      "date": "2 Mei 2021",
+      "ket": "Jumat Agung",
+      "tahun": "2021",
+      "id": "20210502"
+    },
+    {
+      "date": "1 Mei 2021",
+      "ket": "Hari Buruh",
+      "tahun": "2021",
+      "id": "20210501"
+    },
+    {
+      "date": "13 Mei 2021",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2021",
+      "id": "20210513"
+    },
+    {
+      "date": "15 Mei 2021",
+      "ket": "Idul Fitri",
+      "tahun": "2021",
+      "id": "20210515"
+    },
+    {
+      "date": "16 Mei 2021",
+      "ket": "Idul Fitri",
+      "tahun": "2021",
+      "id": "20210516"
+    },
+    {
+      "date": "26 Mei 2021",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2021",
+      "id": "20210526"
+    },
+    {
+      "date": "1 Juni 2021",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2021",
+      "id": "20210601"
+    },
+    {
+      "date": "20 Juli 2021",
+      "ket": "Idul Adha",
+      "tahun": "2021",
+      "id": "20210720"
+    },
+    {
+      "date": "10 Agustus 2021",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2021",
+      "id": "20210810"
+    },
+    {
+      "date": "17 Agustus 2021",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2021",
+      "id": "20210817"
+    },
+    {
+      "date": "18 Oktober 2021",
+      "ket": "Maulid Nabi",
+      "tahun": "2021",
+      "id": "20211018"
+    },
+    {
+      "date": "25 Desember 2021",
+      "ket": "Hari Natal",
+      "tahun": "2021",
+      "id": "20211225"
+    }
+  ]
+}

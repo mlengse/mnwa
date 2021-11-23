@@ -104,12 +104,9 @@ dist
 .tern-port
 
 .env
-package-lock.json
 tmp*
 
 *.png
-
-db*
 
 token*
 
