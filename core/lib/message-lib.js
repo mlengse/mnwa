@@ -173,10 +173,13 @@ exports._generateReply = async ({that, msg}) => {
     //   result += `\n${all.dataDaftar.ketAktif}`
     // }
     if(process.env.FORM_LINK) {
-      result += `\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+      result += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
     }
     if(process.env.ESO_LINK) {
       result += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
+    }
+    if(process.env.KESSAN_LINK) {
+      result += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
     }
     that.spinner.start(`send wa`)
     let sendTo
