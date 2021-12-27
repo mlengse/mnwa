@@ -87,7 +87,7 @@ schedule('30 12 1 * *', async() => {
         for(let newMessage of messages) {
           bot.spinner.succeed('--------------')
           bot.spinner.succeed('chat with new message')
-          bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+          bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${JSON.stringify(newMessage.sender)}`)
           bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
           if(newMessage.type === 'chat'){
             await bot.addContact({ msg: newMessage})
