@@ -62,19 +62,14 @@ schedule('30 12 1 * *', async() => {
                       await client.sendText( from, text)
                       bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
                     }catch(e){
-                      console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
-                      chat && console.error(chat)
-                      // console.error(e)
-                      // console.error(chat)
-                      // console.error(profile)
+                      chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
                     }
                   } else {
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
                   }
                 }
               } catch (err) {
-                console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
-                chat && console.error(chat)
+                chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
               }
             }
           }
