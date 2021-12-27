@@ -30,8 +30,16 @@ schedule('30 12 1 * *', async() => {
                 if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
                   patient.no_hp = `62${patient.no_hp.substr(1)}`
                   let name = patient.nama
-                  let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
-                  // let from = `6287833597999@c.us`
+                  let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.`
+                  if(process.env.FORM_LINK) {
+                    text += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+                  }
+                  if(process.env.ESO_LINK) {
+                    text += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
+                  }
+                  if(process.env.KESSAN_LINK) {
+                    text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
+                  }                  // let from = `6287833597999@c.us`
                   let from = `${patient.no_hp}@c.us`
                   chat = await client.checkNumberStatus(from);
                   let profile = await client.getNumberProfile(from);

@@ -24,7 +24,7 @@ exports._getSubscriber = async ({ that }) => {
         let chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
 
-        if(chat && chat.canReceiveMessage) {
+        if(chat && (chat.canReceiveMessage || chat.numberExists)) {
           await that.addContact({ contact: {
             nama,
             from,
@@ -32,8 +32,16 @@ exports._getSubscriber = async ({ that }) => {
             profile,
           }})
       
-          text = `${text}\n${process.env.FORM_LINK ? `Mohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n${process.env.FORM_LINK}\n`: ''} ${process.env.ESO_LINK ? `Efek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}\n` : ''}`
-
+          if(process.env.FORM_LINK) {
+            text += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+          }
+          if(process.env.ESO_LINK) {
+            text += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
+          }
+          if(process.env.KESSAN_LINK) {
+            text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
+          }
+      
           try{
             await that.client.sendText( from, text)
           }catch(e){
