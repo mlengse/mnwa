@@ -38,13 +38,17 @@ schedule('30 12 1 * *', async() => {
 
                   bot.spinner.succeed(`---------------`)
                   bot.spinner.succeed(`on new simpus registration`)
-                  if(chat && chat.canReceiveMessage) {
-                    await bot.addContact({ contact: {
-                      from,
-                      chat,
-                      profile,
-                      patient
-                    }})
+                  if(chat && (chat.canReceiveMessage || chat.numberExists)) {
+                    try{
+                      await bot.addContact({ contact: {
+                        from,
+                        chat,
+                        profile,
+                        patient
+                      }})
+                    }catch (e){
+                      bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
+                    }
 
                     try{
                       await client.sendText( from, text)
@@ -52,7 +56,6 @@ schedule('30 12 1 * *', async() => {
                       console.error(e)
                       console.error(chat)
                       console.error(profile)
-                      bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
                     }
 
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
