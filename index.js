@@ -65,7 +65,7 @@ schedule('30 12 1 * *', async() => {
                 }
               } catch (err) {
                 console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
-                console.error(chat)
+                chat && console.error(chat)
               }
             }
           }
