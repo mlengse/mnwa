@@ -26,7 +26,7 @@ exports._init = async ({ that }) => {
   // UNPAIRED
   // UNPAIRED_IDLE
   that.client.onStateChange((state) => {
-    if(state !== 'TIMEOUT' || state !== 'CONNECTED') {
+    if(!state.includes('TIMEOUT') && !state.includes('CONNECTED')) {
       console.log('State changed: ', state);
     }
     // force whatsapp take over
