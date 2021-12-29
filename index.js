@@ -89,14 +89,14 @@ schedule('30 12 1 * *', async() => {
           messages.shift()
         }
         for(let newMessage of messages) {
-          bot.spinner.succeed('--------------')
-          bot.spinner.succeed('chat with new message')
-          bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${JSON.stringify(newMessage.sender)}`)
-          bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
           if(newMessage.type === 'chat'){
+            bot.spinner.succeed('--------------')
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg.length){
+              bot.spinner.succeed('new unread message')
+              bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${JSON.stringify(newMessage.sender)}`)
+              bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
               bot.spinner.succeed(`${msg.time} dari: ${msg.to.user} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} ${JSON.stringify(msg)}`)
@@ -111,11 +111,11 @@ schedule('30 12 1 * *', async() => {
     client.onMessage( async message => {
       if(message.type === 'chat'){
         bot.spinner.succeed('-----------------')
-        bot.spinner.succeed(`on new message | name: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-        bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
         await bot.addContact({ msg: message})
         let msg = await bot.handleMessage({message})
         if(msg.reply && msg.msg.length){
+          bot.spinner.succeed(`on new message | name: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+          bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
           bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
         } else {
           console.error(`${new Date()} ${JSON.stringify(msg)}`)

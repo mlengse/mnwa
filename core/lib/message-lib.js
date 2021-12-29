@@ -93,7 +93,7 @@ exports._processTag = async ({that, messageBody}) => {
 
 exports._handleMessage = async ({that, message}) => {
   that.spinner.start('handling message')
-  let msg = {
+  let msg = Object.assign({}, message, {
     time: that.getLongFormat(message.t),
     grup: message.isGroupMsg ? message.chat.name : undefined,
     pengirim: message.sender.name || message.sender.pushname || message.sender.shortName || message.sender.formattedName || message.sender.id.user,
@@ -101,7 +101,7 @@ exports._handleMessage = async ({that, message}) => {
     isi: message.type === 'chat' ? message.body : `${message.type} | ${message.mimetype}`,
     quote: message.quotedMsg ? message.quotedMsg.type === 'chat' ? message.quotedMsg.body : `${message.quotedMsg.type} | ${message.quotedMsg.mimetype}` : undefined,
     // str: JSON.stringify(message)
-  }
+  })
   let reply = {
     reply: false,
     to: undefined,
