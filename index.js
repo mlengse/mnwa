@@ -94,18 +94,15 @@ schedule('30 12 1 * *', async() => {
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
             if(msg.reply && msg.msg && msg.msg.length){
-              bot.spinner.succeed('new unread message')
-              bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${JSON.stringify(newMessage.sender)}`)
-              bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
+              bot.spinner.succeed(`new unread message | name: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+              bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
               bot.spinner.succeed(`${msg.time} dari: ${msg.to.user} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
-      
           }
         }
       }
-  
     }
 
     client.onMessage( async message => {
