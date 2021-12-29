@@ -93,7 +93,7 @@ schedule('30 12 1 * *', async() => {
             bot.spinner.succeed('--------------')
             await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
-            if(msg.reply && msg.msg.length){
+            if(msg.reply && msg.msg && msg.msg.length){
               bot.spinner.succeed('new unread message')
               bot.spinner.succeed(`chat: ${chat.name ? `${chat.name} |` : ''}${JSON.stringify(newMessage.sender)}`)
               bot.spinner.succeed(`isi: ${newMessage.type !== 'chat' ? newMessage.type : bot.processText(newMessage.body || newMessage.content)}`)
@@ -113,7 +113,7 @@ schedule('30 12 1 * *', async() => {
         bot.spinner.succeed('-----------------')
         await bot.addContact({ msg: message})
         let msg = await bot.handleMessage({message})
-        if(msg.reply && msg.msg.length){
+        if(msg.reply && msg.msg && msg.msg.length){
           bot.spinner.succeed(`on new message | name: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
           bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
           bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
