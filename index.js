@@ -102,7 +102,7 @@ schedule('30 12 1 * *', async() => {
               console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else {
-            console.error(`${new Date()} ${JSON.stringify(msg)}`)
+            console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
           }
         }
       }
@@ -128,7 +128,7 @@ schedule('30 12 1 * *', async() => {
           }
         } 
       } else {
-        console.error(`${new Date()} ${JSON.stringify(msg)}`)
+        console.error(`${new Date()} ${JSON.stringify(message)}`)
       }
     })
   }catch(e){
