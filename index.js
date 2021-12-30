@@ -110,12 +110,12 @@ schedule('30 12 1 * *', async() => {
 
     client.onMessage( async message => {
       bot.spinner.succeed('-----------------')
-      if(message.id.includes('status@broadcast')){
-        bot.spinner.info(`new status`)
-        bot.spinner.info(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-        bot.spinner.info(`content: ${bot.processText(message.body || message.content)}`)
-      } else {
-        if(message.type === 'chat'){
+      if(message.type === 'chat'){
+        if(message.id.includes('status@broadcast')){
+          bot.spinner.info(`new status`)
+          bot.spinner.info(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+          bot.spinner.info(`content: ${bot.processText(message.body || message.content)}`)
+        } else {
           let msg = await bot.handleMessage({message})
           if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
             bot.spinner.succeed(`new message`)
@@ -126,9 +126,9 @@ schedule('30 12 1 * *', async() => {
           } else {
             console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
-        } else {
-          console.error(`${new Date()} ${JSON.stringify(msg)}`)
-        }
+        } 
+      } else {
+        console.error(`${new Date()} ${JSON.stringify(msg)}`)
       }
     })
   }catch(e){
