@@ -90,30 +90,42 @@ schedule('30 12 1 * *', async() => {
         }
         for(let newMessage of messages) {
           if(newMessage.type === 'chat'){
-            bot.spinner.succeed('--------------')
-            bot.spinner.succeed(`new unread message | name: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
-            bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
-            await bot.addContact({ msg: newMessage})
             let msg = await bot.handleMessage({message: newMessage})
-            if(msg.reply && msg.msg && msg.msg.length){
-              bot.spinner.succeed(`${msg.time} dari: ${msg.to.user} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
+            if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
+              bot.spinner.succeed('--------------')
+              bot.spinner.succeed(`unread message`)
+              bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+              bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
+              await bot.addContact({ msg })
+              bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
+          } else {
+            console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         }
       }
     }
 
     client.onMessage( async message => {
-      if(message.type === 'chat'){
-        bot.spinner.succeed('-----------------')
-        bot.spinner.succeed(`on new message | name: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-        bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
-        await bot.addContact({ msg: message})
-        let msg = await bot.handleMessage({message})
-        if(msg.reply && msg.msg && msg.msg.length){
-          bot.spinner.succeed(`${msg.time} dari: ${msg.to} isi: ${msg.isi} balas: ${msg.msg.split('\n').join(' ')}`)
+      bot.spinner.succeed('-----------------')
+      if(message.id.includes('status@broadcast')){
+        bot.spinner.info(`new status`)
+        bot.spinner.info(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+        bot.spinner.info(`content: ${bot.processText(message.body || message.content)}`)
+      } else {
+        if(message.type === 'chat'){
+          let msg = await bot.handleMessage({message})
+          if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
+            bot.spinner.succeed(`new message`)
+            bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+            bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
+            await bot.addContact({ msg })
+            bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
+          } else {
+            console.error(`${new Date()} ${JSON.stringify(msg)}`)
+          }
         } else {
           console.error(`${new Date()} ${JSON.stringify(msg)}`)
         }
