@@ -99,7 +99,7 @@ schedule('30 12 1 * *', async() => {
               bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} need manual reply`)
-              // console.error(`${new Date()} ${JSON.stringify(msg)}`)
+              console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else if (newMessage.type === "e2e_notification" || newMessage.isMedia === true){
             bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
@@ -124,7 +124,7 @@ schedule('30 12 1 * *', async() => {
             bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             console.error(`${new Date()} need manual reply`)
-            // console.error(`${new Date()} ${JSON.stringify(msg)}`)
+            console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         } 
       } else if (message.isMedia === true || message.type === "e2e_notification"){
