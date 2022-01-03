@@ -102,7 +102,7 @@ schedule('30 12 1 * *', async() => {
               console.error(`${new Date()} need manual reply`)
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
-          } else if (newMessage.type === 'image' || newMessage.type === "e2e_notification"){
+          } else if (newMessage.type === "e2e_notification" || newMessage.isMedia === true){
             bot.spinner.succeed('--------------')
             bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
             bot.spinner.succeed(`content: ${newMessage.type}`)
@@ -133,7 +133,7 @@ schedule('30 12 1 * *', async() => {
             // console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         } 
-      } else if (message.type === 'image' || message.type === "e2e_notification"){
+      } else if (message.isMedia === true || message.type === "e2e_notification"){
         bot.spinner.succeed('--------------')
         bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
         bot.spinner.succeed(`content: ${message.type}`)
