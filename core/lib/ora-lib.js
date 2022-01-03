@@ -29,7 +29,7 @@ exports.spinner =(process.platform === 'win32' && !process.env.NODE_APP_INSTANCE
 exports.processText = text => {
   let regex = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|[\u2011-\u26FF]|\uD83E[\uDD10-\uDDFF])/g
   let nt = text.replace(regex, '').trim()
-  nt = nt.replace(/(\r\n|\n|\r)/gm, "").trim()
+  nt = nt.replace(/(\r\n|\n|\r)/gm, ". ").trim()
   if(nt === ''){
     nt = 'emoji'
   }
