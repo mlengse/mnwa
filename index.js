@@ -93,7 +93,7 @@ schedule('30 12 1 * *', async() => {
             let msg = await bot.handleMessage({message: newMessage})
             bot.spinner.succeed('--------------')
             bot.spinner.succeed(`unread message`)
-            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
             bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
             if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
               await bot.addContact({ msg })
@@ -102,7 +102,11 @@ schedule('30 12 1 * *', async() => {
               console.error(`${new Date()} need manual reply`)
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
-          } else if (newMessage.type !== 'image'){
+          } else if (newMessage.type === 'image' || newMessage.type === "e2e_notification"){
+            bot.spinner.succeed('--------------')
+            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
+            bot.spinner.succeed(`content: ${newMessage.type}`)
+          } else {
             console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
           }
         }
@@ -129,7 +133,11 @@ schedule('30 12 1 * *', async() => {
             // console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         } 
-      } else if (message.type !== 'image'){
+      } else if (message.type === 'image' || message.type === "e2e_notification"){
+        bot.spinner.succeed('--------------')
+        bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+        bot.spinner.succeed(`content: ${message.type}`)
+      } else {
         console.error(`${new Date()} ${JSON.stringify(message)}`)
       }
     })
