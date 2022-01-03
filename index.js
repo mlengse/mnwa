@@ -91,15 +91,16 @@ schedule('30 12 1 * *', async() => {
         for(let newMessage of messages) {
           if(newMessage.type === 'chat'){
             let msg = await bot.handleMessage({message: newMessage})
+            bot.spinner.succeed('--------------')
+            bot.spinner.succeed(`unread message`)
+            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
+            bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
             if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
-              bot.spinner.succeed('--------------')
-              bot.spinner.succeed(`unread message`)
-              bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.id}`)
-              bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
               await bot.addContact({ msg })
               bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
-              console.error(`${new Date()} ${JSON.stringify(msg)}`)
+              console.error(`${new Date()} need manual reply`)
+              // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else if (newMessage.type !== 'image'){
             console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
@@ -117,14 +118,15 @@ schedule('30 12 1 * *', async() => {
           bot.spinner.info(`content: ${bot.processText(message.body || message.content)}`)
         } else {
           let msg = await bot.handleMessage({message})
+          bot.spinner.succeed(`new message`)
+          bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+          bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
           if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
-            bot.spinner.succeed(`new message`)
-            bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-            bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
             await bot.addContact({ msg })
             bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
-            console.error(`${new Date()} ${JSON.stringify(msg)}`)
+            console.error(`${new Date()} need manual reply`)
+            // console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         } 
       } else if (message.type !== 'image'){
