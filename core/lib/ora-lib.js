@@ -14,15 +14,15 @@ exports.spinner =(process.platform === 'win32' && !process.env.NODE_APP_INSTANCE
     if(!text){
       text = textPersist
     }
-    console.log('succeed:', text)
+    console.log(`${new Date()}: ${text}`)
   },
-  warn: text => console.info('warn:', text),
-  info: text => console.info('info:', text),
+  warn: text => console.error(`warn ${new Date()}: ${text}`),
+  info: text => console.log(`info ${new Date()}: ${text}`),
   fail: text => {
     if(!text){
       text = textPersist
     }
-    console.error('fail:', text)
+    console.error(`err ${new Date()}: ${text}`)
   }
 }
 

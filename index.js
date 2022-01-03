@@ -102,7 +102,7 @@ schedule('30 12 1 * *', async() => {
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else if (newMessage.type === "e2e_notification" || newMessage.isMedia === true){
-            bot.spinner.succeed(`${new Date()} ${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
+            bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
           } else {
             console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
           }
@@ -128,7 +128,7 @@ schedule('30 12 1 * *', async() => {
           }
         } 
       } else if (message.isMedia === true || message.type === "e2e_notification"){
-        bot.spinner.succeed(`${new Date()} ${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+        bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
       } else {
         console.error(`${new Date()} ${JSON.stringify(message)}`)
       }

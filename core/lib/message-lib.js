@@ -124,7 +124,7 @@ exports._handleMessage = async ({that, message}) => {
     }
   }
   msg = JSON.parse(JSON.stringify(Object.assign({}, msg, reply)))
-  that.spinner.succeed()
+  // that.spinner.succeed()
   if(msg.tag) {
     // console.log(msg)
     msg = await that.generateReply({msg})
