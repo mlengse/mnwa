@@ -92,8 +92,7 @@ schedule('30 12 1 * *', async() => {
           if(newMessage.type === 'chat'){
             let msg = await bot.handleMessage({message: newMessage})
             bot.spinner.succeed('--------------')
-            bot.spinner.succeed(`unread message`)
-            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
+            bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
             bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
             if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
               await bot.addContact({ msg })
@@ -103,9 +102,7 @@ schedule('30 12 1 * *', async() => {
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else if (newMessage.type === "e2e_notification" || newMessage.isMedia === true){
-            bot.spinner.succeed('--------------')
-            bot.spinner.succeed(`from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
-            bot.spinner.succeed(`content: ${newMessage.type}`)
+            bot.spinner.succeed(`${new Date()} ${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
           } else {
             console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
           }
@@ -117,13 +114,10 @@ schedule('30 12 1 * *', async() => {
       bot.spinner.succeed('-----------------')
       if(message.type === 'chat'){
         if(message.id.includes('status@broadcast')){
-          bot.spinner.info(`new status`)
-          bot.spinner.info(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-          bot.spinner.info(`content: ${bot.processText(message.body || message.content)}`)
+          bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
         } else {
           let msg = await bot.handleMessage({message})
-          bot.spinner.succeed(`new message`)
-          bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+          bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
           bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
           if(msg.reply && Object.keys(msg.reply).length && msg.msg && msg.msg.length){
             await bot.addContact({ msg })
@@ -134,9 +128,7 @@ schedule('30 12 1 * *', async() => {
           }
         } 
       } else if (message.isMedia === true || message.type === "e2e_notification"){
-        bot.spinner.succeed('--------------')
-        bot.spinner.succeed(`from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-        bot.spinner.succeed(`content: ${message.type}`)
+        bot.spinner.succeed(`${new Date()} ${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
       } else {
         console.error(`${new Date()} ${JSON.stringify(message)}`)
       }
