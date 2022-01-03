@@ -92,11 +92,10 @@ schedule('30 12 1 * *', async() => {
           if(newMessage.type === 'chat'){
             let msg = await bot.handleMessage({message: newMessage})
             bot.spinner.succeed('--------------')
-            bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
-            bot.spinner.succeed(`content: ${bot.processText(newMessage.body || newMessage.content)}`)
+            bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
             if(msg.reply && msg.msg && msg.msg.length){
               await bot.addContact({ msg })
-              bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
+              bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} need manual reply`)
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
@@ -111,17 +110,16 @@ schedule('30 12 1 * *', async() => {
     }
 
     client.onMessage( async message => {
-      bot.spinner.succeed('-----------------')
       if(message.type === 'chat'){
         if(message.id.includes('status@broadcast')){
           bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
         } else {
+          bot.spinner.succeed('-----------------')
           let msg = await bot.handleMessage({message})
-          bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-          bot.spinner.succeed(`content: ${bot.processText(message.body || message.content)}`)
+          bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
           if(msg.reply && msg.msg && msg.msg.length){
             await bot.addContact({ msg })
-            bot.spinner.succeed(`${msg.time} send to: ${msg.to.user} balas: ${msg.msg.split('\n').join(' ')}`)
+            bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             console.error(`${new Date()} need manual reply`)
             // console.error(`${new Date()} ${JSON.stringify(msg)}`)
