@@ -101,7 +101,7 @@ schedule('30 12 1 * *', async() => {
               // console.error(`${new Date()} ${JSON.stringify(msg)}`)
             }
           } else if (newMessage.type !== "chat" || newMessage.isMedia === true){
-            bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
+            // bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
           } else {
             console.error(`${new Date()} ${JSON.stringify(newMessage)}`)
           }
@@ -112,7 +112,7 @@ schedule('30 12 1 * *', async() => {
     client.onMessage( async message => {
       if(message.type === 'chat'){
         if(message.id.includes('status@broadcast')){
-          bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
+          // bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
         } else {
           bot.spinner.succeed('-----------------')
           let msg = await bot.handleMessage({message})
@@ -126,7 +126,7 @@ schedule('30 12 1 * *', async() => {
           }
         } 
       } else if (message.isMedia === true || message.type !== "chat"){
-        bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+        // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
       } else {
         console.error(`${new Date()} ${JSON.stringify(message)}`)
       }
