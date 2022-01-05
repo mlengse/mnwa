@@ -19,7 +19,7 @@ exports._getSubscriber = async ({ that }) => {
       } = JSON.parse(message)
       if(topic === 'sendwa'){
         that.spinner.succeed(`---------------`)
-        that.spinner.succeed(`on new send wa request`)
+        that.spinner.succeed(`on new send wa request ${nama} ${from}`)
       
         let chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
