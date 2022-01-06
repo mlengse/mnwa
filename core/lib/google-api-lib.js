@@ -152,8 +152,14 @@ exports._addContact = async( { that, contact, msg }) => {
     contact = Object.assign({}, contact, msg.chat.contact)
   }
 
-  if(contact && (!contact.pushname || !contact.isMyContact) && (contact.chat || contact.profile  !== '404') ) {
-    contact = Object.assign({}, contact, contact.chat, contact.profile)
+  if(contact && !contact.isMyContact) {
+    if(contact.chat){
+      contact = Object.assign({}, contact, contact.chat)
+    }
+    if(contact.profile !== '404'){
+      contact = Object.assign({}, contact, contact.profile)
+    }
+    // contact = Object.assign({}, contact, contact.chat, contact.profile)
   }
    
   if(contact && contact.isMyContact){
@@ -162,12 +168,12 @@ exports._addContact = async( { that, contact, msg }) => {
     let number
     let name
   
-    // if(!contact.pushname && contact.chat){
-    //   contact = Object.assign({}, contact, contact.chat)
-    // }
-    // if(!contact.pushname && contact.profile !== '404'){
-    //   contact = Object.assign({}, contact, contact.profile)
-    // }
+    if(!contact.pushname && contact.chat){
+      contact = Object.assign({}, contact, contact.chat)
+    }
+    if(!contact.pushname && contact.profile !== '404'){
+      contact = Object.assign({}, contact, contact.profile)
+    }
     if(contact.pushname){
       name = contact.pushname
     }
