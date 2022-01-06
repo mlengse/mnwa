@@ -146,8 +146,15 @@ exports._saveContact = async ({ that, name, number }) => {
 }
 
 exports._addContact = async( { that, contact, msg }) => {
-  if(!contact) {
-    contact = msg.sender || msg.contact
+  if(msg && msg.sender && msg.sender.isMyContact) {
+    contact = Object.assign({}, contact, msg.sender)
+  }
+  if(msg && msg.chat && msg.chat.contact && msg.chat.contact.isMyContact) {
+    contact = Object.assign({}, contact, msg.chat.contact)
+  }
+
+  if(contact && (!contact.pushname || !contact.isMyContact) && (contact.chat || contact.profile  !== '404') ) {
+    contact = Object.assign({}, contact, contact.chat, contact.profile)
   }
    
   if(contact && contact.isMyContact){
@@ -156,12 +163,12 @@ exports._addContact = async( { that, contact, msg }) => {
     let number
     let name
   
-    if(!contact.pushname && contact.chat){
-      contact = Object.assign({}, contact, contact.chat)
-    }
-    if(!contact.pushname && contact.profile !== '404'){
-      contact = Object.assign({}, contact, contact.profile)
-    }
+    // if(!contact.pushname && contact.chat){
+    //   contact = Object.assign({}, contact, contact.chat)
+    // }
+    // if(!contact.pushname && contact.profile !== '404'){
+    //   contact = Object.assign({}, contact, contact.profile)
+    // }
     if(contact.pushname){
       name = contact.pushname
     }
