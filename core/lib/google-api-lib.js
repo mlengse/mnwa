@@ -162,50 +162,55 @@ exports._addContact = async( { that, contact, msg }) => {
     // contact = Object.assign({}, contact, contact.chat, contact.profile)
   }
    
-  if(contact && contact.isMyContact){
-    that.spinner.succeed(`contact is saved as name: ${contact.name}`)
-  } else {
-    let number
-    let name
-  
-    if(!contact.pushname && contact.chat){
-      contact = Object.assign({}, contact, contact.chat)
-    }
-    if(!contact.pushname && contact.profile !== '404'){
-      contact = Object.assign({}, contact, contact.profile)
-    }
-    if(contact.pushname){
-      name = contact.pushname
-    }
-    if(contact.nama){
-      name = contact.nama
-    }
-    if(contact.patient && contact.patient.nama){
-      name = contact.patient.nama + ' Pasien'
-    }
-    if(contact.patient && contact.patient.no_hp){
-      number = contact.patient.number
-    }
-    if(contact.id) {
-      if(contact.id.user){
-        number = contact.id.user
-      } else if(contact.id.includes('@')){
-        number = contact.id.split('@')[0]
+  if(contact){
+    if(contact.isMyContact){
+      that.spinner.succeed(`contact is saved as name: ${contact.name}`)
+    } else {
+      let number
+      let name
+    
+      if(!contact.pushname && contact.chat){
+        contact = Object.assign({}, contact, contact.chat)
       }
-    }
-
-    if(!name && number){
-      name = number+ ' wa'
-    }
+      if(!contact.pushname && contact.profile !== '404'){
+        contact = Object.assign({}, contact, contact.profile)
+      }
+      if(contact.pushname){
+        name = contact.pushname
+      }
+      if(contact.nama){
+        name = contact.nama
+      }
+      if(contact.patient && contact.patient.nama){
+        name = contact.patient.nama + ' Pasien'
+      }
+      if(contact.patient && contact.patient.no_hp){
+        number = contact.patient.number
+      }
+      if(contact.id) {
+        if(contact.id.user){
+          number = contact.id.user
+        } else if(contact.id.includes('@')){
+          number = contact.id.split('@')[0]
+        }
+      }
   
-    if(name && number) {
-      await that.saveContact({ 
-      	name,
-      	number
-    	})
+      if(!name && number){
+        name = number+ ' wa'
+      }
+    
+      if(name && number) {
+        await that.saveContact({ 
+          name,
+          number
+        })
+      }
+    
+      (!name || !number) && console.log(contact)
+          
     }
-  
-    (!name || !number) && console.log(contact)
-        
+  } else {
+    that.spinner.fail(`${Object.assign({}, contact, msg )}`)
   }
+
 }

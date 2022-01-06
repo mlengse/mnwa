@@ -94,7 +94,7 @@ schedule('30 12 1 * *', async() => {
             bot.spinner.succeed('--------------')
             bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
             if(msg.reply && msg.msg && msg.msg.length){
-              await bot.addContact({ msg })
+              await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
               bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} need manual reply`)
@@ -118,7 +118,7 @@ schedule('30 12 1 * *', async() => {
           let msg = await bot.handleMessage({message})
           bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
           if(msg.reply && msg.msg && msg.msg.length){
-            await bot.addContact({ msg })
+            await bot.addContact({ msg: Object.assign({}, msg, message) })
             bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             console.error(`${new Date()} need manual reply`)
