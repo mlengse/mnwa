@@ -153,10 +153,10 @@ exports._addContact = async( { that, contact, msg }) => {
   }
 
   if(contact && !contact.isMyContact) {
-    if(contact.chat){
+    if(contact.chat && contact.chat.isMyContact){
       contact = Object.assign({}, contact, contact.chat)
     }
-    if(contact.profile !== '404'){
+    if(contact.profile !== '404' && contact.profile.isMyContact){
       contact = Object.assign({}, contact, contact.profile)
     }
     // contact = Object.assign({}, contact, contact.chat, contact.profile)
@@ -166,6 +166,7 @@ exports._addContact = async( { that, contact, msg }) => {
     if(contact.isMyContact){
       that.spinner.succeed(`contact is saved as name: ${contact.name}`)
     } else {
+      that.spinner.info(`isMyContact: ${contact.isMyContact}`)
       let number
       let name
     
