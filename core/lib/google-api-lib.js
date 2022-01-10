@@ -145,28 +145,28 @@ exports._saveContact = async ({ that, name, number }) => {
 }
 
 exports._addContact = async( { that, contact, msg }) => {
-  if(msg && msg.sender && msg.sender.isMyContact) {
+  if(msg && msg.sender && (msg.sender.isMyContact || msg.sender.isWAContact)) {
     contact = Object.assign({}, contact, msg.sender)
   }
-  if(msg && msg.chat && msg.chat.contact && msg.chat.contact.isMyContact) {
+  if(msg && msg.chat && msg.chat.contact && (msg.chat.contact.isMyContact || msg.chat.contact.isWAContact)) {
     contact = Object.assign({}, contact, msg.chat.contact)
   }
 
-  if(contact && !contact.isMyContact) {
-    if(contact.chat && contact.chat.isMyContact){
+  if(contact && (!contact.isMyContact || !contact.isWAContact)) {
+    if(contact.chat && (contact.chat.isMyContact || contact.chat.isWAContact)){
       contact = Object.assign({}, contact, contact.chat)
     }
-    if(contact.profile !== '404' && contact.profile.isMyContact){
+    if(contact.profile !== '404' && (contact.profile.isMyContact || contact.profile.isWAContact)){
       contact = Object.assign({}, contact, contact.profile)
     }
     // contact = Object.assign({}, contact, contact.chat, contact.profile)
   }
    
   if(contact){
-    if(contact.isMyContact){
+    if(contact.isMyContact || contact.isWAContact){
       that.spinner.succeed(`contact is saved as name: ${contact.name}`)
     } else {
-      that.spinner.info(`isMyContact: ${contact.isMyContact}`)
+      that.spinner.info(`${contact.isMyContact ? `isMyContact: ${contact.isMyContact}` : `isWAContact: ${contact.isWAContact}`}`)
       let number
       let name
     
