@@ -166,7 +166,7 @@ exports._addContact = async( { that, contact, msg }) => {
     if(contact.isMyContact || contact.isWAContact){
       that.spinner.succeed(`contact is saved as name: ${contact.name}`)
     } else {
-      that.spinner.info(`${contact.isMyContact ? `isMyContact: ${contact.isMyContact}` : `isWAContact: ${contact.isWAContact}`}`)
+      that.spinner.info(`${JSON.stringify(contact)}`)
       let number
       let name
     
