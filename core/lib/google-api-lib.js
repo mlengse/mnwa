@@ -156,7 +156,7 @@ exports._addContact = async( { that, contact, msg }) => {
     if(contact.chat && (contact.chat.isMyContact || contact.chat.isWAContact)){
       contact = Object.assign({}, contact, contact.chat)
     }
-    if(contact.profile !== '404' && (contact.profile.isMyContact || contact.profile.isWAContact)){
+    if(contact.profile && contact.profile !== '404' && (contact.profile.isMyContact || contact.profile.isWAContact)){
       contact = Object.assign({}, contact, contact.profile)
     }
     // contact = Object.assign({}, contact, contact.chat, contact.profile)
