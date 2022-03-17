@@ -9,7 +9,10 @@ exports._init = async ({ that }) => {
   that.spinner.succeed()
   // that.spinner.start('Initializing whatsapp');
 
-  that.client = await wa.create()
+  that.client = await wa.create({
+    session: 'jayengan',
+    multidevice: false
+  })
   // function to detect conflits and change status
   // Force it to keep the current session
   // Possible state values:
@@ -44,8 +47,9 @@ exports._init = async ({ that }) => {
     console.log('State Connection Stream: ' + state);
     clearTimeout(time);
     if (state === 'DISCONNECTED' || state === 'SYNCING') {
-      time = setTimeout(() => {
+      time = setTimeout(async () => {
         that.client.close();
+        await that.init()
       }, 80000);
     }
   });
