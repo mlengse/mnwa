@@ -1,6 +1,15 @@
 const wa = require('venom-bot');
+const fs = require('fs')
+const TOKEN_DIR = "./tokens";
+const TOKEN_PATH = TOKEN_DIR + "/wa-session.data.json";
 
 exports._init = async ({ that }) => {
+  let browserSessionToken
+  if (fs.existsSync(TOKEN_PATH)) {
+    const savedTokenString = fs.readFileSync(TOKEN_PATH).toString();
+    browserSessionToken = JSON.parse(savedTokenString);
+  }
+
   that.spinner.start('config things')
   await Promise.all([
     that.getVillages(),
@@ -11,8 +20,20 @@ exports._init = async ({ that }) => {
 
   that.client = await wa.create({
     session: 'jayengan',
-    multidevice: false
+    multidevice: true,
+    folderNameToken: 'tokens',
+    mkdirFolderToken: './',
+    createPathFileToken: true,
+    disableWelcome: true,
+    disableSpins: true,
+    headless: true,
+    browserSessionToken
   })
+
+  const token = await that.client.getSessionTokenBrowser();
+  await fs.promises.mkdir(TOKEN_DIR, { recursive: true });
+  await fs.promises.writeFile(TOKEN_PATH, JSON.stringify(token));
+  // return client;
   // function to detect conflits and change status
   // Force it to keep the current session
   // Possible state values:
