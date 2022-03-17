@@ -40,6 +40,9 @@ schedule('30 12 1 * *', async() => {
                   if(process.env.KESSAN_LINK) {
                     text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
                   }                  // let from = `6287833597999@c.us`
+                  if(process.env.SCREENING_LINK) {
+                    text += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
+                  }                  // let from = `6287833597999@c.us`
                   let from = `${patient.no_hp}@c.us`
                   chat = await client.checkNumberStatus(from);
                   let profile = await client.getNumberProfile(from);
