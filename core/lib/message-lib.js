@@ -181,6 +181,9 @@ exports._generateReply = async ({that, msg}) => {
     if(process.env.KESSAN_LINK) {
       result += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
     }
+    if(process.env.SCREENING_LINK) {
+      text += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
+    }
     that.spinner.start(`send wa`)
     let sendTo
     if(typeof msg.to === 'string'){
