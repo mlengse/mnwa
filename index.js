@@ -34,6 +34,7 @@ schedule('30 12 1 * *', async() => {
                   if(process.env.FORM_LINK) {
                     text += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
                   }
+
                   if(process.env.ESO_LINK) {
                     text += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
                   }
