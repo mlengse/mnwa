@@ -41,6 +41,10 @@ exports._getSubscriber = async ({ that }) => {
           if(process.env.KESSAN_LINK) {
             text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
           }
+          if(process.env.SCREENING_LINK) {
+            text += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
+          }                  // let from = `6287833597999@c.us`
+
       
           try{
             await that.client.sendText( from, text)
