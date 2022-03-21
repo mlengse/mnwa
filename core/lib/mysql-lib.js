@@ -29,7 +29,7 @@ exports.connect = async query => {
 	}
 	return await new Promise( resolve => {
     connection.query(query, (err, results, fields) => {
-      err ? console.error(`${new Date()} error: ${JSON.stringify(err.stack)}`) : null;
+      err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
       resolve(results)
     })
 
