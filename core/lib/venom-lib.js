@@ -10,13 +10,7 @@ exports._init = async ({ that }) => {
     browserSessionToken = JSON.parse(savedTokenString);
   }
 
-  that.spinner.start('config things')
-  await Promise.all([
-    that.getVillages(),
-    that.getUnits()
-  ])
-  that.spinner.succeed()
-  // that.spinner.start('Initializing whatsapp');
+  that.spinner.start('Initializing whatsapp');
 
   that.client = await wa.create({
     session: 'jayengan',
@@ -97,6 +91,13 @@ exports._init = async ({ that }) => {
   //     }, 80000);
   //   }
   // })
+
+  that.spinner.start('config things')
+  await Promise.all([
+    that.getVillages(),
+    that.getUnits()
+  ])
+  that.spinner.succeed()
 
   return that.client
 }
