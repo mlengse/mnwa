@@ -28,10 +28,40 @@ exports.connect = async query => {
 		connection = this.getConnection()
 	}
 	return await new Promise( resolve => {
-    connection.query(query, (err, results, fields) => {
+
+		let returnedResults
+
+		connection.connect()
+
+    let queryStream = connection.query(query, (err, results, fields) => {
       err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
-      resolve(results)
+      returnedResults = results
     })
+
+		queryStream
+			.on('error', function(err) {
+				console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`);
+				// Handle error, an 'end' event will be emitted after this as well
+			})
+			// .on('fields', function(fields) {
+			// 	// the field packets for the rows to follow
+			// })
+			// .on('result', function(row) {
+			// 	// Pausing the connnection is useful if your processing involves I/O
+			// 	connection.pause();
+
+			// 	processRow(row, function() {
+			// 		connection.resume();
+			// 	});
+			// })
+			// .on('end', function() {
+			// 	connection.end()
+			// 	// all rows have been received
+			// });
+		
+		connection.end()
+
+		resolve(returnedResults)
 
 	})
 }
