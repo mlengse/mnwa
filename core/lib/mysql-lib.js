@@ -33,16 +33,16 @@ exports.connect = async query => {
 
 		connection.connect()
 
-    let queryStream = connection.query(query, (err, results, fields) => {
+    connection.query(query, (err, results, fields) => {
       err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
       returnedResults = results
     })
 
-		queryStream
-			.on('error', function(err) {
-				console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`);
-				// Handle error, an 'end' event will be emitted after this as well
-			})
+		// queryStream
+		// 	.on('error', function(err) {
+		// 		console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`);
+		// 		// Handle error, an 'end' event will be emitted after this as well
+		// 	})
 			// .on('fields', function(fields) {
 			// 	// the field packets for the rows to follow
 			// })
