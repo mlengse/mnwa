@@ -10,7 +10,7 @@ exports._init = async ({ that }) => {
     browserSessionToken = JSON.parse(savedTokenString);
   }
 
-  that.spinner.start('Initializing whatsapp');
+  // that.spinner.start('Initializing whatsapp');
 
   that.client = await wa.create({
     session: 'jayengan',
