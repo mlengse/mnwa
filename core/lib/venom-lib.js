@@ -21,6 +21,7 @@ exports._init = async ({ that }) => {
     disableWelcome: true,
     disableSpins: true,
     headless: true,
+    useChrome: true,
     browserSessionToken
   })
 
