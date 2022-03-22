@@ -29,6 +29,8 @@ exports.connect = async query => {
 	// }
 	return await new Promise( resolve => {
 
+		let returnedResults
+
 		const connection = mysql.createConnection({
 			// connectionLimit: 10,
 			host: MYSQL_HOST,
