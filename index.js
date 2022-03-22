@@ -16,6 +16,12 @@ schedule('30 12 1 * *', async() => {
 
     const client = await bot.init()
 
+    bot.spinner.start('config things')
+    await Promise.all([
+      bot.getVillages(),
+      bot.getUnits()
+    ])
+
     const subscriber = await bot.getSubscriber()
     if( subscriber ){
       subscriber.on('message', async (channel, message) => {

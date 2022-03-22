@@ -92,11 +92,7 @@ exports._init = async ({ that }) => {
   //   }
   // })
 
-  that.spinner.start('config things')
-  await Promise.all([
-    that.getVillages(),
-    that.getUnits()
-  ])
+
   that.spinner.succeed()
 
   return that.client
