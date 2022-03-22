@@ -111,3 +111,5 @@ tmp*
 token*
 
 credentials*
+
+package-lock.json
