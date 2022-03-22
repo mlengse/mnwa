@@ -24,12 +24,18 @@ exports.getConnection = () => {
 }
 
 exports.connect = async query => {
-  if(!connection){
-		connection = this.getConnection()
-	}
+  // if(!connection){
+		// connection = this.getConnection()
+	// }
 	return await new Promise( resolve => {
 
-		let returnedResults
+		const connection = mysql.createConnection({
+			// connectionLimit: 10,
+			host: MYSQL_HOST,
+			user: MYSQL_USER,
+			password: MYSQL_PWD,
+			database: MYSQL_DB
+		})
 
 		connection.connect()
 
