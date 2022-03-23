@@ -19,9 +19,9 @@ exports._init = async ({ that }) => {
     mkdirFolderToken: './',
     createPathFileToken: true,
     disableWelcome: true,
-    disableSpins: true,
+    disableSpins: false,
     headless: true,
-    // useChrome: true,
+    useChrome: true,
     browserSessionToken
   })
 
@@ -45,9 +45,9 @@ exports._init = async ({ that }) => {
   // UNPAIRED
   // UNPAIRED_IDLE
   that.client.onStateChange((state) => {
-    if(!state.includes('TIMEOUT') && !state.includes('CONNECTED')) {
+    // if(!state.includes('TIMEOUT') && !state.includes('CONNECTED')) {
       console.log('State changed: ', state);
-    }
+    // }
     // force whatsapp take over
     if ('CONFLICT'.includes(state)) that.client.useHere();
     // detect disconnect on whatsapp

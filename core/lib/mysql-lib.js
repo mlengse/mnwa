@@ -9,10 +9,10 @@ const {
 	NIK_REGEX
 } = require('../../config')
 
-// let connection = false
+let connection = false
 
 exports.getConnection = () => {
-	let connection = mysql.createConnection({
+	connection = mysql.createConnection({
 		// connectionLimit: 10,
 		host: MYSQL_HOST,
 		user: MYSQL_USER,
@@ -31,7 +31,7 @@ exports.connect = async query => {
 
 		let returnedResults = []
 
-		let connection = mysql.createConnection({
+		connection = mysql.createConnection({
 			// connectionLimit: 10,
 			host: MYSQL_HOST,
 			user: MYSQL_USER,
@@ -68,6 +68,8 @@ exports.connect = async query => {
 			// });
 		
 		connection.end()
+
+		connection = false
 
 		resolve(returnedResults)
 
