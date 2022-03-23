@@ -67,7 +67,7 @@ exports.connect = async query => {
 			// 	// all rows have been received
 			// });
 
-			console.log(returnedResults)
+		console.log(returnedResults)
 		
 		connection.end()
 
