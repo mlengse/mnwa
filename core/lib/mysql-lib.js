@@ -9,29 +9,25 @@ const {
 	NIK_REGEX
 } = require('../../config')
 
-let connection = false
+// let connection = false
 
-exports.getConnection = () => {
-	connection = mysql.createConnection({
-		// connectionLimit: 10,
-		host: MYSQL_HOST,
-		user: MYSQL_USER,
-		password: MYSQL_PWD,
-		database: MYSQL_DB
-	})
+// exports.getConnection = () => {
+// 	connection = mysql.createConnection({
+// 		// connectionLimit: 10,
+// 		host: MYSQL_HOST,
+// 		user: MYSQL_USER,
+// 		password: MYSQL_PWD,
+// 		database: MYSQL_DB
+// 	})
 
-	return connection
-}
+// 	return connection
+// }
 
 exports.connect = async query => {
   // if(!connection){
 		// connection = this.getConnection()
 	// }
-	return await new Promise( resolve => {
-
-		let returnedResults = []
-
-		connection = mysql.createConnection({
+		const connection = mysql.createConnection({
 			// connectionLimit: 10,
 			host: MYSQL_HOST,
 			user: MYSQL_USER,
@@ -41,10 +37,15 @@ exports.connect = async query => {
 
 		connection.connect()
 
-    connection.query(query, (err, results, fields) => {
-      err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
-      returnedResults = results
-    })
+		let returnedResults = await new Promise( resolve => {
+			connection.query(query, (err, results, fields) => {
+				err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
+				resolve(results)
+				// returnedResults = results
+				// console.log(returnedResults)
+			})
+		})
+
 
 		// queryStream
 		// 	.on('error', function(err) {
@@ -67,15 +68,17 @@ exports.connect = async query => {
 			// 	// all rows have been received
 			// });
 
-		console.log(returnedResults)
+		// console.log(returnedResults)
 		
 		connection.end()
 
-		connection = false
+		// connection = false
 
-		resolve(returnedResults)
+		return returnedResults
 
-	})
+		// resolve(returnedResults)
+
+	// })
 }
 
 exports.pad = (n, width, z) => {
