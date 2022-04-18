@@ -4,30 +4,51 @@ const TOKEN_DIR = "./tokens";
 const TOKEN_PATH = TOKEN_DIR + "/wa-session.data.json";
 
 exports._init = async ({ that }) => {
-  let browserSessionToken
-  if (fs.existsSync(TOKEN_PATH)) {
-    const savedTokenString = fs.readFileSync(TOKEN_PATH).toString();
-    browserSessionToken = JSON.parse(savedTokenString);
-  }
+  // let browserSessionToken = null
+  // if (fs.existsSync(TOKEN_PATH)) {
+  //   const savedTokenString = fs.readFileSync(TOKEN_PATH).toString();
+  //   browserSessionToken = JSON.parse(savedTokenString);
+
+  // }
 
   // that.spinner.start('Initializing whatsapp');
 
-  that.client = await wa.create({
-    session: 'jayengan',
-    // multidevice: false,
-    folderNameToken: 'tokens',
-    mkdirFolderToken: './',
-    createPathFileToken: true,
+  that.client = await wa.create(
+  'jayengan',
+  undefined,
+  (statusSession, session) => {
+    that.spinner.succeed(`Status Session: ${statusSession}`); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken || chatsAvailable || deviceNotConnected || serverWssNotConnected || noOpenBrowser
+    //Create session wss return "serverClose" case server for close
+    that.spinner.succeed(`Session name: ${session}`);
+  },
+  {
+    multidevice: true,
+    // folderNameToken: 'tokens',
+    // mkdirFolderToken: './',
+    // createPathFileToken: true,
     disableWelcome: true,
-    // disableSpins: false,
-    // headless: false,
-    useChrome: true,
-    browserSessionToken
-  })
+    disableSpins: true,
+    headless: false,
+    updatesLog: true,
+    // useChrome: true,
+  },
+  // browserSessionToken,
+  undefined
+  // (browser, waPage) => {
+  //   console.log('Browser PID:', browser.process().pid);
+  //   waPage.screenshot({ path: 'screenshot.png' });
+  // }
+  )
 
-  const token = await that.client.getSessionTokenBrowser();
-  await fs.promises.mkdir(TOKEN_DIR, { recursive: true });
-  await fs.promises.writeFile(TOKEN_PATH, JSON.stringify(token));
+  // that.spinner.succeed('dapet client')
+
+  // let token = await that.client.getSessionTokenBrowser();
+
+  // that.spinner.succeed('dapet token')
+
+  // await fs.promises.mkdir(TOKEN_DIR, { recursive: true });
+  // await fs.promises.writeFile(TOKEN_PATH, JSON.stringify(token));
+
   // return client;
   // function to detect conflits and change status
   // Force it to keep the current session
