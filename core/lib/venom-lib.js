@@ -28,7 +28,7 @@ exports._init = async ({ that }) => {
     // createPathFileToken: true,
     disableWelcome: true,
     disableSpins: true,
-    headless: false,
+    // headless: false,
     updatesLog: true,
     // useChrome: true,
   },
