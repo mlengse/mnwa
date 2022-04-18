@@ -14,12 +14,12 @@ exports._init = async ({ that }) => {
 
   that.client = await wa.create({
     session: 'jayengan',
-    multidevice: false,
+    // multidevice: false,
     folderNameToken: 'tokens',
     mkdirFolderToken: './',
     createPathFileToken: true,
     disableWelcome: true,
-    disableSpins: false,
+    // disableSpins: false,
     // headless: false,
     useChrome: true,
     browserSessionToken
