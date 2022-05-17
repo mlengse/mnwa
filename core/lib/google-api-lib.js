@@ -29,24 +29,30 @@ const loadCreds = async () => {
  * @param {function} callback The callback to call with the authorized client.
  */
 const authorize = async () => {
-  const { 
-    installed: {
-      client_secret,
-      client_id,
-      redirect_uris
-    } 
-  } = await loadCreds()
-  const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
-  // Check if we have previously stored a token.
-  return await new Promise( resolve => {
-    fs.readFile(TOKEN_PATH, async (err, token) => {
-      if (err) {
-        resolve( await getNewToken(oAuth2Client))
-      };
-      oAuth2Client.setCredentials(JSON.parse(token));
-      resolve(oAuth2Client);
-    });
-  })
+  try{
+    const { 
+      installed: {
+        client_secret,
+        client_id,
+        redirect_uris
+      } 
+    } = await loadCreds()
+    const oAuth2Client = new google.auth.OAuth2(client_id, client_secret, redirect_uris[0]);
+    // Check if we have previously stored a token.
+    return await new Promise( resolve => {
+      fs.readFile(TOKEN_PATH, async (err, token) => {
+        if (err) {
+          resolve( await getNewToken(oAuth2Client))
+        };
+        oAuth2Client.setCredentials(JSON.parse(token));
+        resolve(oAuth2Client);
+      });
+    })
+    
+  } catch(e){
+    console.error(e)
+    
+  }
 }
 
 /**
