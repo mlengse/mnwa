@@ -22,6 +22,30 @@ schedule('30 12 1 * *', async() => {
       bot.getUnits()
     ])
 
+    
+    client.onMessage( async message => {
+      if(message.type === 'chat'){
+        if(message.id.includes('status@broadcast')){
+          // bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
+        } else {
+          bot.spinner.succeed('-----------------')
+          let msg = await bot.handleMessage({message})
+          bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
+          if(msg.reply && msg.msg && msg.msg.length){
+            process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, message) })
+            bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
+          } else {
+            console.error(`${new Date()} need manual reply`)
+            // console.error(`${new Date()} ${JSON.stringify(msg)}`)
+          }
+        } 
+      } else if (message.isMedia === true || message.type !== "chat"){
+        // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+      } else {
+        console.error(`${new Date()} ${JSON.stringify(message)}`)
+      }
+    })
+
     const subscriber = await bot.getSubscriber()
     if( subscriber ){
       subscriber.on('message', async (channel, message) => {
@@ -125,28 +149,6 @@ schedule('30 12 1 * *', async() => {
       }
     }
 
-    client.onMessage( async message => {
-      if(message.type === 'chat'){
-        if(message.id.includes('status@broadcast')){
-          // bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
-        } else {
-          bot.spinner.succeed('-----------------')
-          let msg = await bot.handleMessage({message})
-          bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
-          if(msg.reply && msg.msg && msg.msg.length){
-            process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, message) })
-            bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
-          } else {
-            console.error(`${new Date()} need manual reply`)
-            // console.error(`${new Date()} ${JSON.stringify(msg)}`)
-          }
-        } 
-      } else if (message.isMedia === true || message.type !== "chat"){
-        // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
-      } else {
-        console.error(`${new Date()} ${JSON.stringify(message)}`)
-      }
-    })
   }catch(e){
     console.error(e)
   }
