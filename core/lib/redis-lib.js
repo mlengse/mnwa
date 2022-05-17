@@ -24,8 +24,8 @@ exports._getSubscriber = async ({ that }) => {
         let chat = await that.client.checkNumberStatus(from);
         let profile = await that.client.getNumberProfile(from);
 
-        if(process.env.ESO_LINK && chat && (chat.canReceiveMessage || chat.numberExists)) {
-          await that.addContact({ contact: {
+        if(chat && (chat.canReceiveMessage || chat.numberExists)) {
+          process.env.ESO_LINK && await that.addContact({ contact: {
             nama,
             from,
             chat,

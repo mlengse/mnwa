@@ -56,9 +56,9 @@ schedule('30 12 1 * *', async() => {
 
                   bot.spinner.succeed(`---------------`)
                   bot.spinner.succeed(`on new simpus registration`)
-                  if(process.env.ESO_LINK && chat && (chat.canReceiveMessage || chat.numberExists)) {
+                  if(chat && (chat.canReceiveMessage || chat.numberExists)) {
                     try{
-                      await bot.addContact({ contact: {
+                      process.env.ESO_LINK && await bot.addContact({ contact: {
                         from,
                         chat,
                         profile,
@@ -109,8 +109,8 @@ schedule('30 12 1 * *', async() => {
             let msg = await bot.handleMessage({message: newMessage})
             bot.spinner.succeed('--------------')
             bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
-            if(process.env.ESO_LINK && msg.reply && msg.msg && msg.msg.length){
-              await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
+            if(msg.reply && msg.msg && msg.msg.length){
+              process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
               bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
             } else {
               console.error(`${new Date()} need manual reply`)
@@ -133,8 +133,8 @@ schedule('30 12 1 * *', async() => {
           bot.spinner.succeed('-----------------')
           let msg = await bot.handleMessage({message})
           bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
-          if(process.env.ESO_LINK && msg.reply && msg.msg && msg.msg.length){
-            await bot.addContact({ msg: Object.assign({}, msg, message) })
+          if(msg.reply && msg.msg && msg.msg.length){
+            process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, message) })
             bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             console.error(`${new Date()} need manual reply`)
