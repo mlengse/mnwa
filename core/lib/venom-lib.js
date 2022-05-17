@@ -14,7 +14,7 @@ exports._init = async ({ that }) => {
   // that.spinner.start('Initializing whatsapp');
 
   that.client = await wa.create(
-  'jayengan',
+  process.env.PUSKESMAS.toLowerCase(),
   undefined,
   (statusSession, session) => {
     that.spinner.succeed(`Status Session: ${statusSession}`); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken || chatsAvailable || deviceNotConnected || serverWssNotConnected || noOpenBrowser
