@@ -92,10 +92,13 @@ schedule('30 12 1 * *', async() => {
     if(chatWithNewMsg.length) {
       for(let chat of chatWithNewMsg){
         let messages = await client.getAllMessagesInChat(chat.id._serialized);
-        while(messages.length < chat.unreadCount){
+        let unreaded = false
+        while(!unreaded || messages.length < chat.unreadCount){
           let earlier = await client.loadEarlierMessages(chat.id._serialized)
           if(earlier.length && Array.isArray(earlier)){
             messages = [ ...messages, ...earlier]
+          } else {
+            unreaded = true
           }
         }
         while(messages.length > chat.unreadCount){
