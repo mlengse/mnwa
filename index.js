@@ -116,9 +116,15 @@ schedule('30 12 1 * *', async() => {
     if(chatWithNewMsg.length) {
       for(let chat of chatWithNewMsg){
         let messages = await client.getAllMessagesInChat(chat.id._serialized);
+        if( !bot.isIterable(messages)){
+          messages = []
+        }
         let unreaded = false
         while(!unreaded || messages.length < chat.unreadCount){
           let earlier = await client.loadEarlierMessages(chat.id._serialized)
+          if( !bot.isIterable(earlier)){
+            earlier = []
+          }
           if(Array.isArray(earlier) && earlier.length){
             messages = [ ...messages, ...earlier]
           } else {

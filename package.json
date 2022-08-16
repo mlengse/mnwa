@@ -16,8 +16,8 @@
     "mysql": "^2.18.1",
     "node-cron": "^2.0.3",
     "ora": "^5.4.1",
-    "puppeteer-core": "^8.0.0",
+    "puppeteer-core": "^15.4.0",
     "redis": "^3.1.2",
-    "venom-bot": "^4.0.9"
+    "venom-bot": "github:orkestral/venom"
   }
 }

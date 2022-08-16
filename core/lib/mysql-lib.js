@@ -87,6 +87,8 @@ exports.pad = (n, width, z) => {
   return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 }
 
+exports.isIterable = object => object != null && typeof object[Symbol.iterator] === 'function'
+
 exports._getVillages = async ({ that }) => {
 	that.config.village = await this.connect('SELECT `id`, `desa` FROM `villages`')
 }
