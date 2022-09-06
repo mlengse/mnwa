@@ -19,7 +19,7 @@ exports._init = async ({ that }) => {
   (statusSession, session) => {
     that.spinner.succeed(`Status Session: ${statusSession}`); //return isLogged || notLogged || browserClose || qrReadSuccess || qrReadFail || autocloseCalled || desconnectedMobile || deleteToken || chatsAvailable || deviceNotConnected || serverWssNotConnected || noOpenBrowser
     //Create session wss return "serverClose" case server for close
-    that.spinner.succeed(`Session name: ${session}`);
+    session ? that.spinner.succeed(`Session name: ${session}`) : '';
   },
   {
     multidevice: true,
