@@ -92,10 +92,10 @@ exports._init = async ({ that }) => {
   });
 
   // function to detect incoming call
-  that.client.onIncomingCall(async (call) => {
-    console.log(call);
-    that.client.sendText(call.peerJid, "Mohon maaf, tidak bisa menjawab telpon");
-  });
+  // that.client.onIncomingCall(async (call) => {
+  //   console.log(call);
+  //   that.client.sendText(call.peerJid, "Mohon maaf, tidak bisa menjawab telpon");
+  // });
 
   // jare nggo ngatasi Error: Evaluation failed: TypeError: Cannot read property 'filter' of undefined
 

@@ -66,20 +66,12 @@ schedule('30 12 1 * *', async() => {
                 if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
                   patient.no_hp = `62${patient.no_hp.substr(1)}`
                   let name = patient.nama
-                  let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.`
+                  let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.\n`
+
                   if(process.env.FORM_LINK) {
-                    text += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+                    text += `Mohon kesediaannya untuk dapat mengisi link di bawah. Link berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n${process.env.FORM_LINK}\n`
                   }
 
-                  if(process.env.ESO_LINK) {
-                    text += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
-                  }
-                  if(process.env.KESSAN_LINK) {
-                    text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
-                  }                  // let from = `6287833597999@c.us`
-                  if(process.env.SCREENING_LINK) {
-                    text += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
-                  }                  // let from = `6287833597999@c.us`
                   let from = `${patient.no_hp}@c.us`
                   chat = await client.checkNumberStatus(from);
                   let profile = await client.getNumberProfile(from);
@@ -118,49 +110,49 @@ schedule('30 12 1 * *', async() => {
       subscriber.subscribe('simpus');
     }
 
-		let chatWithNewMsg = await client.getAllChatsNewMsg()
-    if(chatWithNewMsg.length) {
-      for(let chat of chatWithNewMsg){
-        let messages = await client.getAllMessagesInChat(chat.id._serialized);
-        if( !bot.isIterable(messages)){
-          messages = []
-        }
-        let unreaded = false
-        while(!unreaded || messages.length < chat.unreadCount){
-          let earlier = await client.loadEarlierMessages(chat.id._serialized)
-          if( !bot.isIterable(earlier)){
-            earlier = []
-          }
-          if(Array.isArray(earlier) && earlier.length){
-            messages = [ ...messages, ...earlier]
-          } else {
-            unreaded = true
-          }
-        }
-        while(messages.length > chat.unreadCount){
-          messages.shift()
-        }
-        for(let newMessage of messages) {
-          if(newMessage.type === 'chat'){
-            let msg = await bot.handleMessage({message: newMessage})
-            if(msg.reply && msg.msg && msg.msg.length){
-              bot.spinner.succeed('--------------')
-              bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
+		// let chatWithNewMsg = await client.getAllChatsNewMsg()
+    // if(chatWithNewMsg.length) {
+    //   for(let chat of chatWithNewMsg){
+    //     let messages = await client.getAllMessagesInChat(chat.id._serialized);
+    //     if( !bot.isIterable(messages)){
+    //       messages = []
+    //     }
+    //     let unreaded = false
+    //     while(!unreaded || messages.length < chat.unreadCount){
+    //       let earlier = await client.loadEarlierMessages(chat.id._serialized)
+    //       if( !bot.isIterable(earlier)){
+    //         earlier = []
+    //       }
+    //       if(Array.isArray(earlier) && earlier.length){
+    //         messages = [ ...messages, ...earlier]
+    //       } else {
+    //         unreaded = true
+    //       }
+    //     }
+    //     while(messages.length > chat.unreadCount){
+    //       messages.shift()
+    //     }
+    //     for(let newMessage of messages) {
+    //       if(newMessage.type === 'chat'){
+    //         let msg = await bot.handleMessage({message: newMessage})
+    //         if(msg.reply && msg.msg && msg.msg.length){
+    //           bot.spinner.succeed('--------------')
+    //           bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
 
-              process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
-              bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
-            // } else {
-            //   bot.spinner.fail(`${new Date()} need manual reply`)
-              // console.error(`${new Date()} ${JSON.stringify(msg)}`)
-            }
-          } else if (newMessage.type !== "chat" || newMessage.isMedia === true){
-            bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
-          } else {
-            bot.spinner.fail(`${new Date()} ${JSON.stringify(newMessage)}`)
-          }
-        }
-      }
-    }
+    //           process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
+    //           bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
+    //         // } else {
+    //         //   bot.spinner.fail(`${new Date()} need manual reply`)
+    //           // console.error(`${new Date()} ${JSON.stringify(msg)}`)
+    //         }
+    //       } else if (newMessage.type !== "chat" || newMessage.isMedia === true){
+    //         bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
+    //       } else {
+    //         bot.spinner.fail(`${new Date()} ${JSON.stringify(newMessage)}`)
+    //       }
+    //     }
+    //   }
+    // }
 
   }catch(e){
     console.error(e)

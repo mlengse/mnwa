@@ -33,19 +33,9 @@ exports._getSubscriber = async ({ that }) => {
           }})
       
           if(process.env.FORM_LINK) {
-            text += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+            text += `Mohon kesediaannya untuk dapat mengisi link di bawah. Link berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n${process.env.FORM_LINK}\n`
           }
-          if(process.env.ESO_LINK) {
-            text += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
-          }
-          if(process.env.KESSAN_LINK) {
-            text += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
-          }
-          if(process.env.SCREENING_LINK) {
-            text += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
-          }                  // let from = `6287833597999@c.us`
 
-      
           try{
             await that.client.sendText( from, text)
           }catch(e){

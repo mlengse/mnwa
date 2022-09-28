@@ -172,18 +172,11 @@ exports._generateReply = async ({that, msg}) => {
     // if(result.includes('pendaftaran gagal') && all.dataDaftar && all.dataDaftar.ketAktif && all.dataDaftar.ketAktif !== ''){
     //   result += `\n${all.dataDaftar.ketAktif}`
     // }
+
     if(process.env.FORM_LINK) {
-      result += `\n\nMohon kesediaannya untuk dapat mengisi form kepuasan pelanggan berikut:\n ${process.env.FORM_LINK}`
+      result += `Mohon kesediaannya untuk dapat mengisi link di bawah. Link berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n${process.env.FORM_LINK}\n`
     }
-    if(process.env.ESO_LINK) {
-      result += `\n\nEfek samping dan alergi obat serta pertanyaan/konseling farmasi dapat disampaikan melalui form berikut:\n ${process.env.ESO_LINK}`
-    }
-    if(process.env.KESSAN_LINK) {
-      result += `\n\nPeserta JKN dapat menyampaikan kesan dan pesan melalui form berikut:\n ${process.env.KESSAN_LINK}`
-    }
-    if(process.env.SCREENING_LINK) {
-      result += `\n\nPeserta JKN dapat mengikuti skrining riwayat kesehatan melalui form berikut:\n ${process.env.SCREENING_LINK}`
-    }
+
     that.spinner.start(`send wa`)
     let sendTo
     if(typeof msg.to === 'string'){
