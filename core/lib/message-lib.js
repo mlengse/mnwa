@@ -174,7 +174,7 @@ exports._generateReply = async ({that, msg}) => {
     // }
 
     if(process.env.FORM_LINK) {
-      result += `Mohon kesediaannya untuk dapat mengisi link di bawah. Link berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n${process.env.FORM_LINK}\n`
+      result += `\n\nMohon kesediaannya untuk dapat mengisi link di bawah. \nLink berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n\n${process.env.FORM_LINK}\n\nSemoga selalu sehat, bugar dan produktif.`
     }
 
     that.spinner.start(`send wa`)
