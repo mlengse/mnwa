@@ -779,6 +779,102 @@
       "ket": "Hari Natal",
       "tahun": "2022",
       "id": "20221225"
+    },
+    {
+      "date": "1 Januari 2022",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2022",
+      "id": "20220101"
+    },
+    {
+      "date": "1 Februari 2022",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2022",
+      "id": "20220201"
+    },
+    {
+      "date": "28 Februari 2022",
+      "ket": "Isra Miraj",
+      "tahun": "2022",
+      "id": "20220228"
+    },
+    {
+      "date": "1 Maret 2022",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2022",
+      "id": "20220301"
+    },
+    {
+      "date": "15 April 2022",
+      "ket": "Jumat Agung",
+      "tahun": "2022",
+      "id": "20220415"
+    },
+    {
+      "date": "1 Mei 2022",
+      "ket": "Hari Buruh",
+      "tahun": "2022",
+      "id": "20220501"
+    },
+    {
+      "date": "2 Mei 2022",
+      "ket": "Idul Fitri",
+      "tahun": "2022",
+      "id": "20220502"
+    },
+    {
+      "date": "3 Mei 2022",
+      "ket": "Idul Fitri",
+      "tahun": "2022",
+      "id": "20220503"
+    },
+    {
+      "date": "16 Mei 2022",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2022",
+      "id": "20220516"
+    },
+    {
+      "date": "26 Mei 2022",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2022",
+      "id": "20220526"
+    },
+    {
+      "date": "1 Juni 2022",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2022",
+      "id": "20220601"
+    },
+    {
+      "date": "9 Juli 2022",
+      "ket": "Idul Adha",
+      "tahun": "2022",
+      "id": "20220709"
+    },
+    {
+      "date": "30 Juli 2022",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2022",
+      "id": "20220730"
+    },
+    {
+      "date": "17 Agustus 2022",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2022",
+      "id": "20220817"
+    },
+    {
+      "date": "8 Oktober 2022",
+      "ket": "Maulid Nabi",
+      "tahun": "2022",
+      "id": "20221008"
+    },
+    {
+      "date": "25 Desember 2022",
+      "ket": "Hari Natal",
+      "tahun": "2022",
+      "id": "20221225"
     }
   ]
 }

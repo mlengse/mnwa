@@ -35,7 +35,7 @@ schedule('30 12 1 * *', async() => {
           let msg = await bot.handleMessage({message})
           bot.spinner.succeed(`new message from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
           if(msg.reply && msg.msg && msg.msg.length){
-            process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, message) })
+            process.env.API_KEY && await bot.addContact({ msg: Object.assign({}, msg, message) })
             bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             bot.spinner.fail(`${new Date()} need manual reply`)
@@ -80,7 +80,7 @@ schedule('30 12 1 * *', async() => {
                   bot.spinner.succeed(`on new simpus registration`)
                   if(chat && (chat.canReceiveMessage || chat.numberExists)) {
                     try{
-                      process.env.ESO_LINK && await bot.addContact({ contact: {
+                      process.env.API_KEY && await bot.addContact({ contact: {
                         from,
                         chat,
                         profile,
@@ -139,7 +139,7 @@ schedule('30 12 1 * *', async() => {
     //           bot.spinner.succeed('--------------')
     //           bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
 
-    //           process.env.ESO_LINK && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
+    //           process.env.API_KEY && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
     //           bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
     //         // } else {
     //         //   bot.spinner.fail(`${new Date()} need manual reply`)
