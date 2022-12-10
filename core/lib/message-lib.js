@@ -131,6 +131,7 @@ exports._handleMessage = async ({that, message}) => {
   // } else {
     // that.spinner.start(JSON.stringify(msg))
   }
+  // that.spinner.succeed(`handleMessage ${JSON.stringify(msg)}`)
   return msg
 }
 
