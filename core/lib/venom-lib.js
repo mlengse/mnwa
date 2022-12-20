@@ -26,18 +26,18 @@ exports._init = async ({ that }) => {
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
+    // headless: false,
     disableWelcome: true,
     disableSpins: true,
-    // headless: false,
     updatesLog: true,
-    // useChrome: true,
+    useChrome: true,
   },
   // browserSessionToken,
-  undefined
-  // (browser, waPage) => {
-  //   console.log('Browser PID:', browser.process().pid);
-  //   waPage.screenshot({ path: 'screenshot.png' });
-  // }
+  // undefined
+  (browser, waPage) => {
+    that.spinner.succeed('Browser PID:', browser.process().pid);
+    // waPage.screenshot({ path: 'screenshot.png' });
+  }
   )
 
   // that.spinner.succeed('dapet client')
