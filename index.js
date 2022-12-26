@@ -7,6 +7,7 @@ schedule('30 12 1 * *', async() => {
   try {
     await bot.scrapeLiburnas()
   }catch(e){
+    console.error(`${new Date}, scrapeLiburnas`)
     console.error(e)
   }
 })
@@ -90,18 +91,30 @@ schedule('30 12 1 * *', async() => {
                       bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
                     }
 
-                    try{
+                    // try{
                       await client.sendText( from, text)
-                      bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
-                    }catch(e){
-                      chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
-                    }
+                      .then((result) => {
+                        console.log('Result: ', result); //return object success
+                        bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+                      })
+                      .catch((erro) => {
+                        console.error(`${new Date}, subscriber on message`)
+                        console.error('Error when sending: ', erro); //return object error
+                      });
+                    // }catch(e){
+                      // chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
+                    // }
                   } else {
                     bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
                   }
                 }
               } catch (err) {
-                chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(err)}`)
+                console.error(`${new Date}, subscriber on message`)
+                if(chat){
+                  console.error(chat) 
+                  console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error`)
+                }
+                console.error(err)
               }
             }
           }
@@ -155,6 +168,7 @@ schedule('30 12 1 * *', async() => {
     // }
 
   }catch(e){
+    console.error(`${new Date}, all`)
     console.error(e)
   }
 })()

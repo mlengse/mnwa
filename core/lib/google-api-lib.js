@@ -50,6 +50,7 @@ const authorize = async () => {
     })
     
   } catch(e){
+    console.error(`${new Date}, authorize`)
     console.error(e)
     
   }

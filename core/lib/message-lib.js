@@ -185,14 +185,21 @@ exports._generateReply = async ({that, msg}) => {
     } else {
       sendTo = msg.to._serialized
     }
-    try{
+    // try{
       await that.client.sendText( sendTo, result)
-    }catch(e){
-      console.error(e)
-      // that.spinner.fail(`contact not saved`)
-    }
+      .then((result) => {
+        // console.log('Result: ', result); //return object success
+        that.spinner.succeed()
+      })
+      .catch((erro) => {
+        console.error(`${new Date()}, generate reply`)
+        console.error('Error when sending: ', erro); //return object error
+      });
+    // }catch(e){
+    //   console.error(e)
+    //   // that.spinner.fail(`contact not saved`)
+    // }
 
-    that.spinner.succeed()
   }
   return Object.assign(msg, all, {
     reply: true,

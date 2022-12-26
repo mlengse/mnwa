@@ -36,17 +36,26 @@ exports._getSubscriber = async ({ that }) => {
             text += `\n\nMohon kesediaannya untuk dapat mengisi link di bawah. \nLink berisi form kepuasan pelanggan, efek samping/alergi obat, pertanyaan/konseling farmasi dan skrining riwayat kesehatan.\n\n${process.env.FORM_LINK}\n\nSemoga selalu sehat, bugar dan produktif.`
           }
 
-          try{
+          // try{
             await that.client.sendText( from, text)
-          }catch(e){
-            console.error(e)
-            console.error(chat)
-            console.error(profile)
-            console.error('error dari on Simpus Reg')
-          }
+            .then((result) => {
+              that.spinner.succeed(`${that.getTglDaftarHariIni()} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+              // console.log('Result: ', result); //return object success
+            })
+            .catch((erro) => {
+              console.error(`${new Date()}, subscriber send wa`)
+              console.error('Error when sending: ', erro); //return object error
+            });
+          // }catch(e){
+
+
+          //   console.error(e)
+          //   console.error(chat)
+          //   console.error(profile)
+          //   console.error('error dari on Simpus Reg')
+          // }
       
           // await that.client.sendText( from, text)
-          that.spinner.succeed(`${that.getTglDaftarHariIni()} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
         } else {
           that.spinner.succeed(`${that.getTglDaftarHariIni()} ${from} doesn't exists`)
         }
