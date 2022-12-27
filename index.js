@@ -75,7 +75,7 @@ schedule('30 12 1 * *', async() => {
 
                   let from = `${patient.no_hp}@c.us`
                   chat = await client.checkNumberStatus(from);
-                  let profile = await client.getNumberProfile(from);
+                  // let profile = await client.getNumberProfile(from);
 
                   bot.spinner.succeed(`---------------`)
                   bot.spinner.succeed(`on new simpus registration`)
@@ -84,7 +84,7 @@ schedule('30 12 1 * *', async() => {
                       process.env.API_KEY && await bot.addContact({ contact: {
                         from,
                         chat,
-                        profile,
+                        // profile,
                         patient
                       }})
                     }catch (e){
