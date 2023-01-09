@@ -971,6 +971,102 @@
       "ket": "Hari Natal",
       "tahun": "2022",
       "id": "20221225"
+    },
+    {
+      "date": "1 Januari 2023",
+      "ket": "Tahun Baru Masehi",
+      "tahun": "2023",
+      "id": "20230101"
+    },
+    {
+      "date": "18 Januari 2023",
+      "ket": "Tahun Baru Imlek",
+      "tahun": "2023",
+      "id": "20230118"
+    },
+    {
+      "date": "18 Februari 2023",
+      "ket": "Isra Miraj",
+      "tahun": "2023",
+      "id": "20230218"
+    },
+    {
+      "date": "22 Maret 2023",
+      "ket": "Hari Raya Nyepi",
+      "tahun": "2023",
+      "id": "20230322"
+    },
+    {
+      "date": "7 April 2023",
+      "ket": "Jumat Agung",
+      "tahun": "2023",
+      "id": "20230407"
+    },
+    {
+      "date": "21 April 2023",
+      "ket": "Idul Fitri",
+      "tahun": "2023",
+      "id": "20230421"
+    },
+    {
+      "date": "22 April 2023",
+      "ket": "Idul Fitri",
+      "tahun": "2023",
+      "id": "20230422"
+    },
+    {
+      "date": "1 Mei 2023",
+      "ket": "Hari Buruh",
+      "tahun": "2023",
+      "id": "20230501"
+    },
+    {
+      "date": "6 Mei 2023",
+      "ket": "Hari Raya Waisak",
+      "tahun": "2023",
+      "id": "20230506"
+    },
+    {
+      "date": "18 Mei 2023",
+      "ket": "Kenaikan Isa Almasih",
+      "tahun": "2023",
+      "id": "20230518"
+    },
+    {
+      "date": "1 Juni 2023",
+      "ket": "Hari Lahir Pancasila",
+      "tahun": "2023",
+      "id": "20230601"
+    },
+    {
+      "date": "29 Juni 2023",
+      "ket": "Idul Adha",
+      "tahun": "2023",
+      "id": "20230629"
+    },
+    {
+      "date": "19 Juli 2023",
+      "ket": "Tahun Baru Hijriyah",
+      "tahun": "2023",
+      "id": "20230719"
+    },
+    {
+      "date": "17 Agustus 2023",
+      "ket": "Hari Kemerdekaan",
+      "tahun": "2023",
+      "id": "20230817"
+    },
+    {
+      "date": "27 September 2023",
+      "ket": "Maulid Nabi",
+      "tahun": "2023",
+      "id": "20230927"
+    },
+    {
+      "date": "25 Desember 2023",
+      "ket": "Hari Natal",
+      "tahun": "2023",
+      "id": "20231225"
     }
   ]
 }

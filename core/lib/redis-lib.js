@@ -22,14 +22,14 @@ exports._getSubscriber = async ({ that }) => {
         that.spinner.succeed(`on new send wa request ${nama} ${from}`)
       
         let chat = await that.client.checkNumberStatus(from);
-        let profile = await that.client.getNumberProfile(from);
+        // let profile = await that.client.getNumberProfile(from);
 
         if(chat && (chat.canReceiveMessage || chat.numberExists)) {
           process.env.API_KEY && await that.addContact({ contact: {
             nama,
             from,
             chat,
-            profile,
+            // profile,
           }})
       
           if(process.env.FORM_LINK) {
@@ -39,8 +39,7 @@ exports._getSubscriber = async ({ that }) => {
           // try{
             await that.client.sendText( from, text)
             .then((result) => {
-              that.spinner.succeed(`${that.getTglDaftarHariIni()} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
-              // console.log('Result: ', result); //return object success
+              that.spinner.succeed(`${that.getTglDaftarHariIni()} send text result ${JSON.stringify(result)}`)
             })
             .catch((erro) => {
               console.error(`${new Date()}, subscriber send wa`)

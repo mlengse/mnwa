@@ -94,8 +94,8 @@ schedule('30 12 1 * *', async() => {
                     // try{
                       await client.sendText( from, text)
                       .then((result) => {
-                        console.log('Result: ', result); //return object success
-                        bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, isi: ${text.split('\n').join(' ')}`)
+                        // console.log('Result: ', result); //return object success
+                        bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
                       })
                       .catch((erro) => {
                         console.error(`${new Date}, subscriber on message`)

@@ -189,7 +189,7 @@ exports._generateReply = async ({that, msg}) => {
       await that.client.sendText( sendTo, result)
       .then((result) => {
         // console.log('Result: ', result); //return object success
-        that.spinner.succeed()
+        that.spinner.succeed(`${that.getTglDaftarHariIni()} send text result ${JSON.stringify(result)}`)
       })
       .catch((erro) => {
         console.error(`${new Date()}, generate reply`)
