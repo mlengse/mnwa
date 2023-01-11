@@ -98,14 +98,14 @@ schedule('30 12 1 * *', async() => {
                         bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
                       })
                       .catch((erro) => {
-                        console.error(`${new Date}, subscriber on message`)
+                        console.error(`${new Date}, error send message`)
                         console.error('Error when sending: ', erro); //return object error
                       });
                     // }catch(e){
                       // chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
                     // }
                   } else {
-                    bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
+                    bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
                   }
                 }
               } catch (err) {

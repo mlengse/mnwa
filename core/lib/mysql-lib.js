@@ -348,7 +348,8 @@ exports._getPatient = async ({event}) => {
       }
 
     }catch(err) {
-      console.error(`${new Date()} ${err}`)
+      console.error(`${new Date()} error getPatient`)
+			return err
     }
   }
 

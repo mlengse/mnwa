@@ -56,7 +56,7 @@ exports._getSubscriber = async ({ that }) => {
       
           // await that.client.sendText( from, text)
         } else {
-          that.spinner.succeed(`${that.getTglDaftarHariIni()} ${from} doesn't exists`)
+          that.spinner.fail(`${that.getTglDaftarHariIni()} ${from} doesn't exists`)
         }
       
       }
