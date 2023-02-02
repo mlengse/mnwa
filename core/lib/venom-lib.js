@@ -67,12 +67,12 @@ exports._init = async ({ that }) => {
   // UNPAIRED_IDLE
   that.client.onStateChange((state) => {
     // if(!state.includes('TIMEOUT') && !state.includes('CONNECTED')) {
-      console.log('State changed: ', state);
+      that.spinner.succeed(`State changed: ${state}`);
     // }
     // force whatsapp take over
     if ('CONFLICT'.includes(state)) that.client.useHere();
     // detect disconnect on whatsapp
-    if ('UNPAIRED'.includes(state)) console.log('logout');
+    if ('UNPAIRED'.includes(state)) that.spinner.succeed('logout');
   });
 
   // DISCONNECTED
@@ -81,7 +81,7 @@ exports._init = async ({ that }) => {
   // CONNECTED
   let time = 0;
   that.client.onStreamChange((state) => {
-    console.log('State Connection Stream: ' + state);
+    that.spinner.succeed(`State Connection Stream: ${state}`);
     clearTimeout(time);
     if (state === 'DISCONNECTED' || state === 'SYNCING') {
       time = setTimeout(async () => {
@@ -115,7 +115,7 @@ exports._init = async ({ that }) => {
   // })
 
 
-  that.spinner.succeed()
+  // that.spinner.succeed()
 
   return that.client
 }

@@ -5,7 +5,7 @@ const bot = new Core(config)
 
 schedule('30 12 1 * *', async() => {
   try {
-    await bot.scrapeLiburnas()
+    // await bot.scrapeLiburnas()
   }catch(e){
     console.error(`${new Date}, scrapeLiburnas`)
     console.error(e)
@@ -56,12 +56,17 @@ schedule('30 12 1 * *', async() => {
         if(channel === 'simpus') {
           let event = (JSON.parse(message)).simpus
           if( event.type === 'INSERT' && event.table === 'visits' ) {
-            let tglDaftar = bot.getTglDaftar(event.timestamp)
-            if(tglDaftar === bot.getTglDaftarHariIni()){
+            let timestamp = bot.getTglDaftar(event.timestamp)
+            let tglDaftar = bot.getTglDaftar(event.row.tanggal)
+
+            console.log('event.row.tanggal', event.row.tanggal)
+            console.log('tglDaftar', tglDaftar)
+            // console.log('event.timestamp',event.timestamp)
+            console.log('timestamp', timestamp)
+            // console.log('bot.getTglDaftarHariIni()', bot.getTglDaftarHariIni())
+
+            if(tglDaftar === timestamp){
               let chat
-              // console.log(tglDaftar)
-              // console.log(bot.getTglDaftarHariIni())
-              // console.log(event.row.tanggal)
               try{
                 let patient = await bot.getPatient({event})
                 if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
