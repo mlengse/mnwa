@@ -51,7 +51,6 @@ const waitOpt = {
 }
 
 let pptrOpt = {}
-// console.log(process.platform)
 if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     // headless: true,

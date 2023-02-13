@@ -9,76 +9,40 @@ const {
 	NIK_REGEX
 } = require('../../config')
 
-// let connection = false
-
-// exports.getConnection = () => {
-// 	connection = mysql.createConnection({
-// 		// connectionLimit: 10,
-// 		host: MYSQL_HOST,
-// 		user: MYSQL_USER,
-// 		password: MYSQL_PWD,
-// 		database: MYSQL_DB
-// 	})
-
-// 	return connection
-// }
-
-exports.connect = async query => {
-  // if(!connection){
-		// connection = this.getConnection()
-	// }
-		const connection = mysql.createConnection({
-			// connectionLimit: 10,
-			host: MYSQL_HOST,
-			user: MYSQL_USER,
-			password: MYSQL_PWD,
-			database: MYSQL_DB
-		})
-
-		connection.connect()
-
-		let returnedResults = await new Promise( resolve => {
-			connection.query(query, (err, results, fields) => {
-				err ? console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`) : null;
-				resolve(results)
-				// returnedResults = results
-				// console.log(returnedResults)
-			})
-		})
-
-
-		// queryStream
-		// 	.on('error', function(err) {
-		// 		console.error(`${new Date()} ${query} error: ${JSON.stringify(err.stack)}`);
-		// 		// Handle error, an 'end' event will be emitted after this as well
-		// 	})
-			// .on('fields', function(fields) {
-			// 	// the field packets for the rows to follow
-			// })
-			// .on('result', function(row) {
-			// 	// Pausing the connnection is useful if your processing involves I/O
-			// 	connection.pause();
-
-			// 	processRow(row, function() {
-			// 		connection.resume();
-			// 	});
-			// })
-			// .on('end', function() {
-			// 	connection.end()
-			// 	// all rows have been received
-			// });
-
-		// console.log(returnedResults)
-		
-		connection.end()
-
-		// connection = false
-
-		return returnedResults
-
-		// resolve(returnedResults)
-
-	// })
+exports._connect = async ({ that, query}) => {
+  let res
+  if(query.toLowerCase().includes('select')){
+    res = []
+  } 
+  if(!that.connection || (that.connection && that.connection.state === 'disconnected') && process.env.MYSQL_USER){
+    that.connection = mysql.createConnection({
+      host: that.config.MYSQL_HOST,
+      password: that.config.MYSQL_PWD,
+      user: that.config.MYSQL_USER,
+      database: that.config.MYSQL_DB
+    });
+  } 
+  if(!that.connection) {
+    that.spinner.fail(`${new Date()} connect !that.connection`)
+  }
+  if(query.toLowerCase().includes('undefined') || query.toLowerCase().includes('invalid')) {
+    that.spinner.fail(`${new Date()} query: ${query}`)
+  }
+  try{
+		that.spinner.start(`query: ${query}`)
+    res = await new Promise( (resolve, reject) => that.connection.query(query, async (err, results) => {
+			err && reject(`error querying: ${err.stack}`);
+			resolve(results)
+		}))
+		that.connection = null
+  } catch(e){
+    that.spinner.fail(`connect ${query} ${e}`)
+  }
+	if( query.toLowerCase().includes('select') && (!res || !Array.isArray(res))){
+		that.spinner.fail(`connect !res select ${JSON.stringify(res)}`)
+		res = []
+	}
+  return res
 }
 
 exports.pad = (n, width, z) => {
@@ -90,10 +54,14 @@ exports.pad = (n, width, z) => {
 exports.isIterable = object => object != null && typeof object[Symbol.iterator] === 'function'
 
 exports._getVillages = async ({ that }) => {
-	that.config.village = await this.connect('SELECT `id`, `desa` FROM `villages`')
+	that.config.village = await that.connect({
+		query: 'SELECT `id`, `desa` FROM `villages`'
+	})
 }
 exports._getUnits = async ({ that }) => {
-  let units = await this.connect('SELECT * FROM units')
+  let units = await that.connect({
+		query: 'SELECT * FROM units'
+	})
   that.config.pols = that.config.pols.map(e => {
     for( let b of e.alias) {
       for(let u of units){
@@ -125,7 +93,7 @@ exports._getUnits = async ({ that }) => {
   that.config.polArr = [...new Set(that.config.polArr)]
 }
 
-exports._dataKunj = async ({ tgl }) => await this.connect(`SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`)
+exports._dataKunj = async ({ that, tgl }) => await that.connect({ query: `SELECT * FROM visits WHERE DATE(tanggal) = '${tgl}'`})
 
 exports.findQuery = Arr => {
 	let query = 'SELECT `id`, `nama`, `tgl_lahir`, `sex_id`, `alamat`,  `orchard_id`, `village_id`, `nik`, `no_kartu`, `no_hp` FROM `patients`';
@@ -175,7 +143,7 @@ exports.findQuery = Arr => {
 	return query;
 }
 
-exports._cari = async ({ chatArr }) => {
+exports._cari = async ({ that, chatArr }) => {
 	let chArr = []
 	for(let eachChatArr of chatArr){
 		if(eachChatArr.trim() !=='') {
@@ -186,24 +154,21 @@ exports._cari = async ({ chatArr }) => {
 	let query = this.findQuery(chatArr)
 
 	if(query !== 'SELECT `id`, `nama`, `tgl_lahir`, `sex_id`, `alamat`,  `orchard_id`, `village_id`, `nik`, `no_kartu`, `no_hp` FROM `patients`') {
-		let res = await this.connect(query)
+		let res = await that.connect({query})
 		if( Array.isArray(res) && res.length ){
 			return res
 		}
-		return []
-	} else {
-		return []
 	}
-
+	return []
 }
 
-exports._cariFunc = async ({ chatArr, result} ) => {
+exports._cariFunc = async ({ that, chatArr, result} ) => {
 	if(typeof result === 'undefined'){
 		result = ''
 	}
 	let newParams = [...chatArr].map(e=> e.trim())
 
-	let resultArr = await this._cari({chatArr})
+	let resultArr = await that.cari({chatArr})
 
 	if(resultArr.length > 20){
 		result += `Ditemukan ${resultArr.length} hasil${resultArr.length ? ':' : '.'}\n`
@@ -219,7 +184,7 @@ exports._cariFunc = async ({ chatArr, result} ) => {
 			naParams = naParams.split(' ')
 			naParams.pop()
 			naParams = naParams.join(' ')
-			resultArr = await this._cari({
+			resultArr = await that.cari({
         chatArr: [...naParams.split('#')]
       })
 			if(resultArr.length) {
@@ -235,7 +200,7 @@ exports._cariFunc = async ({ chatArr, result} ) => {
 				while(noParams.length > 6 && !resultArr.length) {
 					noParams = noParams.slice(0, -1)
 					nbParams[id] = noParams
-					resultArr = await this._cari({
+					resultArr = await that.cari({
             chatArr: [...nbParams]
           })
 					if(resultArr.length) {
@@ -256,7 +221,7 @@ exports._cariFunc = async ({ chatArr, result} ) => {
 					while(noParams.length > 6 && !resultArr.length) {
 						noParams = noParams.slice(0, -1)
 						cParams[id] = noParams
-						resultArr = await this._cari({
+						resultArr = await that.cari({
 							chatArr: [...cParams]
 						})
 						if(resultArr.length) {
@@ -284,7 +249,7 @@ exports._cekDaftar = async ({ that, tgl }) => {
 
 	that.spinner.start(`cek daftar ${tgl}`)
 	let terdaft = ''
-	let res = await this._dataKunj({tgl: tgl.split('-').reverse().join('-')})
+	let res = await that.dataKunj({tgl: tgl.split('-').reverse().join('-')})
 	
 	let daftArr=[]
 	if (res.length) for(let i=0; i < res.length ; i++) {
@@ -309,14 +274,16 @@ exports._cekDaftar = async ({ that, tgl }) => {
 	return terdaft
 }
 
-exports._getPatient = async ({event}) => {
+exports._getPatient = async ({that, event}) => {
   let after, res, re, all
 
   if( event.row && event.row.patient_id) {
     after = event.row
 
+		that.spinner.start(`getPatient ${after.patient_id}`)
+
     try{
-      res = await this.connect(`SELECT * FROM patients WHERE id = "${after.patient_id}"`)
+      res = await that.connect({ query: `SELECT * FROM patients WHERE id = "${after.patient_id}"`})
       re = res[0]
       all = Object.assign({}, after, {
         visit_id: after.id
@@ -324,7 +291,7 @@ exports._getPatient = async ({event}) => {
 
       if( all.no_hp && !all.no_hp.match(/^(08)([0-9]){1,12}$/) && after.no_kartu && after.no_kartu.match(BPJS_REGEX)) {
         re = null
-        res = await this.connect(`SELECT * FROM bpjs_verifications WHERE no_bpjs = "${after.no_kartu}"`)
+        res = await that.connect({ query: `SELECT * FROM bpjs_verifications WHERE no_bpjs = "${after.no_kartu}"`})
         if(res[0] && res[0].json_response && res[0].json_response.response) {
           re = JSON.parse(res[0].json_response.response)
           all = Object.assign({}, all, re)

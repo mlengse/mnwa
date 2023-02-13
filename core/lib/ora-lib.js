@@ -1,29 +1,42 @@
 const ora = require('ora')
-
-let textPersist
-
-exports.spinner =(process.platform === 'win32' && !process.env.NODE_APP_INSTANCE) ? ora({
+exports.textS = ''
+exports.textI = ''
+exports.spinner =(!process.env.NODE_APP_INSTANCE) ? ora({
   stream: process.stdout
 }): {
   start: text => {
-    textPersist = text
-    // console.log('start:', text)
+    let old = this.textS
+    if(this.textS === ''){
+      this.textS = text
+    } else if(text){
+      this.textS = `${this.textS} > ${text}`
+    }
+    if(this.textS !== old) {
+      console.log(`start: ${this.textS}`)
+    }
   },
-  stop: _ => '',
+  stop: _ => null,
   succeed: text => {
-    if(!text){
-      text = textPersist
+    let old = this.textS
+    if(this.textS && text){
+      this.textS = `${this.textS} > ${text}`
     }
-    console.log(`${new Date()}: ${text}`)
+    if(this.textS !== old) {
+      console.log(`done: ${this.textS}`)
+    }
+    this.textS = ''
   },
-  warn: text => console.error(`warn ${new Date()}: ${text}`),
-  info: text => console.log(`info ${new Date()}: ${text}`),
+  warn: text => {
+    this.textI = text
+  },
+  info: text => {
+    this.textI = text
+  },
   fail: text => {
-    if(!text){
-      text = textPersist
-    }
-    console.error(`err ${new Date()}: ${text}`)
-  }
+    this.textI = `${this.textI} | ${text}`
+    console.error(`error: ${this.textI}`)
+    this.textI = ''
+  },
 }
 
 exports.processText = text => {

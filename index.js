@@ -40,7 +40,6 @@ schedule('30 12 1 * *', async() => {
             bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
             bot.spinner.fail(`${new Date()} need manual reply`)
-            // console.error(`${new Date()} ${JSON.stringify(msg)}`)
           }
         } 
       } else if (message.isMedia === true || message.type !== "chat"){
@@ -59,11 +58,9 @@ schedule('30 12 1 * *', async() => {
             let timestamp = bot.getTglDaftar(event.timestamp)
             let tglDaftar = bot.getTglDaftar(event.row.tanggal)
 
-            console.log('event.row.tanggal', event.row.tanggal)
-            console.log('tglDaftar', tglDaftar)
-            // console.log('event.timestamp',event.timestamp)
-            console.log('timestamp', timestamp)
-            // console.log('bot.getTglDaftarHariIni()', bot.getTglDaftarHariIni())
+            bot.spinner.start('event.row.tanggal', event.row.tanggal)
+            bot.spinner.start('tglDaftar', tglDaftar)
+            bot.spinner.start('timestamp', timestamp)
 
             if(tglDaftar === timestamp){
               let chat
@@ -80,46 +77,34 @@ schedule('30 12 1 * *', async() => {
 
                   let from = `${patient.no_hp}@c.us`
                   chat = await client.checkNumberStatus(from);
-                  // let profile = await client.getNumberProfile(from);
 
-                  bot.spinner.succeed(`---------------`)
                   bot.spinner.succeed(`on new simpus registration`)
                   if(chat && (chat.canReceiveMessage || chat.numberExists)) {
                     try{
                       process.env.API_KEY && await bot.addContact({ contact: {
                         from,
                         chat,
-                        // profile,
                         patient
                       }})
                     }catch (e){
                       bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
                     }
 
-                    // try{
-                      await client.sendText( from, text)
-                      .then((result) => {
-                        // console.log('Result: ', result); //return object success
-                        bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
-                      })
-                      .catch((erro) => {
-                        console.error(`${new Date}, error send message`)
-                        console.error('Error when sending: ', erro); //return object error
-                      });
-                    // }catch(e){
-                      // chat && console.error(chat) && console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error: ${JSON.stringify(e)}`)
-                    // }
+                    await client.sendText( from, text)
+                    .then((result) => {
+                      bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
+                    })
+                    .catch((erro) => {
+                      bot.spinner.fail(`${new Date}, error send message ${erro.stack}`); 
+                    });
                   } else {
                     bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
                   }
+                } else {
+                  bot.spinner.succeed(`!no_hp ${patient.no_hp}`)
                 }
               } catch (err) {
-                console.error(`${new Date}, subscriber on message`)
-                if(chat){
-                  console.error(chat) 
-                  console.error(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error`)
-                }
-                console.error(err)
+                bot.spinner.fail(`subscriber on message ${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error ${err} ${JSON.stringify(chat)}`)
               }
             }
           }
@@ -127,50 +112,6 @@ schedule('30 12 1 * *', async() => {
       });
       subscriber.subscribe('simpus');
     }
-
-		// let chatWithNewMsg = await client.getAllChatsNewMsg()
-    // if(chatWithNewMsg.length) {
-    //   for(let chat of chatWithNewMsg){
-    //     let messages = await client.getAllMessagesInChat(chat.id._serialized);
-    //     if( !bot.isIterable(messages)){
-    //       messages = []
-    //     }
-    //     let unreaded = false
-    //     while(!unreaded || messages.length < chat.unreadCount){
-    //       let earlier = await client.loadEarlierMessages(chat.id._serialized)
-    //       if( !bot.isIterable(earlier)){
-    //         earlier = []
-    //       }
-    //       if(Array.isArray(earlier) && earlier.length){
-    //         messages = [ ...messages, ...earlier]
-    //       } else {
-    //         unreaded = true
-    //       }
-    //     }
-    //     while(messages.length > chat.unreadCount){
-    //       messages.shift()
-    //     }
-    //     for(let newMessage of messages) {
-    //       if(newMessage.type === 'chat'){
-    //         let msg = await bot.handleMessage({message: newMessage})
-    //         if(msg.reply && msg.msg && msg.msg.length){
-    //           bot.spinner.succeed('--------------')
-    //           bot.spinner.succeed(`unread message from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}: ${bot.processText(newMessage.body || newMessage.content)}`)
-
-    //           process.env.API_KEY && await bot.addContact({ msg: Object.assign({}, msg, newMessage) })
-    //           bot.spinner.succeed(`${msg.time} send to: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
-    //         // } else {
-    //         //   bot.spinner.fail(`${new Date()} need manual reply`)
-    //           // console.error(`${new Date()} ${JSON.stringify(msg)}`)
-    //         }
-    //       } else if (newMessage.type !== "chat" || newMessage.isMedia === true){
-    //         bot.spinner.succeed(`${newMessage.type} from: ${newMessage.sender.pushname || newMessage.sender.shortName || newMessage.sender.name || newMessage.sender.displayName || newMessage.sender.formattedName || newMessage.sender.id}`)
-    //       } else {
-    //         bot.spinner.fail(`${new Date()} ${JSON.stringify(newMessage)}`)
-    //       }
-    //     }
-    //   }
-    // }
 
   }catch(e){
     console.error(`${new Date}, all`)
