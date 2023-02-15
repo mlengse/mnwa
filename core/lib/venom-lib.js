@@ -24,9 +24,28 @@ exports._init = async ({ that }) => {
   },
   (browser, waPage) => {
     that.spinner.succeed('Browser PID:', browser.process().pid);
-  }
-  )
+    that.waPage = waPage
+    // waPage.evaluate( () => { 
+    //   window.Store.checkNumber.queryExist = function(e) { 
+    //     if (e.endsWith('@c.us')) { 
+    //       const spl = e.split('@'); 
+    //       const server = spl[1]; 
+    //       const user = spl[0]; 
+    //       return { 
+    //         status: 200, 
+    //         jid: { 
+    //           server: server, 
+    //           user: user, 
+    //           _serialized: e 
+    //         } 
+    //       } 
+    //     } 
+    //   } 
+    // });
+  })
 
+  
+  
   that.client.onStateChange((state) => {
     that.spinner.succeed(`State changed: ${state}`);
     if ('CONFLICT'.includes(state)) that.client.useHere();

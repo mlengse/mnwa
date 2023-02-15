@@ -23,7 +23,6 @@ schedule('30 12 1 * *', async() => {
       bot.getUnits()
     ])
     bot.spinner.succeed('config things')
-
     
     client.onMessage( async message => {
       // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
@@ -39,7 +38,7 @@ schedule('30 12 1 * *', async() => {
             process.env.API_KEY && await bot.addContact({ msg: Object.assign({}, msg, message) })
             bot.spinner.succeed(`${msg.time} send to: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id} balas: ${msg.msg.split('\n').join(' ')}`)
           } else {
-            bot.spinner.fail(`${new Date()} need manual reply`)
+            bot.spinner.succeed(`${msg.time} need manual reply`)
           }
         } 
       } else if (message.isMedia === true || message.type !== "chat"){
@@ -58,15 +57,15 @@ schedule('30 12 1 * *', async() => {
             let timestamp = bot.getTglDaftar(event.timestamp)
             let tglDaftar = bot.getTglDaftar(event.row.tanggal)
 
-            bot.spinner.start('event.row.tanggal', event.row.tanggal)
-            bot.spinner.start('tglDaftar', tglDaftar)
-            bot.spinner.start('timestamp', timestamp)
+            bot.spinner.start(`event.row.tanggal ${event.row.tanggal}`)
+            bot.spinner.start(`tglDaftar ${tglDaftar}`)
+            bot.spinner.start(`timestamp ${timestamp}`)
 
             if(tglDaftar === timestamp){
               let chat
               try{
                 let patient = await bot.getPatient({event})
-                if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){1,12}$/)) {
+                if(patient && patient.no_hp && patient.no_hp.match(/^(08)([0-9]){9,12}$/)) {
                   patient.no_hp = `62${patient.no_hp.substr(1)}`
                   let name = patient.nama
                   let text = `Terima kasih atas kunjungan ${name} ke Puskesmas ${process.env.PUSKESMAS}.`
@@ -76,27 +75,52 @@ schedule('30 12 1 * *', async() => {
                   }
 
                   let from = `${patient.no_hp}@c.us`
-                  chat = await client.checkNumberStatus(from);
+                  bot.spinner.succeed(`on new simpus registration ${from}`)
 
-                  bot.spinner.succeed(`on new simpus registration`)
+                  chat = await that.waPage.evaluate(()=>{
+                    window.Store.checkNumber.queryExist = function(e) { 
+                      if (e.endsWith('@c.us')) { 
+                        const spl = e.split('@'); 
+                        const server = spl[1]; 
+                        const user = spl[0]; 
+                        return { 
+                          status: 200, 
+                          jid: { 
+                            server: server, 
+                            user: user, 
+                            _serialized: e 
+                          } 
+                        } 
+                      } 
+                    } 
+                  });
+              
+
+                  // chat = await client.checkNumberStatus(from)
+                  // .then((result) => {
+                  //     bot.spinner.succeed(`checkNumberStatus ${JSON.stringify(result)}`); //return object success
+                  // }).catch((erro) => {
+                  //     bot.spinner.fail(`checkNumberStatus ${JSON.stringify(erro)}`); //return object error
+                  // });
+  
                   if(chat && (chat.canReceiveMessage || chat.numberExists)) {
                     try{
+                      
                       process.env.API_KEY && await bot.addContact({ contact: {
                         from,
                         chat,
                         patient
                       }})
+                      await client.sendText( from, text)
+                      .then((result) => {
+                        bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
+                      })
+                      .catch((erro) => {
+                        bot.spinner.fail(`${new Date}, error send message ${erro.stack}`); 
+                      });
                     }catch (e){
                       bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
                     }
-
-                    await client.sendText( from, text)
-                    .then((result) => {
-                      bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
-                    })
-                    .catch((erro) => {
-                      bot.spinner.fail(`${new Date}, error send message ${erro.stack}`); 
-                    });
                   } else {
                     bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
                   }

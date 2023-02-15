@@ -129,8 +129,10 @@ exports._saveContact = async ({ that, name, number }) => {
     //   query: number,
     //   readMask: 'phoneNumbers'
     // })
+
+    // that.spinner.info(`existsContact ${JSON.stringify(existsContact)}`)
   
-    // if(!existsContact) {
+    try {
       const {data: newContact} = await service.people.createContact({
         requestBody: {
           phoneNumbers: [{value: '0' + number.substring(2)}],
@@ -144,9 +146,9 @@ exports._saveContact = async ({ that, name, number }) => {
         },
       });
       that.spinner.succeed(`Created Contact: ${newContact.phoneNumbers[0].value} | ${newContact.names[0].displayName} `);
-    // } else {
-      // that.spinner.fail(`Contact is exist: ${JSON.stringify(existsContact)}`)
-    // }
+    } catch(e) {
+      that.spinner.fail(`saveContact ${e}`)
+    }
   }
 }
 
@@ -172,7 +174,7 @@ exports._addContact = async( { that, contact, msg }) => {
     if(contact.isMyContact || contact.isWAContact){
       that.spinner.succeed(`contact is saved as name: ${contact.name}`)
     } else {
-      that.spinner.info(`${JSON.stringify(contact)}`)
+      // that.spinner.info(`addContact ${JSON.stringify(contact)}`)
       let number
       let name
     
@@ -201,6 +203,10 @@ exports._addContact = async( { that, contact, msg }) => {
           number = contact.id.split('@')[0]
         }
       }
+
+      if(!number && contact && contact.from){
+        number = contact.from.split('@')[0]
+      }
   
       if(!name && number){
         name = number+ ' wa'
@@ -213,11 +219,11 @@ exports._addContact = async( { that, contact, msg }) => {
         })
       }
     
-      (!name || !number) && console.log(contact)
+      (!name || !number) && that.spinner.fail(`addContact ${JSON.stringify(contact)}`)
           
     }
   } else {
-    that.spinner.fail(`${Object.assign({}, contact, msg )}`)
+    that.spinner.fail(`addContact ${JSON.stringify(Object.assign({}, contact, msg ))}`)
   }
 
 }
