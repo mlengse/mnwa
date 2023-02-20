@@ -77,33 +77,33 @@ schedule('30 12 1 * *', async() => {
                   let from = `${patient.no_hp}@c.us`
                   bot.spinner.succeed(`on new simpus registration ${from}`)
 
-                  chat = await that.waPage.evaluate(()=>{
-                    window.Store.checkNumber.queryExist = function(e) { 
-                      if (e.endsWith('@c.us')) { 
-                        const spl = e.split('@'); 
-                        const server = spl[1]; 
-                        const user = spl[0]; 
-                        return { 
-                          status: 200, 
-                          jid: { 
-                            server: server, 
-                            user: user, 
-                            _serialized: e 
-                          } 
-                        } 
-                      } 
-                    } 
-                  });
+                  // chat = await bot.page.evaluate(()=>{
+                  //   window.Store.checkNumber.queryExist = function(e) { 
+                  //     if (e.endsWith('@c.us')) { 
+                  //       const spl = e.split('@'); 
+                  //       const server = spl[1]; 
+                  //       const user = spl[0]; 
+                  //       return { 
+                  //         status: 200, 
+                  //         jid: { 
+                  //           server: server, 
+                  //           user: user, 
+                  //           _serialized: e 
+                  //         } 
+                  //       } 
+                  //     } 
+                  //   } 
+                  // });
               
 
-                  // chat = await client.checkNumberStatus(from)
-                  // .then((result) => {
-                  //     bot.spinner.succeed(`checkNumberStatus ${JSON.stringify(result)}`); //return object success
-                  // }).catch((erro) => {
-                  //     bot.spinner.fail(`checkNumberStatus ${JSON.stringify(erro)}`); //return object error
-                  // });
+                  chat = await client.checkNumberStatus(from)
+                  .then((result) => {
+                      bot.spinner.succeed(`checkNumberStatus ${JSON.stringify(result)}`); //return object success
+                  }).catch((erro) => {
+                      bot.spinner.fail(`checkNumberStatus ${JSON.stringify(erro)}`); //return object error
+                  });
   
-                  if(chat && (chat.canReceiveMessage || chat.numberExists)) {
+                  // if(chat && (chat.canReceiveMessage || chat.numberExists)) {
                     try{
                       
                       process.env.API_KEY && await bot.addContact({ contact: {
@@ -116,19 +116,19 @@ schedule('30 12 1 * *', async() => {
                         bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)
                       })
                       .catch((erro) => {
-                        bot.spinner.fail(`${new Date}, error send message ${erro.stack}`); 
+                        bot.spinner.fail(`${new Date}, error send message ${JSON.stringify(erro.stack)}`); 
                       });
                     }catch (e){
-                      bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved`)
+                      bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text to: ${from}, contact not saved ${JSON.stringify(e.stack)}`)
                     }
-                  } else {
-                    bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
-                  }
+                  // } else {
+                    // bot.spinner.fail(`${tglDaftar} jam ${bot.getJam(event.timestamp)} ${from} doesn't exists ${JSON.stringify(chat)}`)
+                  // }
                 } else {
                   bot.spinner.succeed(`!no_hp ${patient.no_hp}`)
                 }
               } catch (err) {
-                bot.spinner.fail(`subscriber on message ${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error ${err} ${JSON.stringify(chat)}`)
+                bot.spinner.fail(`subscriber on message ${tglDaftar} jam ${bot.getJam(event.timestamp)} send text error ${JSON.stringify(err.stack)} ${JSON.stringify(chat)}`)
               }
             }
           }
