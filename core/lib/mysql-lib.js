@@ -32,6 +32,7 @@ exports._connect = async ({ that, query}) => {
 		that.spinner.start(`query: ${query}`)
     res = await new Promise( (resolve, reject) => that.connection.query(query, async (err, results) => {
 			err && reject(`error querying: ${err.stack}`);
+			// that.connection = null
 			resolve(results)
 		}))
 		that.connection = null

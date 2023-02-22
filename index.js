@@ -111,6 +111,7 @@ schedule('30 12 1 * *', async() => {
                         chat,
                         patient
                       }})
+                      bot.spinner.start(`sendText ${from} ${text}`)
                       await client.sendText( from, text)
                       .then((result) => {
                         bot.spinner.succeed(`${tglDaftar} jam ${bot.getJam(event.timestamp)} send text result ${JSON.stringify(result)}`)

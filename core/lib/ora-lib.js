@@ -5,17 +5,20 @@ exports.spinner =(!process.env.NODE_APP_INSTANCE) ? ora({
   stream: process.stdout
 }): {
   start: text => {
-    let old = this.textS
+    // let old = this.textS
     if(this.textS === ''){
       this.textS = text
     } else if(text){
       this.textS = `${this.textS} > ${text}`
     }
-    if(this.textS !== old) {
-      console.log(`start: ${this.textS}`)
-    }
+    // if(this.textS !== old) {
+    //   console.log(`start: ${this.textS}`)
+    // }
   },
-  stop: _ => null,
+  stop: _ => {
+    console.log(`stop: ${this.textS}`)
+    this.textS = ''
+  },
   succeed: text => {
     let old = this.textS
     if(this.textS && text){

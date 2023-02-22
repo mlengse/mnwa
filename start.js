@@ -12,7 +12,10 @@ let spinner = (!process.env.NODE_APP_INSTANCE) ? ora({
       textS = `${textS} > ${text}`
     }
   },
-  stop: _ => null,
+  stop: _ => {
+    console.log(`stop: ${textS}`)
+    textS = ''
+  },
   succeed: text => {
     textS = `${textS} > ${text}`
     console.log(`done: ${textS}`)
