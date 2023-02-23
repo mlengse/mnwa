@@ -6,11 +6,11 @@ let spinner = (!process.env.NODE_APP_INSTANCE) ? ora({
   stream: process.stdout
 }): {
   start: text => {
-    if(textS === ''){
+    // if(textS === ''){
       textS = text
-    } else {
-      textS = `${textS} > ${text}`
-    }
+    // } else {
+    //   textS = `${textS} > ${text}`
+    // }
   },
   stop: _ => {
     console.log(`stop: ${textS}`)
@@ -28,7 +28,7 @@ let spinner = (!process.env.NODE_APP_INSTANCE) ? ora({
     textI = text
   },
   fail: text => {
-    textI = `${textI} | ${text}`
+    textI = `${textS} > ${textI} | ${text}`
     console.log(`error: ${textI}`)
     textI = ''
   },

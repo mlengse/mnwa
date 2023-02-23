@@ -6,11 +6,11 @@ exports.spinner =(!process.env.NODE_APP_INSTANCE) ? ora({
 }): {
   start: text => {
     // let old = this.textS
-    if(this.textS === ''){
+    // if(this.textS === ''){
       this.textS = text
-    } else if(text){
-      this.textS = `${this.textS} > ${text}`
-    }
+    // } else if(text){
+    //   this.textS = `${this.textS} > ${text}`
+    // }
     // if(this.textS !== old) {
     //   console.log(`start: ${this.textS}`)
     // }
@@ -36,7 +36,7 @@ exports.spinner =(!process.env.NODE_APP_INSTANCE) ? ora({
     this.textI = text
   },
   fail: text => {
-    this.textI = `${this.textI} | ${text}`
+    this.textI = `${this.textS} > ${this.textI} | ${text}`
     console.error(`error: ${this.textI}`)
     this.textI = ''
   },
