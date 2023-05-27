@@ -29,13 +29,19 @@ exports._connect = async ({ that, query}) => {
     that.spinner.fail(`${new Date()} query: ${query}`)
   }
   try{
-		that.spinner.start(`query: ${query}`)
-    res = await new Promise( (resolve, reject) => that.connection.query(query, async (err, results) => {
-			err && reject(`error querying: ${err.stack}`);
-			// that.connection = null
-			resolve(results)
-		}))
-		that.connection = null
+		// that.spinner.start(`query: ${query}`)
+    res = await new Promise( (resolve, reject) => {
+			// that.connection.connect()
+			that.connection.query(query, async (err, results) => {
+				err && reject(`error querying: ${err.stack}`);
+				// that.connection = null
+				// that.connection.end()
+				resolve(results)
+			})
+		})
+		// console.log(res)
+		
+		// that.connection = null
   } catch(e){
     that.spinner.fail(`connect ${query} ${e}`)
   }

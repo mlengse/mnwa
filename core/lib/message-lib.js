@@ -135,6 +135,12 @@ exports._handleMessage = async ({that, message}) => {
   return msg
 }
 
+exports._wait = async ({ that, time }) => {
+  return await new Promise(resolve => {
+    setTimeout(() => { resolve(); }, time);
+  })
+}
+
 exports._generateReply = async ({that, msg}) => {
   that.spinner.start('generate reply')
   // console.log(msg)
@@ -151,6 +157,7 @@ exports._generateReply = async ({that, msg}) => {
         result = 'ok\n'
         break
       } else {
+
         result = await that.cekApi({ chatArr, result })
         break
       }
@@ -244,7 +251,8 @@ exports._cekApi = async ({that, chatArr, result }) => {
       //console.log(isMasuk)
       if(!isMasuk) {
         return `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
-      } else {
+      } else { 
+
         result = await that.cekDaftar({ tgl: that.getFormat6(tgl)})
         return result + '\n'
       }

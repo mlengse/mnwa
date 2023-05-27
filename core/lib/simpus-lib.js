@@ -281,11 +281,14 @@ exports._daftarSimpus = async ({that, tgl, poli, rm}) => {
 
   let res = await that.simpanPendaftaran({dataDaftar, tglDaftar: tgl})
 
+  await that.wait(5000)
+
   let msg = await that.getTerdaftar({tgl, rm})
 
   let count = 0
 
-  while(msg == '' || count < 10 ){
+  while(msg == '' || count < 2 ){
+    await that.wait(5000)
     msg = await that.getTerdaftar({tgl, rm})
     count++
   }
@@ -402,12 +405,17 @@ exports._getDataPasien =  async ({that, id, tglDaftar}) => {
     $("#alamat").val(item.alamat);
     $("#desa, #village").val(item.village_id);
     $("#dusun, #orchard").val(item.orchard_id);
+    if(!item.typepatient_id){
+      item.typepatient_id = '01'
+    }
     $("#jenispasien, #typepatient").val(item.typepatient_id);
     $("#penyandang_cacat").val(item.penyandang_cacat);
     $("#goldar option[data-goldar='"+ item.goldar +"']").attr("selected","selected").trigger('change');
     $('#last_visit').html("<a href='#' onclick='return false' class='button' style='color:green;font-weight: bold;'>last visit : "+item.last_visit+"</a>");
     return item
   }, id)
+
+  console.log(ne)
 
   if(ne.no_kartu) {
     return Object.assign({}, ne, await that.getVerBPJS({
