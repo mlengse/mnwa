@@ -16,11 +16,11 @@ exports._init = async ({ that }) => {
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
-    headless: 'new',
+    // headless: 'new',
     disableWelcome: true,
     disableSpins: true,
-    updatesLog: true,
-    useChrome: true,
+    // updatesLog: true,
+    // useChrome: true,
   },
   (browser, waPage) => {
     that.spinner.succeed('Browser PID:', browser.process().pid);
