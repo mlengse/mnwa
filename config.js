@@ -67,7 +67,7 @@ if(process.platform === 'win32' || CHROME_PATH ) {
   }
 } else {
   pptrOpt = {
-    headless: true,
+    headless: 'new',
     userDataDir: `${USER_DATA_PATH}`,
     args: [
       '--no-sandbox', 
