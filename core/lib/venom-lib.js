@@ -16,7 +16,7 @@ exports._init = async ({ that }) => {
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
-    // headless: false,
+    headless: 'new',
     disableWelcome: true,
     disableSpins: true,
     updatesLog: true,
