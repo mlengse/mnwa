@@ -53,7 +53,7 @@ const waitOpt = {
 let pptrOpt = {}
 if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
-    // headless: true,
+    headless: 'new',
     // headless: false,
     executablePath: `${CHROME_PATH}`, 
     // userDataDir: `${USER_DATA_PATH}`,
@@ -69,10 +69,10 @@ if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     headless: 'new',
     userDataDir: `${USER_DATA_PATH}`,
-    args: [
-      '--no-sandbox', 
-      '--disable-setuid-sandbox', 
-    ]
+    // args: [
+    //   '--no-sandbox', 
+    //   '--disable-setuid-sandbox', 
+    // ]
   }
 }
 
