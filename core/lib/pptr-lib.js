@@ -1,4 +1,4 @@
-exports.pptr = require('puppeteer-core')
+exports.pptr = require('puppeteer')
 
 exports._simpusGoto =  async ({that, url}) => {
   await that.simpusPage.goto(url, that.config.waitOpt)
@@ -22,7 +22,7 @@ exports._initSimpus = async ({ that }) => {
   that.spinner.start('initSimpus')
   // console.log(that.config.pptrOpt)
   if(!that.pages){
-    that.browser = await that.pptr.launch(that.config.pptrOpt);
+    that.browser = await that.pptr.launch();
     that.spinner.start(`initSimpus browser ${!!that.browser} `)
     
     that.pages = await that.browser.pages()
