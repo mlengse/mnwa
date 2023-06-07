@@ -23,7 +23,10 @@ exports._initSimpus = async ({ that }) => {
   // console.log(that.config.pptrOpt)
   if(!that.pages){
     that.browser = await that.pptr.launch(that.config.pptrOpt);
+    that.spinner.start(`initSimpus browser ${!!that.browser} `)
+    
     that.pages = await that.browser.pages()
+    that.spinner.start(`initSimpus browser ${!!that.browser} pages ${that.pages.length}`)
   }
   if(!that.simpusPage) {
     if(!that.pages[1]){
