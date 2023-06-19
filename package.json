@@ -4,21 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "post-install": "patch-package"
   },
   "author": "mlengse",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.6.0",
+    "fix-esm": "^1.0.1",
     "googleapis": "^67.1.1",
     "lowdb": "^1.0.0",
     "moment": "^2.29.4",
     "mysql": "^2.18.1",
     "node-cron": "^2.0.3",
     "ora": "^5.4.1",
-    "puppeteer": "^14.4.1",
-    "puppeteer-core": "^14.4.1",
+    "puppeteer": "^19.11.1",
+    "puppeteer-core": "^19.11.1",
     "redis": "^3.1.2",
-    "venom-bot": "^5.0.1"
+    "venom-bot": "5.0.1"
+  },
+  "devDependencies": {
+    "patch-package": "7.0.0"
   }
 }

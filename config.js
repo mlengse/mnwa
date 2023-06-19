@@ -54,6 +54,8 @@ let pptrOpt = {}
 if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     headless: 'new',
+    ignoreDefaultArgs: ['--disable-extensions'],
+
     // headless: false,
     executablePath: `${CHROME_PATH}`, 
     // userDataDir: `${USER_DATA_PATH}`,
@@ -69,6 +71,7 @@ if(process.platform === 'win32' || CHROME_PATH ) {
   pptrOpt = {
     headless: 'new',
     userDataDir: `${USER_DATA_PATH}`,
+    ignoreDefaultArgs: ['--disable-extensions'],
     // args: [
     //   '--no-sandbox', 
     //   '--disable-setuid-sandbox', 

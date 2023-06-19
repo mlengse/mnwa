@@ -1,3 +1,5 @@
+require("fix-esm").register();
+
 const wa = require('venom-bot');
 const fs = require('fs')
 const TOKEN_DIR = "./tokens";
@@ -8,11 +10,14 @@ exports._init = async ({ that }) => {
   process.env.PUSKESMAS.toLowerCase(),
   undefined,
   (statusSession, session) => {
-    that.spinner.succeed(`Status Session: ${statusSession}`); 
-    session ? that.spinner.succeed(`Session name: ${session}`) : '';
+    that.spinner.succeed(`${statusSession ? `${statusSession}`:'noStatus'} ${session ? `${session}`: 'noSession'}`);
   },
   {
     multidevice: true,
+    headless: 'new',
+    puppeteerOptions: {
+      ignoreDefaultArgs: ['--disable-extensions']
+    },
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
@@ -23,7 +28,9 @@ exports._init = async ({ that }) => {
     // useChrome: true,
   },
   (browser, waPage) => {
-    that.spinner.succeed('Browser PID:', browser.process().pid);
+    if(browser.process && browser.process() && browser.process().pid){
+      that.spinner.succeed('Browser PID:', browser.process().pid);
+    }
     that.waPage = waPage
     // waPage.evaluate( () => { 
     //   window.Store.checkNumber.queryExist = function(e) { 
@@ -48,8 +55,12 @@ exports._init = async ({ that }) => {
   
   that.client.onStateChange((state) => {
     that.spinner.succeed(`State changed: ${state}`);
-    if ('CONFLICT'.includes(state)) that.client.useHere();
-    if ('UNPAIRED'.includes(state)) that.spinner.succeed('logout');
+    if ('CONFLICT'.includes(state)) {
+      that.client.useHere();
+    }
+    if ('UNPAIRED'.includes(state)) {
+      that.spinner.succeed('logout');
+    }
   });
 
   let time = 0;

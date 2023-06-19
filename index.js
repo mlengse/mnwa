@@ -25,11 +25,11 @@ schedule('30 12 1 * *', async() => {
     bot.spinner.succeed('config things')
     
     client.onMessage( async message => {
-      // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+      bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
 
       if(message.type === 'chat'){
         if(message.id.includes('status@broadcast')){
-          // bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
+          bot.spinner.info(`new status from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}: ${bot.processText(message.body || message.content)}`)
         } else {
           bot.spinner.succeed('-----------------')
           let msg = await bot.handleMessage({message})
@@ -42,7 +42,7 @@ schedule('30 12 1 * *', async() => {
           }
         } 
       } else if (message.isMedia === true || message.type !== "chat"){
-        // bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
+        bot.spinner.succeed(`${message.type} from: ${message.sender.pushname || message.sender.shortName || message.sender.name || message.sender.id}`)
       } else {
         bot.spinner.fail(`${new Date()} ${JSON.stringify(message)}`)
       }
