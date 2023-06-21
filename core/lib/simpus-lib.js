@@ -9,7 +9,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
     case 'sekarang':
     case 'hari ini':
     case 'hariini':
-      that.spinner.succeed(`${hari}`)
+      that.spinner.succeed(`sekarang ${hari}`)
       
       if(that.config.DAFTAR_HARI_INI  && that.config.PUSKESMAS !== 'Pajang') {
         let jam = that.getJamBy(tgl)
@@ -30,7 +30,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
       // break
     case 'besok':
     case 'besuk':
-      that.spinner.succeed(`${hari}`)
+      that.spinner.succeed(`besok ${hari}`)
       tgl = that.getTglBesokBy(tgl)
       if(!that.config.DAFTAR_HARI_INI){
         let jam = that.getJamBy(tgl)
@@ -42,11 +42,11 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
       }
       // break
     case 'lusa':
-      that.spinner.succeed(`${hari}`)
+      that.spinner.succeed(`lusa ${hari}`)
       tgl = that.getTglLusaBy(tgl)
       // break
     default:
-      that.spinner.succeed(`${hari}`)
+      that.spinner.succeed(`default ${hari}`)
       if(!result){
         let tgll = that.getFormat3(tgl)
         dddd = that.getHariBy(tgl)
@@ -120,8 +120,9 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
               }
     
               let tgld = that.getFormat6(tgl)
+              
     
-              that.spinner.start(dddd, tgld, poli)
+              that.spinner.succeed(`${dddd}, ${tgl}, ${tgld}, ${poli}`)
     
               return await that.daftar({hari, dddd, tgl: tgld, poli, rm: rm[0]})
     
@@ -133,7 +134,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
         }
     
       } else {
-        that.spinner.succeed(`${result}`)
+        that.spinner.succeed(`result ${result}`)
         return `Hari periksa tidak sesuai referensi sistem.\nGunakan ${that.config.DAFTAR_HARI_INI ? '#sekarang, #hariini,': ''} #besok, #besuk atau #lusa.`
       }
   }
