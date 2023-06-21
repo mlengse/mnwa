@@ -9,16 +9,20 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
     case 'sekarang':
     case 'hari ini':
     case 'hariini':
+      that.spinner.succeed(`${hari}`)
+      
       if(that.config.DAFTAR_HARI_INI  && that.config.PUSKESMAS !== 'Pajang') {
         let jam = that.getJamBy(tgl)
         if(that.config.PUSKESMAS !== 'Jayengan'){
           if(jam >= 8) {
             result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
+            that.spinner.succeed(`${result}`)
             return result
           }
         } else {
           if(jam >= 10) {
             result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 10.00\n'
+            that.spinner.succeed(`${result}`)
             return result
           }
         }
@@ -26,25 +30,32 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
       // break
     case 'besok':
     case 'besuk':
+      that.spinner.succeed(`${hari}`)
       tgl = that.getTglBesokBy(tgl)
       if(!that.config.DAFTAR_HARI_INI){
         let jam = that.getJamBy(tgl)
         if(jam >= 21 && that.config.PUSKESMAS === 'Pajang') {
           result = 'Pendaftaran via whatsapp untuk besok ditutup pukul 21.00\n'
+          that.spinner.succeed(`${result}`)
           return result
         }
       }
       // break
     case 'lusa':
+      that.spinner.succeed(`${hari}`)
       tgl = that.getTglLusaBy(tgl)
       // break
     default:
+      that.spinner.succeed(`${hari}`)
       if(!result){
         let tgll = that.getFormat3(tgl)
         dddd = that.getHariBy(tgl)
     
         if (that.isMinggu(tgl)) {
           result = `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
+          that.spinner.succeed(`${result}`)
+
+
           return result
         } else {
           let isMasuk = await that.libur({tgl: tgll})
@@ -122,6 +133,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
         }
     
       } else {
+        that.spinner.succeed(`${result}`)
         return `Hari periksa tidak sesuai referensi sistem.\nGunakan ${that.config.DAFTAR_HARI_INI ? '#sekarang, #hariini,': ''} #besok, #besuk atau #lusa.`
       }
   }
