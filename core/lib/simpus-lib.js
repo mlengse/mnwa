@@ -13,6 +13,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
       
       if(that.config.DAFTAR_HARI_INI  && that.config.PUSKESMAS !== 'Pajang') {
         let jam = that.getJamBy(tgl)
+        that.spinner.info(`${tgl} ${jam}`)
         if(that.config.PUSKESMAS !== 'Jayengan'){
           if(jam >= 8) {
             result = 'Pendaftaran via whatsapp untuk hari ini ditutup pukul 08.00\n'
@@ -26,8 +27,13 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
             return result
           }
         }
+        break
+      } else {
+        result = 'Tidak bisa melakukan pendaftaran untuk hari ini\n'
+        that.spinner.succeed(`${result}`)
+        return result
+
       } 
-      break
     case 'besok':
     case 'besuk':
       that.spinner.succeed(`besok ${hari}`)
