@@ -1,4 +1,4 @@
-// require("fix-esm").register();
+require("fix-esm").register();
 
 const wa = require('venom-bot');
 const fs = require('fs')
@@ -16,10 +16,10 @@ exports._init = async ({ that }) => {
   },
   {
     multidevice: true,
-    headless: 'new',
-    puppeteerOptions: {
-      ignoreDefaultArgs: ['--disable-extensions']
-    },
+    // headless: 'new',
+    // puppeteerOptions: {
+    //   ignoreDefaultArgs: ['--disable-extensions']
+    // },
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
