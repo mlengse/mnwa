@@ -16,17 +16,17 @@ exports._init = async ({ that }) => {
   },
   {
     multidevice: true,
-    // headless: 'new',
-    // puppeteerOptions: {
-    //   ignoreDefaultArgs: ['--disable-extensions']
-    // },
+    headless: 'new',
+    puppeteerOptions: {
+      ignoreDefaultArgs: ['--disable-extensions']
+    },
     // folderNameToken: 'tokens',
     // mkdirFolderToken: './',
     // createPathFileToken: true,
     // headless: 'new',
     disableWelcome: true,
     disableSpins: true,
-    // updatesLog: true,
+    updatesLog: true,
     // useChrome: true,
   },
   (browser, waPage) => {
