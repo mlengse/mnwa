@@ -27,7 +27,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
           }
         }
       }
-      // break
+      break
     case 'besok':
     case 'besuk':
       that.spinner.succeed(`besok ${hari}`)
@@ -40,11 +40,11 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
           return result
         }
       }
-      // break
+      break
     case 'lusa':
       that.spinner.succeed(`lusa ${hari}`)
       tgl = that.getTglLusaBy(tgl)
-      // break
+      break
     default:
       that.spinner.succeed(`default ${hari}`)
       if(!result){
