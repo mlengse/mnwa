@@ -1,4 +1,4 @@
-exports.pptr = require('puppeteer')
+exports.pptr = require('puppeteer-core')
 
 exports._simpusGoto =  async ({that, url}) => {
   await that.simpusPage.goto(url, that.config.waitOpt)
