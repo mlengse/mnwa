@@ -1,4 +1,4 @@
-require("fix-esm").register();
+// require("fix-esm").register();
 
 const wa = require('venom-bot');
 const fs = require('fs')
