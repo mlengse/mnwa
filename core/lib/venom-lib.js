@@ -7,7 +7,6 @@ const TOKEN_PATH = TOKEN_DIR + "/wa-session.data.json";
 
 exports._init = async ({ that }) => {
 
-  console.log('mulai')
 
   that.client = await wa.create(
   process.env.PUSKESMAS.toLowerCase(),
@@ -54,6 +53,7 @@ exports._init = async ({ that }) => {
     // });
   })
 
+  console.log('mulai', !!that.client)
   
   
   that.client.onStateChange((state) => {
