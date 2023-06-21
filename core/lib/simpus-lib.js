@@ -26,7 +26,7 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
             return result
           }
         }
-      }
+      } 
       break
     case 'besok':
     case 'besuk':
@@ -47,98 +47,99 @@ exports._daftarApi = async ({ that, chatArr, result}) => {
       break
     default:
       that.spinner.succeed(`default ${hari}`)
-      if(!result){
-        let tgll = that.getFormat3(tgl)
-        dddd = that.getHariBy(tgl)
-    
-        if (that.isMinggu(tgl)) {
-          result = `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
-          that.spinner.succeed(`${result}`)
+      return `Hari periksa tidak sesuai referensi sistem.\nGunakan ${that.config.DAFTAR_HARI_INI ? '#sekarang, #hariini,': ''} #besok, #besuk atau #lusa.`
 
-
-          return result
-        } else {
-          let isMasuk = await that.libur({tgl: tgll})
-    
-          if(!isMasuk) {
-            return `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
-          } else {
-            let poli = chatArr.shift().toLowerCase()
-            if(poli.includes('poli')) {
-              poli = poli.split('poli').join('')
-            }
-            poli = poli.trim()
-            let ada = that.config.polArr.filter(e => e == poli)
-            if(ada.length){
-    
-              if(that.config.jadwal[poli] && Array.isArray(that.config.jadwal[poli]) && that.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
-                return `poli ${poli} hanya buka hari ${that.config.jadwal[poli].map(e => that.getHari(e))}`
-              }
-    
-              if(poli === 'rujukan') {
-                poli = 'umum'
-              }
-    
-              let res = await that.cariFunc({chatArr})
-              let rm = res.resultArr
-    
-              if(rm.length > 1) {
-                let nama = [...new Set(rm.map(e=>e.nama))]
-                let jk = [...new Set(rm.map(e=>e.sex_id))]
-                let tglLhr = [...new Set(rm.map(e=>e.tgl_lahir))]
-                if(nama.length !== 1 && jk.length !== 1 && tglLhr.length !== 1){
-                  return 'Ditemukan lebih dari 1 rekam medis, mohon perbaiki parameter pencarian.\n'
-                }
-                rm = rm.splice(rm.length-1, 1)
-              } else if (!rm.length) {
-                return `Tidak ditemukan rekam medis berdasarkan parameter tersebut.\n`
-              } 
-    
-              let umurArr = that.getUmurArr(rm[0].tgl_lahir)
-              let umur = umurArr[0]
-              if(umur == 'setahun'){
-                umur = '1'
-              } else if (umurArr[1] !== 'tahun') {
-                umur = '1'
-              }
-    
-              if((poli === 'mtbs'  && umur > 5)) {
-                return `poli ${poli} hanya melayani balita kurang dari 5 tahun.\n`
-              } else if (poli === 'imunisasi' && umur > 6 ) {
-                return `poli ${poli} hanya melayani balita kurang dari 6 tahun.\n`
-              } else if(poli === 'lansia' && umur < 60) {
-                return `poli lansia hanya melayani pasien lanjut usia 60 tahun ke atas.\n`
-              } else if(poli==='kb') {
-                if(umur <= 6) {
-                  return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
-                } else if(umur <= 15){
-                  return `usia terdaftar kurang dari 15 tahun, mohon cek kembali nama poli.\n`								
-                }
-              } else if(poli==='kia' && umur <= 5) {
-                console.log("daftar kia", poli, umur, umurArr)
-                return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
-              }
-    
-              let tgld = that.getFormat6(tgl)
-              
-    
-              that.spinner.succeed(`${dddd}, ${tgl}, ${tgld}, ${poli}`)
-    
-              return await that.daftar({hari, dddd, tgl: tgld, poli, rm: rm[0]})
-    
-            } else {
-              return `Parameter ketiga adalah nama poli.\nNama poli tidak sesuai referensi sistem.\nGunakan: ${that.config.polArr.map(e=>`#${e},`).join(' ')}.`
-            }
-          }
-    
-        }
-    
-      } else {
-        that.spinner.succeed(`result ${result}`)
-        return `Hari periksa tidak sesuai referensi sistem.\nGunakan ${that.config.DAFTAR_HARI_INI ? '#sekarang, #hariini,': ''} #besok, #besuk atau #lusa.`
-      }
   }
 
+  if(!result){
+    let tgll = that.getFormat3(tgl)
+    dddd = that.getHariBy(tgl)
+
+    if (that.isMinggu(tgl)) {
+      result = `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
+      that.spinner.succeed(`${result}`)
+
+
+      return result
+    } else {
+      let isMasuk = await that.libur({tgl: tgll})
+
+      if(!isMasuk) {
+        return `Pelayanan rawat jalan ${that.getFormat5(tgl)} tutup.\n`
+      } else {
+        let poli = chatArr.shift().toLowerCase()
+        if(poli.includes('poli')) {
+          poli = poli.split('poli').join('')
+        }
+        poli = poli.trim()
+        let ada = that.config.polArr.filter(e => e == poli)
+        if(ada.length){
+
+          if(that.config.jadwal[poli] && Array.isArray(that.config.jadwal[poli]) && that.config.jadwal[poli].indexOf(tgl.weekday()) === -1 ){
+            return `poli ${poli} hanya buka hari ${that.config.jadwal[poli].map(e => that.getHari(e))}`
+          }
+
+          if(poli === 'rujukan') {
+            poli = 'umum'
+          }
+
+          let res = await that.cariFunc({chatArr})
+          let rm = res.resultArr
+
+          if(rm.length > 1) {
+            let nama = [...new Set(rm.map(e=>e.nama))]
+            let jk = [...new Set(rm.map(e=>e.sex_id))]
+            let tglLhr = [...new Set(rm.map(e=>e.tgl_lahir))]
+            if(nama.length !== 1 && jk.length !== 1 && tglLhr.length !== 1){
+              return 'Ditemukan lebih dari 1 rekam medis, mohon perbaiki parameter pencarian.\n'
+            }
+            rm = rm.splice(rm.length-1, 1)
+          } else if (!rm.length) {
+            return `Tidak ditemukan rekam medis berdasarkan parameter tersebut.\n`
+          } 
+
+          let umurArr = that.getUmurArr(rm[0].tgl_lahir)
+          let umur = umurArr[0]
+          if(umur == 'setahun'){
+            umur = '1'
+          } else if (umurArr[1] !== 'tahun') {
+            umur = '1'
+          }
+
+          if((poli === 'mtbs'  && umur > 5)) {
+            return `poli ${poli} hanya melayani balita kurang dari 5 tahun.\n`
+          } else if (poli === 'imunisasi' && umur > 6 ) {
+            return `poli ${poli} hanya melayani balita kurang dari 6 tahun.\n`
+          } else if(poli === 'lansia' && umur < 60) {
+            return `poli lansia hanya melayani pasien lanjut usia 60 tahun ke atas.\n`
+          } else if(poli==='kb') {
+            if(umur <= 6) {
+              return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
+            } else if(umur <= 15){
+              return `usia terdaftar kurang dari 15 tahun, mohon cek kembali nama poli.\n`								
+            }
+          } else if(poli==='kia' && umur <= 5) {
+            console.log("daftar kia", poli, umur, umurArr)
+            return `untuk pemeriksaan balita mohon ganti poli ke mtbs atau imunisasi.\n`								
+          }
+
+          let tgld = that.getFormat6(tgl)
+          
+
+          that.spinner.succeed(`${dddd}, ${tgl}, ${tgld}, ${poli}`)
+
+          return await that.daftar({hari, dddd, tgl: tgld, poli, rm: rm[0]})
+
+        } else {
+          return `Parameter ketiga adalah nama poli.\nNama poli tidak sesuai referensi sistem.\nGunakan: ${that.config.polArr.map(e=>`#${e},`).join(' ')}.`
+        }
+      }
+
+    }
+
+  } else {
+    that.spinner.succeed(`result ${result}`)
+  }
 
 }
 
