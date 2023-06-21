@@ -11,7 +11,6 @@ schedule('30 12 1 * *', async() => {
     console.error(e)
   }
 })
-console.log('mulai')
 ;(async()=>{
   try{
 
